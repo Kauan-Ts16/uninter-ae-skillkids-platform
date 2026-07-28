@@ -48,7 +48,7 @@ Armazenamento das informações em banco relacional PostgreSQL, utilizando entid
 - **Arquitetura**
 
 <div align="center">
-  <img src="docs/modelagem/Fluxo.png" width="600px;">
+  <img src="docs/diagramas/Fluxo.png" width="600px;">
 </div>
 
 
@@ -58,7 +58,7 @@ Armazenamento das informações em banco relacional PostgreSQL, utilizando entid
 > Este diagrama apresenta a estrutura das entidades do sistema e seus relacionamentos, auxiliando no desenvolvimento e manutenção da aplicação.
 
 <div align="center">
-  <img src="docs/modelagem/Modelagem.png" width="700px;">
+  <img src="docs/diagramas/Modelagem.png" width="700px;">
 </div>
 
 
