@@ -1,0 +1,41 @@
+package com.kauanrodrigues.backend.mapper;
+
+import com.kauanrodrigues.backend.dto.user.UserPatchDto;
+import com.kauanrodrigues.backend.dto.user.UserPostDto;
+import com.kauanrodrigues.backend.dto.user.UserResponseDto;
+import com.kauanrodrigues.backend.model.UserModel;
+
+public class UserMapper {
+
+    public static UserModel toModel(UserPostDto input) {
+        UserModel output = new UserModel();
+
+        output.setName(input.name());
+        output.setEmail(input.email());
+        output.setPassword(input.password());
+
+        return output;
+    }
+
+    public static void updateModel(UserPatchDto input, UserModel output) {
+        if (input.name() != null) {
+            output.setName(input.name());
+        }
+
+        if (input.email() != null) {
+            output.setEmail(input.email());
+        }
+    }
+
+    public static UserResponseDto toResponse(UserModel user) {
+        return new UserResponseDto(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole().getRoleName(),
+                user.isActive(),
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+        );
+    }
+}
