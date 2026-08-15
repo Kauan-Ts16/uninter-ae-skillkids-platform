@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<UserModel, UUID> {
 
     boolean existsByEmailIgnoreCase(String email);
 
+    boolean existsByClassroom_Id(UUID classroomId);
+
     Optional<UserModel> findByIdAndActive(UUID id, boolean active);
 
     List<UserModel> findAllByActive(boolean active);

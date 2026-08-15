@@ -14,33 +14,23 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_users")
-public class UserModel {
+@Table(name = "tb_classrooms")
+public class ClassroomModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id")
+    @Column(name = "classroom_id")
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private RoleModel role;
+    @JoinColumn(name = "teacher_id")
+    private UserModel teacher;
 
     @Column(nullable = false)
     private boolean active = true;
-
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
-    private ClassroomModel classroom;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

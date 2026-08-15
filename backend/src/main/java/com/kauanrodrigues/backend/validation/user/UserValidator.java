@@ -5,17 +5,23 @@ import com.kauanrodrigues.backend.dto.user.UserPatchDto;
 import com.kauanrodrigues.backend.dto.user.UserPostDto;
 import com.kauanrodrigues.backend.enums.RoleName;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
+import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.UserModel;
+import com.kauanrodrigues.backend.repository.ClassroomRepository;
 import com.kauanrodrigues.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
 public class UserValidator {
 
     private final UserRepository repository;
+    private final ClassroomRepository classroomRepository;
+
     private final UserFormatValidator formatValidator;
 
 
@@ -39,8 +45,32 @@ public class UserValidator {
         }
     }
 
+    public void validateForDelete(UserModel user) {
+        if (classroomRepository.existsByTeacher_Id(user.getId())) {
+            throw new ExceptionGeneric("User cannot be deleted!", "The user is assigned as teacher to a classroom.", HttpStatus.CONFLICT);
+        }
+    }
+
     public void validatePasswordChange(UserPasswordPatchDto dto) {
         formatValidator.validatePassword(dto.password());
+    }
+
+    public void validateStudent(UserModel student) {
+        if (student.getRole().getRoleName() != RoleName.STUDENT) {
+            throw new ExceptionGeneric("Invalid student!", "The selected user must have Student role.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void validateClassroom(RoleName roleName, UUID classroomId) {
+        if (classroomId != null && roleName != RoleName.STUDENT) {
+            throw new ExceptionGeneric("Invalid classroom!", "Only users with STUDENT role can be assigned to a classroom.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void validateClassroomId(UUID classroomId) {
+        if (classroomId == null) {
+            throw new ExceptionGeneric("Invalid classroom!", "classroom id is required.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     private void validateUpdateFields(UserPatchDto dto) {

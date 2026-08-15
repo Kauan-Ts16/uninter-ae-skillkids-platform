@@ -3,16 +3,18 @@ package com.kauanrodrigues.backend.mapper;
 import com.kauanrodrigues.backend.dto.user.UserPatchDto;
 import com.kauanrodrigues.backend.dto.user.UserPostDto;
 import com.kauanrodrigues.backend.dto.user.UserResponseDto;
+import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.UserModel;
 
 public class UserMapper {
 
-    public static UserModel toModel(UserPostDto input) {
+    public static UserModel toModel(UserPostDto input, ClassroomModel classroom) {
         UserModel output = new UserModel();
 
         output.setName(input.name());
         output.setEmail(input.email());
         output.setPassword(input.password());
+        output.setClassroom(classroom);
 
         return output;
     }
@@ -28,11 +30,15 @@ public class UserMapper {
     }
 
     public static UserResponseDto toResponse(UserModel user) {
+        ClassroomModel classroom = user.getClassroom();
+
         return new UserResponseDto(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getRole().getRoleName(),
+                classroom != null ? classroom.getId() : null,
+                classroom != null ? classroom.getName() : null,
                 user.isActive(),
                 user.getCreatedAt(),
                 user.getUpdatedAt()
