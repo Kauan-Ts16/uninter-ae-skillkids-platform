@@ -1,14 +1,13 @@
 package com.kauanrodrigues.backend.service;
 
-import com.kauanrodrigues.backend.dto.user.UserPasswordPatchDto;
-import com.kauanrodrigues.backend.dto.user.UserPatchDto;
-import com.kauanrodrigues.backend.dto.user.UserPostDto;
-import com.kauanrodrigues.backend.dto.user.UserResponseDto;
+import com.kauanrodrigues.backend.dto.user.*;
 import com.kauanrodrigues.backend.enums.RoleName;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
 import com.kauanrodrigues.backend.mapper.UserMapper;
+import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.RoleModel;
 import com.kauanrodrigues.backend.model.UserModel;
+import com.kauanrodrigues.backend.repository.ClassroomRepository;
 import com.kauanrodrigues.backend.repository.RoleRepository;
 import com.kauanrodrigues.backend.repository.UserRepository;
 import com.kauanrodrigues.backend.validation.user.UserValidator;
@@ -28,6 +27,8 @@ public class UserService {
 
     private final RoleRepository roleRepository;
 
+    private final ClassroomRepository classroomRepository;
+
     private final UserValidator validator;
 
 
@@ -37,7 +38,15 @@ public class UserService {
 
         RoleModel role = findRoleByName(dto.role());
 
-        UserModel user = UserMapper.toModel(dto);
+        validator.validateClassroom(role.getRoleName(), dto.classroomId());
+
+        ClassroomModel classroom = null;
+
+        if (dto.classroomId() != null) {
+            classroom = findClassroomByIdAndActive(dto.classroomId(), true);
+        }
+
+        UserModel user = UserMapper.toModel(dto, classroom);
 
         user.setRole(role);
 
@@ -49,6 +58,8 @@ public class UserService {
     @Transactional
     public void delete(UUID id) {
         UserModel user = findModelById(id);
+
+        validator.validateForDelete(user);
 
         repository.delete(user);
     }
@@ -73,6 +84,32 @@ public class UserService {
         validator.validatePasswordChange(dto);
 
         user.setPassword(dto.password());
+    }
+
+    @Transactional
+    public UserResponseDto updateClassroom(UUID id, UserClassroomPatchDto dto) {
+        UserModel student = findModelByIdAndActive(id, true);
+
+        validator.validateStudent(student);
+
+        validator.validateClassroomId(dto.classroomId());
+
+        ClassroomModel classroom = findClassroomByIdAndActive(dto.classroomId(), true);
+
+        student.setClassroom(classroom);
+
+        repository.flush();
+
+        return UserMapper.toResponse(student);
+    }
+
+    @Transactional
+    public void removeClassroom(UUID id) {
+        UserModel student = findModelByIdAndActive(id, true);
+
+        validator.validateStudent(student);
+
+        student.setClassroom(null);
     }
 
     @Transactional
@@ -128,9 +165,14 @@ public class UserService {
                 .orElseThrow(()-> new ExceptionGeneric("User not found!", "No user found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    private UserModel findModelByIdAndActive(UUID id, boolean active) {
+    protected UserModel findModelByIdAndActive(UUID id, boolean active) {
         return repository.findByIdAndActive(id, active)
                 .orElseThrow(() -> new ExceptionGeneric("User not found!", "No " + (active ? "active" : "inactive") + " user found with id: " + id, HttpStatus.NOT_FOUND));
+    }
+
+    private ClassroomModel findClassroomByIdAndActive(UUID id, boolean active) {
+        return classroomRepository.findByIdAndActive(id, active)
+                .orElseThrow(() -> new ExceptionGeneric("Classroom not found!", "No " + (active ? "active" : "inactive") + " classroom found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
 }

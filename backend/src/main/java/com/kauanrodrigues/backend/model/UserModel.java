@@ -38,6 +38,10 @@ public class UserModel {
     @Column(nullable = false)
     private boolean active = true;
 
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private ClassroomModel classroom;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;

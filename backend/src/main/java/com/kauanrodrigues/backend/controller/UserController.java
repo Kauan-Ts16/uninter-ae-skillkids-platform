@@ -1,9 +1,6 @@
 package com.kauanrodrigues.backend.controller;
 
-import com.kauanrodrigues.backend.dto.user.UserPasswordPatchDto;
-import com.kauanrodrigues.backend.dto.user.UserPatchDto;
-import com.kauanrodrigues.backend.dto.user.UserPostDto;
-import com.kauanrodrigues.backend.dto.user.UserResponseDto;
+import com.kauanrodrigues.backend.dto.user.*;
 import com.kauanrodrigues.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,6 +37,17 @@ public class UserController {
     @PatchMapping("/{id}/password")
     public ResponseEntity<Void> changePassword(@PathVariable(name = "id")UUID id, @RequestBody UserPasswordPatchDto dto) {
         service.changePassword(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/classroom")
+    public ResponseEntity<UserResponseDto> updateClassroom(@PathVariable(name = "id")UUID id, @RequestBody UserClassroomPatchDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateClassroom(id, dto));
+    }
+
+    @DeleteMapping("/{id}/classroom")
+    public ResponseEntity<Void> removeClassroom(@PathVariable(name = "id")UUID id) {
+        service.removeClassroom(id);
         return ResponseEntity.noContent().build();
     }
 
