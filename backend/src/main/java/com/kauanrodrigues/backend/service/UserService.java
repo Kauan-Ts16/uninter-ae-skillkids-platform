@@ -165,7 +165,7 @@ public class UserService {
                 .orElseThrow(()-> new ExceptionGeneric("User not found!", "No user found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    protected UserModel findModelByIdAndActive(UUID id, boolean active) {
+    private UserModel findModelByIdAndActive(UUID id, boolean active) {
         return repository.findByIdAndActive(id, active)
                 .orElseThrow(() -> new ExceptionGeneric("User not found!", "No " + (active ? "active" : "inactive") + " user found with id: " + id, HttpStatus.NOT_FOUND));
     }

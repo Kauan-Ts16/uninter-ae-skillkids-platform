@@ -5,7 +5,6 @@ import com.kauanrodrigues.backend.dto.user.UserPatchDto;
 import com.kauanrodrigues.backend.dto.user.UserPostDto;
 import com.kauanrodrigues.backend.enums.RoleName;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
-import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.UserModel;
 import com.kauanrodrigues.backend.repository.ClassroomRepository;
 import com.kauanrodrigues.backend.repository.UserRepository;
@@ -20,6 +19,7 @@ import java.util.UUID;
 public class UserValidator {
 
     private final UserRepository repository;
+
     private final ClassroomRepository classroomRepository;
 
     private final UserFormatValidator formatValidator;
