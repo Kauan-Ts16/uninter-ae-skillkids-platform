@@ -5,6 +5,7 @@ import com.kauanrodrigues.backend.dto.course.CoursePostDto;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
 import com.kauanrodrigues.backend.model.CourseModel;
 import com.kauanrodrigues.backend.repository.CourseRepository;
+import com.kauanrodrigues.backend.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ public class CourseValidator {
     private final CourseFormatValidator formatValidator;
 
     private final CourseRepository repository;
+
+    private final ExerciseRepository exerciseRepository;
 
 
     public void validateForCreate(CoursePostDto dto) {
@@ -33,6 +36,12 @@ public class CourseValidator {
 
         if (dto.title() != null && !course.getTitle().equalsIgnoreCase(dto.title())) {
             validateUniqueTitle(dto.title());
+        }
+    }
+
+    public void validateDelete(CourseModel course) {
+        if (exerciseRepository.existsByCourseId(course.getId())) {
+            throw new ExceptionGeneric("Course cannot be deleted!", "The course cannot deleted because it has exercises associated with it.", HttpStatus.BAD_REQUEST);
         }
     }
 
