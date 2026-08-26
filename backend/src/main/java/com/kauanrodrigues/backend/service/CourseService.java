@@ -40,6 +40,8 @@ public class CourseService {
     public void delete(UUID id) {
         CourseModel course = findModelById(id);
 
+        validator.validateDelete(course);
+
         repository.delete(course);
     }
 
@@ -99,7 +101,7 @@ public class CourseService {
         return CourseMapper.toResponse(findModelByIdAndActive(id, false));
     }
 
-    private CourseModel findModelById(UUID id) {
+    public CourseModel findModelById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(()-> new ExceptionGeneric("Course not found!", "No course found with id: " + id, HttpStatus.NOT_FOUND));
     }
