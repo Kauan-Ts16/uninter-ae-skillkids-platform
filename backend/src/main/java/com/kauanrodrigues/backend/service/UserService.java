@@ -155,19 +155,19 @@ public class UserService {
         return UserMapper.toResponse(findModelByIdAndActive(id, false));
     }
 
-    private RoleModel findRoleByName(RoleName roleName) {
-        return roleRepository.findByRoleName(roleName)
-                .orElseThrow(() -> new ExceptionGeneric("Role not found!", "No role found with name: " + roleName, HttpStatus.NOT_FOUND));
+    public UserModel findModelByIdAndActive(UUID id, boolean active) {
+        return repository.findByIdAndActive(id, active)
+                .orElseThrow(() -> new ExceptionGeneric("User not found!", "No " + (active ? "active" : "inactive") + " user found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    private UserModel findModelById(UUID id) {
+    public UserModel findModelById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(()-> new ExceptionGeneric("User not found!", "No user found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    private UserModel findModelByIdAndActive(UUID id, boolean active) {
-        return repository.findByIdAndActive(id, active)
-                .orElseThrow(() -> new ExceptionGeneric("User not found!", "No " + (active ? "active" : "inactive") + " user found with id: " + id, HttpStatus.NOT_FOUND));
+    private RoleModel findRoleByName(RoleName roleName) {
+        return roleRepository.findByRoleName(roleName)
+                .orElseThrow(() -> new ExceptionGeneric("Role not found!", "No role found with name: " + roleName, HttpStatus.NOT_FOUND));
     }
 
     private ClassroomModel findClassroomByIdAndActive(UUID id, boolean active) {

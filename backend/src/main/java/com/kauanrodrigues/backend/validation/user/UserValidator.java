@@ -7,6 +7,7 @@ import com.kauanrodrigues.backend.enums.RoleName;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
 import com.kauanrodrigues.backend.model.UserModel;
 import com.kauanrodrigues.backend.repository.ClassroomRepository;
+import com.kauanrodrigues.backend.repository.ExerciseProgressRepository;
 import com.kauanrodrigues.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ public class UserValidator {
     private final UserRepository repository;
 
     private final ClassroomRepository classroomRepository;
+
+    private final ExerciseProgressRepository exerciseProgressRepository;
 
     private final UserFormatValidator formatValidator;
 
@@ -48,6 +51,10 @@ public class UserValidator {
     public void validateForDelete(UserModel user) {
         if (classroomRepository.existsByTeacher_Id(user.getId())) {
             throw new ExceptionGeneric("User cannot be deleted!", "The user is assigned as teacher to a classroom.", HttpStatus.CONFLICT);
+        }
+
+        if (exerciseProgressRepository.existsByStudentId(user.getId())) {
+            throw new ExceptionGeneric("User cannot be deleted!", "The student has exercise progress.", HttpStatus.CONFLICT);
         }
     }
 
