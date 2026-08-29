@@ -4,6 +4,8 @@ import com.kauanrodrigues.backend.dto.exercise.ExerciseOptionsPatchDto;
 import com.kauanrodrigues.backend.dto.exercise.ExercisePatchDto;
 import com.kauanrodrigues.backend.dto.exercise.ExercisePostDto;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
+import com.kauanrodrigues.backend.model.ExerciseModel;
+import com.kauanrodrigues.backend.repository.ExerciseProgressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import java.util.UUID;
 public class ExerciseValidator {
 
     private final ExerciseFormatValidator formatValidator;
+
+    private final ExerciseProgressRepository exerciseProgressRepository;
 
 
     public void validateForCreate(ExercisePostDto dto) {
@@ -33,9 +37,21 @@ public class ExerciseValidator {
         formatValidator.validateDescriptionForUpdate(dto.description());
     }
 
+    public void validateForDelete(ExerciseModel exercise) {
+        if (exerciseProgressRepository.existsByExerciseId(exercise.getId())) {
+            throw new ExceptionGeneric("Exercise cannot be deleted!", "The exercise has student progress.", HttpStatus.CONFLICT);
+        }
+    }
+
     public void validateForOptionsUpdate(ExerciseOptionsPatchDto dto) {
         formatValidator.validateOptions(dto.options());
         formatValidator.validateCorrectOptionIndex(dto.correctOptionIndex(), dto.options());
+    }
+
+    public void validateOptionsChange(ExerciseModel exercise) {
+        if (exerciseProgressRepository.existsByExerciseId(exercise.getId())) {
+            throw new ExceptionGeneric("Exercise options cannot be updated!", "The exercise has student progress.", HttpStatus.CONFLICT);
+        }
     }
 
     private void validateCourseId(UUID courseId) {

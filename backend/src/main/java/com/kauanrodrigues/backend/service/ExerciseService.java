@@ -50,6 +50,8 @@ public class ExerciseService {
     public void delete(UUID id) {
         ExerciseModel exercise = findModelById(id);
 
+        validator.validateForDelete(exercise);
+
         UUID courseId = exercise.getCourse().getId();
         Integer deletedSequence = exercise.getSequence();
 
@@ -94,6 +96,10 @@ public class ExerciseService {
                         exercise.getCorrectOptionIndex(),
                         dto.correctOptionIndex()
                 );
+
+        if (optionsChanged || correctOptionChanged) {
+            validator.validateOptionsChange(exercise);
+        }
 
         if (optionsChanged) {
             exercise.setOptions(dto.options());
@@ -166,14 +172,14 @@ public class ExerciseService {
         return ExerciseMapper.toResponse(findModelByIdAndActive(id, false));
     }
 
+    public ExerciseModel findModelByIdAndActive(UUID id, boolean active) {
+        return repository.findByIdAndActive(id, active)
+                .orElseThrow(() -> new ExceptionGeneric("Exercise not found!", "No " + (active ? "active" : "inactive") + " exercise found with id: " + id, HttpStatus.NOT_FOUND));
+    }
+
     private ExerciseModel findModelById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ExceptionGeneric("Exercise not found!", "No exercise found with id: " + id, HttpStatus.BAD_REQUEST));
-    }
-
-    private ExerciseModel findModelByIdAndActive(UUID id, boolean active) {
-        return repository.findByIdAndActive(id, active)
-                .orElseThrow(() -> new ExceptionGeneric("Exercise not found!", "No " + (active ? "active" : "inactive") + " exercise found with id: " + id, HttpStatus.BAD_REQUEST));
     }
 
     private Integer findNextSequence(UUID courseId) {
