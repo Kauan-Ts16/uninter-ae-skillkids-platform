@@ -58,6 +58,12 @@ public class UserValidator {
         }
     }
 
+    public void validateForDeactivate(UserModel user) {
+        if (user.getRole().getRoleName() == RoleName.TEACHER && classroomRepository.existsByTeacher_Id(user.getId())) {
+            throw new ExceptionGeneric("Teacher assigned to classroom!", "The teacher cannot be deactivated while assigned to a classroom.", HttpStatus.CONFLICT);
+        }
+    }
+
     public void validatePasswordChange(UserPasswordPatchDto dto) {
         formatValidator.validatePassword(dto.password());
     }
@@ -65,6 +71,20 @@ public class UserValidator {
     public void validateStudent(UserModel student) {
         if (student.getRole().getRoleName() != RoleName.STUDENT) {
             throw new ExceptionGeneric("Invalid student!", "The selected user must have Student role.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void validateTeacher(UserModel teacher) {
+        if (teacher.getRole().getRoleName() != RoleName.TEACHER) {
+            throw new ExceptionGeneric("Invalid teacher!", "The selected user must have Teacher role.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public void validateStudentWithoutClassroom(UserModel student) {
+        validateStudent(student);
+
+        if (student.getClassroom() != null) {
+            throw new ExceptionGeneric("Student already assigned!", "The selected student is already assigned to a classroom.", HttpStatus.CONFLICT);
         }
     }
 

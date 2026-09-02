@@ -1,13 +1,14 @@
-package com.kauanrodrigues.backend.controller;
+package com.kauanrodrigues.backend.controller.exerciseProgress;
 
-import com.kauanrodrigues.backend.dto.exerciseProgress.ExerciseAnswerPostDto;
-import com.kauanrodrigues.backend.dto.exerciseProgress.ExerciseAnswerResponseDto;
 import com.kauanrodrigues.backend.dto.exerciseProgress.ExerciseProgressResponseDto;
-import com.kauanrodrigues.backend.service.ExerciseProgressService;
+import com.kauanrodrigues.backend.service.exerciseProgress.ExerciseProgressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,11 +20,6 @@ public class ExerciseProgressController {
 
     private final ExerciseProgressService service;
 
-
-    @PostMapping("/answer")
-    public ResponseEntity<ExerciseAnswerResponseDto> answer(@RequestBody ExerciseAnswerPostDto dto) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.answer(dto));
-    }
 
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<ExerciseProgressResponseDto>> findAllByStudentId(@PathVariable(name = "studentId")UUID studentId) {

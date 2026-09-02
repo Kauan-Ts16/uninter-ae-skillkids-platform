@@ -1,4 +1,4 @@
-package com.kauanrodrigues.backend.service;
+package com.kauanrodrigues.backend.service.course;
 
 import com.kauanrodrigues.backend.dto.course.CoursePatchDto;
 import com.kauanrodrigues.backend.dto.course.CoursePostDto;
@@ -106,7 +106,7 @@ public class CourseService {
                 .orElseThrow(()-> new ExceptionGeneric("Course not found!", "No course found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
-    private CourseModel findModelByIdAndActive(UUID id, boolean active) {
+    public CourseModel findModelByIdAndActive(UUID id, boolean active) {
         return repository.findByIdAndActive(id, active)
                 .orElseThrow(() -> new ExceptionGeneric("Course not found!", "No " + (active ? "active" : "inactive") + " course found with id: " + id, HttpStatus.NOT_FOUND));
     }

@@ -2,10 +2,9 @@ package com.kauanrodrigues.backend.validation.classroom;
 
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPatchDto;
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPostDto;
-import com.kauanrodrigues.backend.enums.RoleName;
+import com.kauanrodrigues.backend.dto.classroom.TeacherClassroomPostDto;
 import com.kauanrodrigues.backend.exception.ExceptionGeneric;
 import com.kauanrodrigues.backend.model.ClassroomModel;
-import com.kauanrodrigues.backend.model.UserModel;
 import com.kauanrodrigues.backend.repository.ClassroomRepository;
 import com.kauanrodrigues.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +22,14 @@ public class ClassroomValidator {
     private final UserRepository userRepository;
 
 
-    public void validateForCreate(ClassroomPostDto dto, UserModel teacher) {
+    public void validateForCreate(ClassroomPostDto dto) {
         validateName(dto.name());
         validateUniqueName(dto.name());
+    }
 
-        if (teacher != null) {
-            validateTeacher(teacher);
-        }
+    public void validateForTeacherCreate(TeacherClassroomPostDto dto) {
+        validateName(dto.name());
+        validateUniqueName(dto.name());
     }
 
     public void validateForUpdate(ClassroomPatchDto dto, ClassroomModel classroom) {
@@ -43,12 +43,6 @@ public class ClassroomValidator {
     public void validateForDelete(ClassroomModel classroom) {
         if (userRepository.existsByClassroom_Id(classroom.getId())) {
             throw new ExceptionGeneric("Classroom cannot be deleted!", "The classroom has students assigned to it.", HttpStatus.CONFLICT);
-        }
-    }
-
-    public void validateTeacher(UserModel teacher) {
-        if (teacher.getRole().getRoleName() != RoleName.TEACHER) {
-            throw new ExceptionGeneric("Invalid teacher!", "The selected user must have Teacher role.", HttpStatus.BAD_REQUEST);
         }
     }
 

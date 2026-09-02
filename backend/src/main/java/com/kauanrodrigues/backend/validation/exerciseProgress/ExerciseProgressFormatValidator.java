@@ -11,15 +11,8 @@ import java.util.UUID;
 public class ExerciseProgressFormatValidator {
 
     public void validateForAnswer(ExerciseAnswerPostDto dto) {
-        validateStudentId(dto.studentId());
         validateExerciseId(dto.exerciseId());
         validateSelectedOptionIndex(dto.selectedOptionIndex());
-    }
-
-    private void validateStudentId(UUID studentId) {
-        if (studentId == null) {
-            throw new ExceptionGeneric("Invalid student!", "The student is required.", HttpStatus.BAD_REQUEST);
-        }
     }
 
     private void validateExerciseId(UUID exerciseId) {

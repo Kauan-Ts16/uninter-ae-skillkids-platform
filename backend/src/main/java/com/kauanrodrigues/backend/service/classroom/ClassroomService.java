@@ -1,4 +1,4 @@
-package com.kauanrodrigues.backend.service;
+package com.kauanrodrigues.backend.service.classroom;
 
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPatchDto;
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPostDto;
@@ -9,8 +9,9 @@ import com.kauanrodrigues.backend.mapper.ClassroomMapper;
 import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.UserModel;
 import com.kauanrodrigues.backend.repository.ClassroomRepository;
-import com.kauanrodrigues.backend.repository.UserRepository;
+import com.kauanrodrigues.backend.service.user.UserService;
 import com.kauanrodrigues.backend.validation.classroom.ClassroomValidator;
+import com.kauanrodrigues.backend.validation.user.UserValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,9 +26,13 @@ public class ClassroomService {
 
     private final ClassroomRepository repository;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
+
+    private final ClassroomJoinCodeService joinCodeService;
 
     private final ClassroomValidator validator;
+
+    private final UserValidator userValidator;
 
 
     @Transactional
@@ -35,12 +40,16 @@ public class ClassroomService {
         UserModel teacher = null;
 
         if (dto.teacherId() != null) {
-            teacher = findUserByIdAndActive(dto.teacherId(), true);
+            teacher = userService.findModelByIdAndActive(dto.teacherId(), true);
+
+            userValidator.validateTeacher(teacher);
         }
 
-        validator.validateForCreate(dto, teacher);
+        validator.validateForCreate(dto);
 
         ClassroomModel classroom = ClassroomMapper.toModel(dto, teacher);
+
+        classroom.setJoinCode(joinCodeService.generateJoinCode());
 
         classroom = repository.saveAndFlush(classroom);
 
@@ -75,9 +84,9 @@ public class ClassroomService {
 
         validator.validateTeacherId(teacherDto.teacherId());
 
-        UserModel teacher = findUserByIdAndActive(teacherDto.teacherId(), true);
+        UserModel teacher = userService.findModelByIdAndActive(teacherDto.teacherId(), true);
 
-        validator.validateTeacher(teacher);
+        userValidator.validateTeacher(teacher);
 
         classroom.setTeacher(teacher);
 
@@ -88,7 +97,7 @@ public class ClassroomService {
 
     @Transactional
     public void removeTeacher(UUID id) {
-        ClassroomModel classroom = findModelByIdAndActive(id, true);
+        ClassroomModel classroom = findModelById(id);
 
         classroom.setTeacher(null);
     }
@@ -144,11 +153,6 @@ public class ClassroomService {
     private ClassroomModel findModelByIdAndActive(UUID id, boolean active) {
         return repository.findByIdAndActive(id, active)
                 .orElseThrow(() -> new ExceptionGeneric("Classroom not found!", "No " + (active ? "active" : "inactive") + " classroom found with id: " + id, HttpStatus.NOT_FOUND));
-    }
-
-    private UserModel findUserByIdAndActive(UUID id, boolean active) {
-        return userRepository.findByIdAndActive(id, active)
-                .orElseThrow(() -> new ExceptionGeneric("User not found!", "No " + (active ? "active" : "inactive") + " user found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
 }

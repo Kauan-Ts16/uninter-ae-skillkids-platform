@@ -3,6 +3,7 @@ package com.kauanrodrigues.backend.mapper;
 import com.kauanrodrigues.backend.dto.user.UserPatchDto;
 import com.kauanrodrigues.backend.dto.user.UserPostDto;
 import com.kauanrodrigues.backend.dto.user.UserResponseDto;
+import com.kauanrodrigues.backend.dto.user.TeacherStudentResponseDto;
 import com.kauanrodrigues.backend.model.ClassroomModel;
 import com.kauanrodrigues.backend.model.UserModel;
 
@@ -13,7 +14,6 @@ public class UserMapper {
 
         output.setName(input.name());
         output.setEmail(input.email());
-        output.setPassword(input.password());
         output.setClassroom(classroom);
 
         return output;
@@ -44,4 +44,14 @@ public class UserMapper {
                 user.getUpdatedAt()
         );
     }
+
+    public static TeacherStudentResponseDto toTeacherStudentResponse(UserModel user) {
+        return new TeacherStudentResponseDto(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.isActive()
+        );
+    }
+
 }

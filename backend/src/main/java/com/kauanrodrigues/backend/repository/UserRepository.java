@@ -1,5 +1,6 @@
 package com.kauanrodrigues.backend.repository;
 
+import com.kauanrodrigues.backend.enums.RoleName;
 import com.kauanrodrigues.backend.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,11 @@ public interface UserRepository extends JpaRepository<UserModel, UUID> {
     Optional<UserModel> findByIdAndActive(UUID id, boolean active);
 
     List<UserModel> findAllByActive(boolean active);
+
+    List<UserModel> findAllByRole_RoleNameAndActiveAndClassroomIsNull(RoleName roleName, boolean active);
+
+    List<UserModel> findAllByClassroom_Id(UUID classroomId);
+
+    Optional<UserModel> findByEmailIgnoreCase(String email);
 
 }

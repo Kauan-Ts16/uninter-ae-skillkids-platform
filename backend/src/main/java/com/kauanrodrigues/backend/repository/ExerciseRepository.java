@@ -19,5 +19,7 @@ public interface ExerciseRepository extends JpaRepository<ExerciseModel, UUID> {
 
     Optional<ExerciseModel> findTopByCourseIdOrderBySequenceDesc(UUID courseId);
 
+    List<ExerciseModel> findAllByCourseIdAndActiveOrderBySequenceAsc(UUID courseId, boolean active);
+
     boolean existsByCourseId(UUID courseId);
 }

@@ -15,8 +15,16 @@ public interface ClassroomRepository extends JpaRepository<ClassroomModel, UUID>
 
     boolean existsByTeacher_Id(UUID teacherId);
 
+    boolean existsByJoinCode(String joinCode);
+
     Optional<ClassroomModel> findByIdAndActive(UUID id, boolean active);
 
     List<ClassroomModel> findAllByActive(boolean active);
+
+    List<ClassroomModel> findAllByTeacher_IdAndActive(UUID teacherId, boolean active);
+
+    Optional<ClassroomModel> findByIdAndTeacher_IdAndActive(UUID id, UUID teacherId, boolean active);
+
+    Optional<ClassroomModel> findByJoinCodeIgnoreCaseAndActive(String joinCode, boolean active);
 
 }

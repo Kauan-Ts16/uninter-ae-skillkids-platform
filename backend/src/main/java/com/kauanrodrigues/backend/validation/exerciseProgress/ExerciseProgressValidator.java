@@ -23,7 +23,6 @@ public class ExerciseProgressValidator {
 
     public void validateForAnswer(ExerciseAnswerPostDto dto, UserModel student, ExerciseModel exercise, ExerciseProgressModel progress) {
         validateStudentForProgress(student);
-        validateExercise(exercise);
         validateSelectedOptionIndex(dto.selectedOptionIndex(), exercise);
         validateProgress(progress);
     }
@@ -31,16 +30,6 @@ public class ExerciseProgressValidator {
     public void validateStudentForProgress(UserModel student) {
         if (student.getRole().getRoleName() != RoleName.STUDENT) {
             throw new ExceptionGeneric("Invalid student!", "The informed user must have the STUDENT role.", HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    private void validateExercise(ExerciseModel exercise) {
-        if (!exercise.isActive()) {
-            throw new ExceptionGeneric("Inactive exercise!", "The exercise must be active to be answered.", HttpStatus.BAD_REQUEST);
-        }
-
-        if (!exercise.getCourse().isActive()) {
-            throw new ExceptionGeneric("Inactive course!", "The exercise course must be active to answer this exercise.", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -52,7 +41,7 @@ public class ExerciseProgressValidator {
 
     private void validateProgress(ExerciseProgressModel progress) {
         if (progress != null && progress.isCompleted()) {
-            throw new ExceptionGeneric("Exercise already completed!", "The student has already completed this exercise.", HttpStatus.BAD_REQUEST);
+            throw new ExceptionGeneric("Exercise already completed!", "The student has already completed this exercise.", HttpStatus.CONFLICT);
         }
     }
 
