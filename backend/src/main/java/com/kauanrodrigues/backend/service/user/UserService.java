@@ -1,4 +1,4 @@
-package com.kauanrodrigues.backend.service;
+package com.kauanrodrigues.backend.service.user;
 
 import com.kauanrodrigues.backend.dto.user.*;
 import com.kauanrodrigues.backend.enums.RoleName;
@@ -14,6 +14,7 @@ import com.kauanrodrigues.backend.validation.user.UserValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class UserService {
     private final ClassroomRepository classroomRepository;
 
     private final UserValidator validator;
+
+    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional
@@ -48,6 +51,7 @@ public class UserService {
 
         UserModel user = UserMapper.toModel(dto, classroom);
 
+        user.setPassword(passwordEncoder.encode(dto.password()));
         user.setRole(role);
 
         user = repository.saveAndFlush(user);
@@ -83,7 +87,7 @@ public class UserService {
 
         validator.validatePasswordChange(dto);
 
-        user.setPassword(dto.password());
+        user.setPassword(passwordEncoder.encode(dto.password()));
     }
 
     @Transactional
@@ -105,7 +109,7 @@ public class UserService {
 
     @Transactional
     public void removeClassroom(UUID id) {
-        UserModel student = findModelByIdAndActive(id, true);
+        UserModel student = findModelById(id);
 
         validator.validateStudent(student);
 
@@ -115,6 +119,8 @@ public class UserService {
     @Transactional
     public void deactivate(UUID id) {
         UserModel user = findModelByIdAndActive(id, true);
+
+        validator.validateForDeactivate(user);
 
         user.setActive(false);
     }

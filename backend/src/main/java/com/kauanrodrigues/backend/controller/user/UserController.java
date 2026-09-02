@@ -1,7 +1,7 @@
-package com.kauanrodrigues.backend.controller;
+package com.kauanrodrigues.backend.controller.user;
 
 import com.kauanrodrigues.backend.dto.user.*;
-import com.kauanrodrigues.backend.service.UserService;
+import com.kauanrodrigues.backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
