@@ -1,10 +1,10 @@
-package com.kauanrodrigues.backend.controller;
+package com.kauanrodrigues.backend.controller.classroom;
 
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPatchDto;
 import com.kauanrodrigues.backend.dto.classroom.ClassroomPostDto;
 import com.kauanrodrigues.backend.dto.classroom.ClassroomResponseDto;
 import com.kauanrodrigues.backend.dto.classroom.TeacherPatchDto;
-import com.kauanrodrigues.backend.service.ClassroomService;
+import com.kauanrodrigues.backend.service.classroom.ClassroomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -25,6 +25,9 @@ public class ClassroomModel {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false, unique = true)
+    private String joinCode;
+
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private UserModel teacher;
