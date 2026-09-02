@@ -1,10 +1,10 @@
-package com.kauanrodrigues.backend.controller;
+package com.kauanrodrigues.backend.controller.exercise;
 
 import com.kauanrodrigues.backend.dto.exercise.ExerciseOptionsPatchDto;
 import com.kauanrodrigues.backend.dto.exercise.ExercisePatchDto;
 import com.kauanrodrigues.backend.dto.exercise.ExercisePostDto;
 import com.kauanrodrigues.backend.dto.exercise.ExerciseResponseDto;
-import com.kauanrodrigues.backend.service.ExerciseService;
+import com.kauanrodrigues.backend.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

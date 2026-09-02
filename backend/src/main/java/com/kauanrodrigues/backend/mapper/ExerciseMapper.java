@@ -1,9 +1,6 @@
 package com.kauanrodrigues.backend.mapper;
 
-import com.kauanrodrigues.backend.dto.exercise.ExerciseOptionsPatchDto;
-import com.kauanrodrigues.backend.dto.exercise.ExercisePatchDto;
-import com.kauanrodrigues.backend.dto.exercise.ExercisePostDto;
-import com.kauanrodrigues.backend.dto.exercise.ExerciseResponseDto;
+import com.kauanrodrigues.backend.dto.exercise.*;
 import com.kauanrodrigues.backend.model.CourseModel;
 import com.kauanrodrigues.backend.model.ExerciseModel;
 
@@ -51,6 +48,19 @@ public class ExerciseMapper {
                 exercise.isActive(),
                 exercise.getCreatedAt(),
                 exercise.getUpdatedAt()
+        );
+    }
+
+    public static StudentExerciseResponseDto toStudentResponse(ExerciseModel exercise) {
+        return new StudentExerciseResponseDto(
+                exercise.getId(),
+                exercise.getTitle(),
+                exercise.getDescription(),
+                exercise.getDifficulty(),
+                exercise.getSequence(),
+                exercise.getOptions(),
+                exercise.getCourse().getId(),
+                exercise.getCourse().getTitle()
         );
     }
 
