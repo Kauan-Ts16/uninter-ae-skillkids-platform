@@ -1,9 +1,9 @@
-package com.kauanrodrigues.backend.controller;
+package com.kauanrodrigues.backend.controller.course;
 
 import com.kauanrodrigues.backend.dto.course.CoursePatchDto;
 import com.kauanrodrigues.backend.dto.course.CoursePostDto;
 import com.kauanrodrigues.backend.dto.course.CourseResponseDto;
-import com.kauanrodrigues.backend.service.CourseService;
+import com.kauanrodrigues.backend.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

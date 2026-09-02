@@ -41,7 +41,7 @@ public class CourseValidator {
 
     public void validateDelete(CourseModel course) {
         if (exerciseRepository.existsByCourseId(course.getId())) {
-            throw new ExceptionGeneric("Course cannot be deleted!", "The course cannot deleted because it has exercises associated with it.", HttpStatus.BAD_REQUEST);
+            throw new ExceptionGeneric("Course cannot be deleted!", "The course cannot be deleted because it has exercises associated with it.", HttpStatus.CONFLICT);
         }
     }
 
