@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Configurações -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SkillKids</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/auth.css">
+
+    <!-- Scripts -->
+    <script type="module" src="./assets/js/pages/login.js"></script>
+</head>
+
+<!-- ==================== NOTIFICAÇÕES ==================== -->
+
+<div
+    id="toast-container"
+    class="toast-container"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+></div>
+
+<body class="auth-page">
+
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header class="auth-header">
+        <a class="brand" href="./index.html" aria-label="SkillKids - início">
+            <img
+                class="brand-logo"
+                src="./assets/images/skillkids-logo.png"
+                alt="SkillKids"
+            >
+        </a>
+    </header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="auth-main">
+
+        <!-- ==================== BANNER ==================== -->
+        <section class="auth-banner" aria-labelledby="banner-title">
+            <h1 id="banner-title" class="auth-banner-title">
+                Vamos aprender juntos!
+            </h1>
+
+            <div class="auth-illustration" aria-hidden="true">
+                <img
+                    src="./assets/images/skillkids-mascot-login.png"
+                    alt=""
+                >
+            </div>
+        </section>
+
+        <!-- ==================== LOGIN ==================== -->
+        <section class="auth-card" aria-labelledby="login-title">
+
+            <!-- Apresentação -->
+            <header class="auth-card-header">
+                <h2 id="login-title" class="auth-title">
+                    Que bom ver você!
+                </h2>
+
+                <p class="auth-subtitle">
+                    Entre para começar.
+                </p>
+            </header>
+
+            <!-- Formulário -->
+            <form id="login-form" class="auth-form" method="post">
+
+                <!-- E-mail -->
+                <div class="form-group">
+                    <label class="form-label" for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        class="form-input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        required
+                    >
+                </div>
+
+                <!-- Senha -->
+                <div class="form-group">
+                    <label class="form-label" for="password">
+                        Senha
+                    </label>
+
+                    <input
+                        class="form-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <!-- Será habilitado quando implementarmos o envio. -->
+                <button
+                    class="button button-primary auth-submit"
+                    type="submit"
+                    id="login-submit"
+                    disabled
+                >
+                    Entrar
+                </button>
+            </form>
+
+            <!-- Cadastro -->
+            <div class="auth-register">
+                <p>Ainda não tem uma conta?</p>
+
+                <a class="auth-register-link" href="./register.html">
+                    Criar minha conta
+                </a>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

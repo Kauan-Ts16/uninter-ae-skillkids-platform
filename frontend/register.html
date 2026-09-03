@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/auth.css">
+
+    <!-- ==================== SCRIPT ==================== -->
+
+    <script type="module" src="./assets/js/pages/register.js"></script>
+</head>
+
+<!-- ==================== NOTIFICAÇÕES ==================== -->
+
+<div
+    id="toast-container"
+    class="toast-container"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+></div>
+
+<body class="auth-page">
+
+    <!-- ==================== CABEÇALHO ==================== -->
+
+    <header class="auth-header">
+        <a class="brand" href="./index.html" aria-label="SkillKids - início">
+            <img
+                class="brand-logo"
+                src="./assets/images/skillkids-logo.png"
+                alt="SkillKids"
+            >
+        </a>
+    </header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+
+    <main class="auth-main">
+
+        <!-- ==================== BANNER ==================== -->
+
+        <section class="auth-banner" aria-labelledby="banner-title">
+            <h1 id="banner-title" class="auth-banner-title">
+                Sua aventura começa aqui!
+            </h1>
+
+            <div class="auth-illustration" aria-hidden="true">
+                <img
+                    src="./assets/images/skillkids-mascot-login.png"
+                    alt=""
+                >
+            </div>
+        </section>
+
+        <!-- ==================== CARTÃO DE CADASTRO ==================== -->
+
+        <section
+            class="auth-card auth-card--register"
+            aria-labelledby="register-title"
+        >
+            <header class="auth-card-header">
+                <h2 id="register-title" class="auth-title">
+                    Crie sua conta!
+                </h2>
+
+                <p class="auth-subtitle">
+                    Faça parte do SkillKids.
+                </p>
+            </header>
+
+            <!-- ==================== FORMULÁRIO ==================== -->
+
+            <form
+                id="register-form"
+                class="auth-form auth-form--register"
+                method="post"
+            >
+                <!-- Nome -->
+
+                <div class="form-group">
+                    <label class="form-label" for="name">
+                        Nome
+                    </label>
+
+                    <input
+                        class="form-input"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Digite seu nome"
+                        autocomplete="name"
+                        minlength="3"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <!-- E-mail e senha -->
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                            class="form-input"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="username"
+                            autocapitalize="none"
+                            spellcheck="false"
+                            minlength="6"
+                            maxlength="254"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password">
+                            Senha
+                        </label>
+
+                        <input
+                            class="form-input"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Crie sua senha"
+                            autocomplete="new-password"
+                            minlength="6"
+                            maxlength="50"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Perfil -->
+
+                <fieldset class="role-group">
+                    <legend class="form-label">Eu sou</legend>
+
+                    <div class="role-options">
+
+                        <!-- Aluno -->
+
+                        <div class="role-option">
+                            <input
+                                class="role-input"
+                                type="radio"
+                                id="role-student"
+                                name="role"
+                                value="STUDENT"
+                                checked
+                                required
+                            >
+
+                            <label class="role-card" for="role-student">
+                                <svg
+                                    class="role-icon"
+                                    viewBox="0 0 64 64"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                >
+                                    <path
+                                        d="M23 16V12a9 9 0 0 1 18 0v4"
+                                        fill="none"
+                                        stroke="#FACC15"
+                                        stroke-width="5"
+                                    />
+                                    <rect x="7" y="30" width="10" height="22" rx="5" fill="#FACC15"/>
+                                    <rect x="47" y="30" width="10" height="22" rx="5" fill="#FACC15"/>
+                                    <rect x="14" y="14" width="36" height="45" rx="12" fill="#0F766E"/>
+                                    <path d="M15 24h34v5a12 12 0 0 1-12 12H27a12 12 0 0 1-12-12z" fill="#0D9488"/>
+                                    <rect x="22" y="39" width="20" height="14" rx="4" fill="#FACC15"/>
+                                    <path d="M26 45h12" stroke="#0F766E" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+
+                                <span class="role-name">Aluno</span>
+                            </label>
+                        </div>
+
+                        <!-- Professor -->
+
+                        <div class="role-option">
+                            <input
+                                class="role-input"
+                                type="radio"
+                                id="role-teacher"
+                                name="role"
+                                value="TEACHER"
+                                required
+                            >
+
+                            <label class="role-card" for="role-teacher">
+                                <svg
+                                    class="role-icon"
+                                    viewBox="0 0 64 64"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                >
+                                    <rect x="13" y="6" width="39" height="48" rx="6" fill="#0F766E"/>
+                                    <path d="M19 6h4v43h-4a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#0D9488"/>
+                                    <path d="M20 46h32v12H20a6 6 0 0 1 0-12z" fill="#E2E8F0"/>
+                                    <path d="M23 51h25" stroke="#FFFFFF" stroke-width="3"/>
+                                    <path d="M28 49h9v14l-4.5-3-4.5 3z" fill="#FACC15"/>
+                                    <path d="M20 58h32" stroke="#0F766E" stroke-width="3"/>
+                                </svg>
+
+                                <span class="role-name">Professor</span>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Envio -->
+
+                <button
+                    class="button button-primary auth-submit"
+                    type="submit"
+                    id="register-submit"
+                    disabled
+                >
+                    Criar minha conta
+                </button>
+            </form>
+
+            <!-- ==================== ACESSO AO LOGIN ==================== -->
+
+            <div class="auth-register">
+                <p>Já tem uma conta?</p>
+
+                <a class="auth-register-link" href="./index.html">
+                    Entrar
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
