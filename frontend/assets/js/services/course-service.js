@@ -16,6 +16,21 @@ export async function getCourses(token) {
     return courses;
 }
 
+export async function getActiveCourses(token) {
+    const courses = await apiRequest(
+        "/courses/active",
+        { token }
+    );
+
+    if (!Array.isArray(courses)) {
+        throw new Error(
+            "O servidor retornou uma lista de cursos inválida."
+        );
+    }
+
+    return courses;
+}
+
 // ==================== CADASTRO DE CURSO ====================
 
 export function createCourse(data, token) {
