@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cursos | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/panel.css">
+    <link rel="stylesheet" href="../assets/css/courses.css">
+</head>
+
+<body class="panel-page">
+    <!-- ==================== MENU LATERAL ==================== -->
+    <aside id="panel-sidebar" class="panel-sidebar"></aside>
+
+    <div class="panel-body">
+        <!-- ==================== CABEÇALHO ==================== -->
+        <header id="panel-header" class="panel-header"></header>
+
+        <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+        <main class="panel-main">
+            <section class="panel-intro" aria-labelledby="page-title">
+                <h1 id="page-title">Cursos</h1>
+                <p>Gerencie os cursos do SkillKids.</p>
+            </section>
+
+            <!-- ==================== LISTAGEM DE CURSOS ==================== -->
+            <section class="panel-card courses-card" aria-labelledby="courses-title">
+                <!-- Cabeçalho da listagem -->
+                <header class="courses-header">
+                    <div>
+                        <h2 id="courses-title">Lista de cursos</h2>
+                        <p id="courses-count"></p>
+                    </div>
+
+                    <div class="courses-actions">
+                        <button id="courses-create" class="button button-primary" type="button" disabled>
+                            Novo curso
+                        </button>
+
+                        <button id="courses-reload" class="button courses-reload" type="button" disabled>
+                            Atualizar
+                        </button>
+                    </div>
+                </header>
+
+                <!-- ==================== FILTROS ==================== -->
+                <div class="courses-filters" role="search" aria-label="Filtros de cursos">
+                    <!-- Busca -->
+                    <div class="form-group">
+                        <label class="form-label" for="courses-search">
+                            Buscar
+                        </label>
+
+                        <input id="courses-search" class="form-input" type="search" placeholder="Título ou descrição"
+                            autocomplete="off" disabled>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="form-label" for="courses-status">
+                            Status
+                        </label>
+
+                        <select id="courses-status" class="form-input" disabled>
+                            <option value="">Todos os status</option>
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                    </div>
+
+                    <!-- Limpeza -->
+                    <button id="courses-clear" class="button courses-clear" type="button" disabled>
+                        Limpar
+                    </button>
+                </div>
+
+                <!-- Estados da listagem -->
+                <p id="courses-feedback" class="courses-feedback" role="status">
+                    Carregando cursos...
+                </p>
+
+                <!-- Tabela -->
+                <div id="courses-table-wrapper" class="courses-table-wrapper" role="region"
+                    aria-labelledby="courses-title" tabindex="0" hidden>
+                    <table class="courses-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="courses-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== CADASTRO DE CURSO ==================== -->
+    <dialog id="course-dialog" class="course-dialog" aria-labelledby="course-dialog-title"
+        aria-describedby="course-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="course-dialog-header">
+            <div>
+                <h2 id="course-dialog-title">Novo curso</h2>
+
+                <p id="course-dialog-description">
+                    Preencha os dados para criar um curso.
+                </p>
+            </div>
+
+            <button id="course-dialog-close" class="course-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="course-form" class="course-form">
+            <!-- Título -->
+            <div class="form-group">
+                <label class="form-label" for="course-title">
+                    Título
+                </label>
+
+                <input id="course-title" class="form-input" name="title" type="text"
+                    placeholder="Digite o título do curso" minlength="3" maxlength="100" required>
+            </div>
+
+            <!-- Descrição -->
+            <div class="form-group">
+                <label class="form-label" for="course-description">
+                    Descrição
+                </label>
+
+                <textarea id="course-description" class="form-input course-description-input" name="description"
+                    placeholder="Descreva o conteúdo do curso" minlength="3" maxlength="500" rows="5"
+                    required></textarea>
+            </div>
+
+            <!-- Ações -->
+            <footer class="course-form-footer">
+                <button id="course-cancel" class="button course-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="course-submit" class="button button-primary" type="submit">
+                    Criar curso
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== EDIÇÃO DE CURSO ==================== -->
+    <dialog id="edit-course-dialog" class="course-dialog" aria-labelledby="edit-course-dialog-title"
+        aria-describedby="edit-course-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="course-dialog-header">
+            <div>
+                <h2 id="edit-course-dialog-title">
+                    Editar curso
+                </h2>
+
+                <p id="edit-course-dialog-description">
+                    Atualize os dados do curso.
+                </p>
+            </div>
+
+            <button id="edit-course-close" class="course-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="edit-course-form" class="course-form">
+            <!-- Título -->
+            <div class="form-group">
+                <label class="form-label" for="edit-course-title">
+                    Título
+                </label>
+
+                <input id="edit-course-title" class="form-input" name="title" type="text" minlength="3" maxlength="100"
+                    required>
+            </div>
+
+            <!-- Descrição -->
+            <div class="form-group">
+                <label class="form-label" for="edit-course-description">
+                    Descrição
+                </label>
+
+                <textarea id="edit-course-description" class="form-input course-description-input" name="description"
+                    minlength="3" maxlength="500" rows="5" required></textarea>
+            </div>
+
+            <!-- Ações -->
+            <footer class="course-form-footer">
+                <button id="edit-course-cancel" class="button course-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="edit-course-submit" class="button button-primary" type="submit">
+                    Salvar alterações
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== STATUS DO CURSO ==================== -->
+    <dialog id="course-status-dialog" class="course-dialog status-dialog" aria-labelledby="course-status-title"
+        aria-describedby="course-status-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span id="course-status-icon" class="status-dialog-icon" aria-hidden="true"></span>
+
+            <!-- Mensagem -->
+            <h2 id="course-status-title"></h2>
+            <p id="course-status-description"></p>
+
+            <!-- Ações -->
+            <form id="course-status-form" class="status-dialog-actions">
+                <button id="course-status-cancel" class="button course-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="course-status-confirm" class="button status-confirm" type="submit">
+                    Confirmar
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== EXCLUSÃO DO CURSO ==================== -->
+    <dialog id="course-delete-dialog" class="course-dialog status-dialog" data-action="deactivate"
+        aria-labelledby="course-delete-title" aria-describedby="course-delete-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span class="status-dialog-icon" aria-hidden="true">
+                !
+            </span>
+
+            <!-- Mensagem -->
+            <h2 id="course-delete-title">
+                Excluir curso?
+            </h2>
+
+            <p id="course-delete-description">
+                Esta ação não poderá ser desfeita.
+            </p>
+
+            <!-- Ações -->
+            <form id="course-delete-form" class="status-dialog-actions">
+                <button id="course-delete-cancel" class="button course-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="course-delete-confirm" class="button status-confirm" type="submit">
+                    Excluir
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== AÇÕES DO CURSO ==================== -->
+    <dialog id="course-actions-dialog" class="course-dialog course-actions-dialog"
+        aria-labelledby="course-actions-title" aria-describedby="course-actions-description">
+        <!-- Cabeçalho -->
+        <header class="course-dialog-header">
+            <div>
+                <h2 id="course-actions-title">
+                    Ações do curso
+                </h2>
+
+                <p id="course-actions-description">
+                    Escolha uma ação.
+                </p>
+            </div>
+
+            <button id="course-actions-close" class="course-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Opções -->
+        <div class="course-actions-list">
+            <button id="course-action-edit" class="course-management-action" type="button">
+                <span class="course-management-action-title">
+                    Editar dados
+                </span>
+
+                <span class="course-management-action-description">
+                    Alterar o título ou a descrição
+                </span>
+            </button>
+
+            <button id="course-action-status" class="
+                course-management-action
+                course-management-action--status
+            " type="button">
+                <span id="course-action-status-title" class="course-management-action-title"></span>
+
+                <span id="course-action-status-description" class="course-management-action-description"></span>
+            </button>
+
+            <button id="course-action-delete" class="
+                course-management-action
+                course-management-action--delete
+            " type="button">
+                <span class="course-management-action-title">
+                    Excluir curso
+                </span>
+
+                <span class="course-management-action-description">
+                    Remover permanentemente este curso
+                </span>
+            </button>
+        </div>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/admin/courses.js"></script>
+</body>
+
+</html>

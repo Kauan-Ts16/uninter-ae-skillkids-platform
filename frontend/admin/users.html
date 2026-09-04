@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/panel.css">
+    <link rel="stylesheet" href="../assets/css/users.css">
+</head>
+
+<body class="panel-page">
+    <!-- ==================== MENU LATERAL ==================== -->
+    <aside id="panel-sidebar" class="panel-sidebar"></aside>
+
+    <div class="panel-body">
+        <!-- ==================== CABEÇALHO ==================== -->
+        <header id="panel-header" class="panel-header"></header>
+
+        <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+        <main class="panel-main">
+            <section class="panel-intro" aria-labelledby="page-title">
+                <h1 id="page-title">Usuários</h1>
+                <p>Gerencie os usuários do SkillKids.</p>
+            </section>
+
+            <!-- ==================== LISTAGEM DE USUÁRIOS ==================== -->
+            <section class="panel-card users-card" aria-labelledby="users-title">
+                <!-- Cabeçalho da listagem -->
+                <header class="users-header">
+                    <div>
+                        <h2 id="users-title">Lista de usuários</h2>
+                        <p id="users-count"></p>
+                    </div>
+
+                    <div class="users-actions">
+                        <button id="users-create" class="button button-primary" type="button" disabled>
+                            Novo usuário
+                        </button>
+
+                        <button id="users-reload" class="button users-reload" type="button" disabled>
+                            Atualizar
+                        </button>
+                    </div>
+                </header>
+
+                <!-- ==================== FILTROS ==================== -->
+                <div class="users-filters" role="search" aria-label="Filtros de usuários">
+                    <!-- Busca por nome ou e-mail -->
+                    <div class="form-group">
+                        <label class="form-label" for="users-search">Buscar</label>
+
+                        <input id="users-search" class="form-input" type="search" placeholder="Nome ou e-mail"
+                            autocomplete="off" disabled>
+                    </div>
+
+                    <!-- Perfil -->
+                    <div class="form-group">
+                        <label class="form-label" for="users-role">Perfil</label>
+
+                        <select id="users-role" class="form-input" disabled>
+                            <option value="">Todos os perfis</option>
+                            <option value="ADMIN">Administrador</option>
+                            <option value="TEACHER">Professor</option>
+                            <option value="STUDENT">Aluno</option>
+                        </select>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="form-label" for="users-status">Status</label>
+
+                        <select id="users-status" class="form-input" disabled>
+                            <option value="">Todos os status</option>
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                    </div>
+
+                    <!-- Limpeza -->
+                    <button id="users-clear" class="button users-clear" type="button" disabled>
+                        Limpar
+                    </button>
+                </div>
+
+                <!-- Carregamento, lista vazia ou falha -->
+                <p id="users-feedback" class="users-feedback" role="status">
+                    Carregando usuários...
+                </p>
+
+                <!-- Tabela -->
+                <div id="users-table-wrapper" class="users-table-wrapper" role="region" aria-labelledby="users-title"
+                    tabindex="0" hidden>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Perfil</th>
+                                <th scope="col">Turma</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="users-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== CADASTRO DE USUÁRIO ==================== -->
+    <dialog id="user-dialog" class="user-dialog" aria-labelledby="user-dialog-title"
+        aria-describedby="user-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="user-dialog-header">
+            <div>
+                <h2 id="user-dialog-title">Novo usuário</h2>
+
+                <p id="user-dialog-description">
+                    Preencha os dados para criar um usuário.
+                </p>
+            </div>
+
+            <button id="user-dialog-close" class="user-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="user-form" class="user-form">
+            <!-- Nome -->
+            <div class="form-group">
+                <label class="form-label" for="user-name">Nome</label>
+
+                <input id="user-name" class="form-input" name="name" type="text" placeholder="Digite o nome"
+                    autocomplete="name" minlength="3" maxlength="100" required>
+            </div>
+
+            <!-- E-mail e senha -->
+            <div class="user-form-row">
+                <div class="form-group">
+                    <label class="form-label" for="user-email">E-mail</label>
+
+                    <input id="user-email" class="form-input" name="email" type="email" placeholder="Digite o e-mail"
+                        autocomplete="username" minlength="6" maxlength="254" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="user-password">Senha</label>
+
+                    <input id="user-password" class="form-input" name="password" type="password"
+                        placeholder="De 6 a 50 caracteres" autocomplete="new-password" minlength="6" maxlength="50"
+                        required>
+                </div>
+            </div>
+
+            <!-- Perfil e turma -->
+            <div class="user-form-row">
+                <div class="form-group">
+                    <label class="form-label" for="user-role">Perfil</label>
+
+                    <select id="user-role" class="form-input" name="role" required>
+                        <option value="">Selecione</option>
+                        <option value="STUDENT">Aluno</option>
+                        <option value="TEACHER">Professor</option>
+                        <option value="ADMIN">Administrador</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="user-classroom">
+                        Turma
+                    </label>
+
+                    <select id="user-classroom" class="form-input" name="classroomId" disabled>
+                        <option value="">Sem turma</option>
+                    </select>
+
+                    <small id="user-classroom-help" class="form-help">
+                        Disponível somente para alunos.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Ações -->
+            <footer class="user-form-footer">
+                <button id="user-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="user-submit" class="button button-primary" type="submit">
+                    Criar usuário
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== EDIÇÃO DE USUÁRIO ==================== -->
+    <dialog id="edit-user-dialog" class="user-dialog" aria-labelledby="edit-user-title"
+        aria-describedby="edit-user-description">
+        <!-- Cabeçalho -->
+        <header class="user-dialog-header">
+            <div>
+                <h2 id="edit-user-title">Editar usuário</h2>
+
+                <p id="edit-user-description">
+                    Atualize o nome e o e-mail do usuário.
+                </p>
+            </div>
+
+            <button id="edit-user-close" class="user-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="edit-user-form" class="user-form">
+            <div class="form-group">
+                <label class="form-label" for="edit-user-name">Nome</label>
+
+                <input id="edit-user-name" class="form-input" name="name" type="text" autocomplete="name" minlength="3"
+                    maxlength="100" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="edit-user-email">E-mail</label>
+
+                <input id="edit-user-email" class="form-input" name="email" type="email" autocomplete="username"
+                    minlength="6" maxlength="254" required>
+            </div>
+
+            <footer class="user-form-footer">
+                <button id="edit-user-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="edit-user-submit" class="button button-primary" type="submit">
+                    Salvar alterações
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== ALTERAÇÃO DE SENHA ==================== -->
+    <dialog id="password-dialog" class="user-dialog" aria-labelledby="password-dialog-title"
+        aria-describedby="password-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="user-dialog-header">
+            <div>
+                <h2 id="password-dialog-title">Alterar senha</h2>
+
+                <p id="password-dialog-description">
+                    Informe a nova senha do usuário.
+                </p>
+            </div>
+
+            <button id="password-dialog-close" class="user-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="password-form" class="user-form">
+            <div class="form-group">
+                <label class="form-label" for="new-password">
+                    Nova senha
+                </label>
+
+                <input id="new-password" class="form-input" name="password" type="password"
+                    placeholder="De 6 a 50 caracteres" autocomplete="new-password" minlength="6" maxlength="50"
+                    required>
+            </div>
+
+            <footer class="user-form-footer">
+                <button id="password-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="password-submit" class="button button-primary" type="submit">
+                    Alterar senha
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== TURMA DO ALUNO ==================== -->
+    <dialog id="classroom-dialog" class="user-dialog" aria-labelledby="classroom-dialog-title"
+        aria-describedby="classroom-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="user-dialog-header">
+            <div>
+                <h2 id="classroom-dialog-title">Turma do aluno</h2>
+
+                <p id="classroom-dialog-description">
+                    Selecione uma turma para o aluno.
+                </p>
+            </div>
+
+            <button id="classroom-dialog-close" class="user-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="classroom-form" class="user-form">
+            <div class="form-group">
+                <label class="form-label" for="manage-classroom">
+                    Turma
+                </label>
+
+                <select id="manage-classroom" class="form-input" name="classroomId">
+                    <option value="">Sem turma</option>
+                </select>
+
+                <small class="form-help">
+                    Selecione “Sem turma” para remover o vínculo atual.
+                </small>
+            </div>
+
+            <footer class="user-form-footer">
+                <button id="classroom-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="classroom-submit" class="button button-primary" type="submit">
+                    Salvar vínculo
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== STATUS DO USUÁRIO ==================== -->
+    <dialog id="status-dialog" class="user-dialog status-dialog" aria-labelledby="status-dialog-title"
+        aria-describedby="status-dialog-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span id="status-dialog-icon" class="status-dialog-icon" aria-hidden="true"></span>
+
+            <!-- Mensagem -->
+            <h2 id="status-dialog-title"></h2>
+            <p id="status-dialog-description"></p>
+
+            <!-- Ações -->
+            <form id="status-form" class="status-dialog-actions">
+                <button id="status-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="status-confirm" class="button status-confirm" type="submit">
+                    Confirmar
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== EXCLUSÃO DO USUÁRIO ==================== -->
+    <dialog id="delete-dialog" class="user-dialog status-dialog" data-action="deactivate"
+        aria-labelledby="delete-dialog-title" aria-describedby="delete-dialog-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span class="status-dialog-icon" aria-hidden="true">!</span>
+
+            <!-- Mensagem -->
+            <h2 id="delete-dialog-title">Excluir usuário?</h2>
+
+            <p id="delete-dialog-description">
+                Esta ação não poderá ser desfeita.
+            </p>
+
+            <!-- Ações -->
+            <form id="delete-form" class="status-dialog-actions">
+                <button id="delete-cancel" class="button user-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="delete-confirm" class="button status-confirm" type="submit">
+                    Excluir
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== AÇÕES DO USUÁRIO ==================== -->
+    <dialog id="actions-dialog" class="user-dialog actions-dialog" aria-labelledby="actions-dialog-title"
+        aria-describedby="actions-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="user-dialog-header">
+            <div>
+                <h2 id="actions-dialog-title">Ações do usuário</h2>
+
+                <p id="actions-dialog-description">
+                    Escolha uma ação.
+                </p>
+            </div>
+
+            <button id="actions-dialog-close" class="user-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Opções -->
+        <div class="user-actions-list">
+            <button id="action-edit" class="user-management-action" type="button">
+                <span class="user-management-action-title">
+                    Editar dados
+                </span>
+
+                <span class="user-management-action-description">
+                    Alterar nome e e-mail
+                </span>
+            </button>
+
+            <button id="action-password" class="user-management-action" type="button">
+                <span class="user-management-action-title">
+                    Alterar senha
+                </span>
+
+                <span class="user-management-action-description">
+                    Definir uma nova senha
+                </span>
+            </button>
+
+            <button id="action-classroom" class="user-management-action" type="button" hidden>
+                <span class="user-management-action-title">
+                    Gerenciar turma
+                </span>
+
+                <span class="user-management-action-description">
+                    Vincular, trocar ou remover a turma
+                </span>
+            </button>
+
+            <button id="action-status" class="user-management-action user-management-action--status" type="button">
+                <span id="action-status-title" class="user-management-action-title"></span>
+
+                <span id="action-status-description" class="user-management-action-description"></span>
+            </button>
+
+            <button class="user-management-action user-management-action--delete" id="action-delete" type="button">
+                <span class="user-management-action-title">
+                    Excluir usuário
+                </span>
+
+                <span class="user-management-action-description">
+                    Remover permanentemente este usuário
+                </span>
+            </button>
+        </div>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/admin/users.js"></script>
+</body>
+
+</html>

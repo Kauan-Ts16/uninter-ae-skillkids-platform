@@ -6,7 +6,10 @@ import { login, getAccount } from "./services/auth-service.js";
 
 const SESSION_KEY = "skillkids-session";
 
-const LOGIN_URL = new URL("../../index.html", import.meta.url);
+const LOGIN_URL = new URL(
+    "../../index.html",
+    import.meta.url
+);
 
 // ==================== LIMPEZA DA SESSÃO ====================
 
@@ -22,13 +25,22 @@ export async function signIn(email, password) {
     const startedAt = Date.now();
     const authentication = await login(email, password);
 
-    const user = await getAccount(authentication.accessToken);
+    const user = await getAccount(
+        authentication.accessToken
+    );
 
     // A API informa a duração em segundos
-    const expiresAt = startedAt + authentication.expiresIn * 1000;
+    const expiresAt =
+        startedAt +
+        authentication.expiresIn * 1000;
 
-    if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) {
-        throw new Error("A sessão expirou. Entre novamente.");
+    if (
+        !Number.isFinite(expiresAt) ||
+        expiresAt <= Date.now()
+    ) {
+        throw new Error(
+            "A sessão expirou. Entre novamente."
+        );
     }
 
     const session = {
@@ -41,7 +53,10 @@ export async function signIn(email, password) {
         }
     };
 
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    sessionStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(session)
+    );
 
     return session.user;
 }
@@ -49,7 +64,8 @@ export async function signIn(email, password) {
 // ==================== CONSULTA DA SESSÃO ====================
 
 export function getSession() {
-    const storedSession = sessionStorage.getItem(SESSION_KEY);
+    const storedSession =
+        sessionStorage.getItem(SESSION_KEY);
 
     if (!storedSession) {
         return null;
@@ -75,6 +91,29 @@ export function getSession() {
     }
 
     return session;
+}
+
+// ==================== ATUALIZAÇÃO DA SESSÃO ====================
+
+export function updateSessionUser(user) {
+    const session = getSession();
+
+    if (!session) {
+        return null;
+    }
+
+    session.user = {
+        id: user.id ?? session.user.id,
+        name: user.name ?? session.user.name,
+        role: user.role ?? session.user.role
+    };
+
+    sessionStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(session)
+    );
+
+    return session.user;
 }
 
 // ==================== TOKEN ====================

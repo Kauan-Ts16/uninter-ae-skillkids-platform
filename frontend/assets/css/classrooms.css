@@ -1,0 +1,488 @@
+/* ==================== CARTÃO DE TURMAS ==================== */
+
+.panel-card.classrooms-card {
+    padding: 0;
+}
+
+
+/* ==================== CABEÇALHO DA LISTAGEM ==================== */
+
+.classrooms-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+}
+
+.classrooms-header .button {
+    min-height: 44px;
+}
+
+.classrooms-header #classrooms-count {
+    margin-top: 4px;
+    font-size: 0.95rem;
+}
+
+.classrooms-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.classrooms-reload {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.classrooms-reload:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+
+/* ==================== FILTROS ==================== */
+
+.classrooms-filters {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 2fr) repeat(2, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 16px;
+    padding: 0 24px 24px;
+}
+
+.classrooms-filters .form-group {
+    min-width: 0;
+}
+
+.classrooms-filters .form-input,
+.classrooms-filters .button {
+    min-height: 44px;
+}
+
+.classrooms-clear {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.classrooms-clear:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== ESTADOS DA LISTAGEM ==================== */
+
+.classrooms-card .classrooms-feedback {
+    margin: 0;
+    padding: 24px;
+    color: var(--color-text-light);
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ==================== TABELA ==================== */
+
+.classrooms-table-wrapper {
+    overflow-x: auto;
+    border-radius: 0 0 16px 16px;
+}
+
+.classrooms-table {
+    width: 100%;
+    min-width: 720px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.classrooms-table th,
+.classrooms-table td {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-border);
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+.classrooms-table thead {
+    background-color: var(--color-background);
+}
+
+.classrooms-table th {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.classrooms-table td {
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.classrooms-table tbody tr:hover {
+    background-color: var(--color-background);
+}
+
+.classrooms-table th:nth-child(1) {
+    width: 24%;
+}
+
+.classrooms-table th:nth-child(2) {
+    width: 20%;
+}
+
+.classrooms-table th:nth-child(3) {
+    width: 28%;
+}
+
+.classrooms-table th:nth-child(4) {
+    width: 14%;
+}
+
+.classrooms-table th:nth-child(5) {
+    width: 14%;
+}
+
+
+/* ==================== STATUS DA TURMA ==================== */
+
+.classroom-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.classroom-status[data-active="true"] {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.classroom-status[data-active="false"] {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+
+/* ==================== AÇÃO DA TABELA ==================== */
+
+.classroom-row-actions {
+    display: flex;
+    align-items: center;
+}
+
+.classroom-action-button {
+    min-height: 36px;
+    padding: 0 16px;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-small);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.classroom-action-button:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+/* ==================== MODAL DE TURMA ==================== */
+
+.classroom-dialog {
+    width: min(560px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    margin: auto;
+    padding: 0;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(23, 43, 77, 0.2);
+    overflow: auto;
+}
+
+.classroom-dialog::backdrop {
+    background-color: rgba(23, 43, 77, 0.5);
+}
+
+
+/* ==================== CABEÇALHO DO MODAL ==================== */
+
+.classroom-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.classroom-dialog-header h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.classroom-dialog-header p {
+    margin-top: 6px;
+    color: var(--color-text-light);
+}
+
+.classroom-dialog-close {
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 0;
+    border-radius: var(--border-radius-small);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.classroom-dialog-close:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== FORMULÁRIO DO MODAL ==================== */
+
+.classroom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+}
+
+.classroom-form .form-input {
+    min-height: 48px;
+}
+
+.classroom-form .form-help {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+}
+
+
+/* ==================== AÇÕES DO FORMULÁRIO ==================== */
+
+.classroom-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 4px;
+}
+
+.classroom-button-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.classroom-button-secondary:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== PÁGINA COM MODAL ==================== */
+
+.panel-page.modal-open {
+    overflow: hidden;
+}
+
+/* ==================== MODAL DE AÇÕES ==================== */
+
+.classroom-actions-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.classroom-actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+}
+
+.classroom-management-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    width: 100%;
+    min-height: 68px;
+    padding: 12px 16px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+    text-align: left;
+    cursor: pointer;
+}
+
+.classroom-management-action:hover:not(:disabled) {
+    background-color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+.classroom-management-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.classroom-management-action-title {
+    font-weight: 800;
+}
+
+.classroom-management-action-description {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+
+/* ==================== AÇÕES DE STATUS ==================== */
+
+.classroom-management-action--status[data-status="activate"] {
+    border-color: #067647;
+}
+
+.classroom-management-action--status[data-status="activate"] .classroom-management-action-title {
+    color: #067647;
+}
+
+.classroom-management-action--status[data-status="deactivate"] {
+    border-color: #B42318;
+}
+
+.classroom-management-action--status[data-status="deactivate"] .classroom-management-action-title {
+    color: #B42318;
+}
+
+
+/* ==================== AÇÃO DE EXCLUSÃO ==================== */
+
+.classroom-management-action--delete {
+    border-color: #B42318;
+}
+
+.classroom-management-action--delete .classroom-management-action-title {
+    color: #B42318;
+}
+
+.classroom-management-action--delete:hover:not(:disabled) {
+    background-color: #FEF3F2;
+    border-color: #B42318;
+}
+
+/* ==================== CONFIRMAÇÃO DE STATUS ==================== */
+
+.status-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.status-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    text-align: center;
+}
+
+.status-dialog-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+    background-color: var(--status-background);
+    color: var(--status-color);
+    border-radius: 50%;
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.status-dialog h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.status-dialog p {
+    margin-top: 12px;
+    color: var(--color-text-light);
+}
+
+.status-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 28px;
+}
+
+.status-dialog-actions .button {
+    flex: 1;
+}
+
+.status-dialog[data-action="activate"] {
+    --status-color: #067647;
+    --status-background: #ECFDF3;
+}
+
+.status-dialog[data-action="deactivate"] {
+    --status-color: #B42318;
+    --status-background: #FEF3F2;
+}
+
+.status-confirm {
+    background-color: var(--status-color);
+    color: var(--color-surface);
+}
+
+.status-confirm:hover:not(:disabled) {
+    filter: brightness(0.92);
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1100px) {
+    .classrooms-filters {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0 20px 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .classrooms-header {
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .classrooms-actions {
+        width: 100%;
+    }
+
+    .classrooms-actions .button {
+        flex: 1;
+    }
+
+    .classrooms-table th,
+    .classrooms-table td {
+        padding: 14px 20px;
+    }
+
+    .classroom-form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .classroom-form-footer .button {
+        width: 100%;
+    }
+
+}

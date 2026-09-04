@@ -1,29 +1,37 @@
 // ==================== IMPORTAÇÕES ====================
-
 import { signIn, getSession } from "../auth.js";
-
 import { showMessage, clearMessage } from "../components/toast.js";
 
-// ==================== ELEMENTOS ====================
+// ==================== CAMINHOS ====================
+const ADMIN_URL = new URL(
+    "../../../admin/users.html",
+    import.meta.url
+);
 
+// ==================== ELEMENTOS ====================
 const loginForm = document.querySelector("#login-form");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const loginSubmit = document.querySelector("#login-submit");
 
-// ==================== MENSAGENS ====================
+// ==================== REDIRECIONAMENTO ====================
+function redirectToPanel(user) {
+    if (user.role !== "ADMIN") {
+        return false;
+    }
 
+    window.location.replace(ADMIN_URL.href);
 
+    return true;
+}
 
 // ==================== CARREGAMENTO ====================
-
 function setLoading(loading) {
     loginSubmit.disabled = loading;
     loginSubmit.textContent = loading ? "Entrando..." : "Entrar";
 }
 
 // ==================== ENVIO DO FORMULÁRIO ====================
-
 async function handleLogin(event) {
     event.preventDefault();
 
@@ -40,12 +48,18 @@ async function handleLogin(event) {
     try {
         const user = await signIn(email, password);
 
+        passwordInput.value = "";
+
+        // Encaminhamento para a área do usuário
+        if (redirectToPanel(user)) {
+            return;
+        }
+
+        // Comportamento temporário para Professor e Aluno
         showMessage(
             `Login realizado com sucesso! Bem-vindo(a), ${user.name}.`,
             "success"
         );
-
-        passwordInput.value = "";
     } catch (error) {
         showMessage(error.message, "error");
     } finally {
@@ -54,16 +68,14 @@ async function handleLogin(event) {
 }
 
 // ==================== EVENTOS ====================
-
 loginForm.addEventListener("submit", handleLogin);
 
 // ==================== INICIALIZAÇÃO ====================
-
 setLoading(false);
 
 const session = getSession();
 
-if (session) {
+if (session && !redirectToPanel(session.user)) {
     showMessage(
         `Você já está conectado como ${session.user.name}.`,
         "success"
