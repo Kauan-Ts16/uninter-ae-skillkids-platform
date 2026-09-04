@@ -1,7 +1,9 @@
 // ==================== IMPORTAÇÕES ====================
+
 import { signOut } from "../auth.js";
 
 // ==================== CAMINHOS ====================
+
 const LOGO_URL = new URL(
     "../../images/skillkids-logo.png",
     import.meta.url
@@ -12,17 +14,34 @@ const USERS_URL = new URL(
     import.meta.url
 );
 
+const CLASSROOMS_URL = new URL(
+    "../../../admin/classrooms.html",
+    import.meta.url
+);
+
+// ==================== PÁGINA ATUAL ====================
+
+function getCurrentPageAttribute(pageName) {
+    return window.location.pathname.endsWith(`/${pageName}`)
+        ? 'aria-current="page"'
+        : "";
+}
+
 // ==================== PAINEL ADMINISTRATIVO ====================
+
 export function renderAdminPanel(user) {
     const sidebar = document.querySelector("#panel-sidebar");
     const header = document.querySelector("#panel-header");
+
+    const usersCurrent = getCurrentPageAttribute("users.html");
+    const classroomsCurrent = getCurrentPageAttribute("classrooms.html");
 
     // Menu lateral
     sidebar.innerHTML = `
         <a
             class="panel-brand"
             href="${USERS_URL.href}"
-            aria-label="SkillKids — Usuários"
+            aria-label="SkillKids — Área administrativa"
         >
             <img src="${LOGO_URL.href}" alt="SkillKids">
         </a>
@@ -33,16 +52,20 @@ export function renderAdminPanel(user) {
                     <a
                         class="panel-menu-link"
                         href="${USERS_URL.href}"
-                        aria-current="page"
+                        ${usersCurrent}
                     >
                         Usuários
                     </a>
                 </li>
 
                 <li>
-                    <button class="panel-menu-link" type="button" disabled>
+                    <a
+                        class="panel-menu-link"
+                        href="${CLASSROOMS_URL.href}"
+                        ${classroomsCurrent}
+                    >
                         Turmas
-                    </button>
+                    </a>
                 </li>
 
                 <li>
@@ -89,6 +112,7 @@ export function renderAdminPanel(user) {
     document.querySelector("#panel-user-name").textContent = user.name;
 
     // Saída da conta
-    document.querySelector("#logout-button")
+    document
+        .querySelector("#logout-button")
         .addEventListener("click", signOut);
 }
