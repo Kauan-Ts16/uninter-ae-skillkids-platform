@@ -22,6 +22,28 @@ export function getAccount(token) {
     });
 }
 
+// ==================== ATUALIZAÇÃO DA CONTA ====================
+
+export function updateAccount(data, token) {
+    return apiRequest("/account", {
+        method: "PATCH",
+        body: data,
+        token
+    });
+}
+
+// ==================== ALTERAÇÃO DE SENHA ====================
+
+export function changeAccountPassword(password, token) {
+    return apiRequest("/account/password", {
+        method: "PATCH",
+        body: {
+            password
+        },
+        token
+    });
+}
+
 // ==================== CADASTRO ====================
 
 export function register({ name, email, password, role }) {
