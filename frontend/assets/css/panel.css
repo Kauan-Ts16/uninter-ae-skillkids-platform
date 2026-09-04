@@ -1,0 +1,234 @@
+/* ==================== ESTABILIDADE DA PÁGINA ==================== */
+
+html {
+    scrollbar-gutter: stable;
+}
+
+/* ==================== ESTRUTURA DO PAINEL ==================== */
+
+.panel-page {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    min-height: 100vh;
+    background-color: #F7FAFF;
+}
+
+.panel-body {
+    min-width: 0;
+}
+
+
+/* ==================== MENU LATERAL ==================== */
+
+.panel-sidebar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 100vh;
+    padding: 28px 20px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    border-right: 1px solid #D8E1EC;
+}
+
+.panel-brand {
+    display: flex;
+    justify-content: center;
+}
+
+.panel-brand img {
+    width: 180px;
+    height: auto;
+}
+
+.panel-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.panel-menu-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    background-color: transparent;
+    color: #172B4D;
+    border: 0;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.panel-menu-link:hover:not(:disabled) {
+    background-color: #F1F5F9;
+}
+
+.panel-menu-link[aria-current="page"] {
+    background-color: #EFF6FF;
+    color: #2563EB;
+}
+
+.panel-menu-link:disabled {
+    color: #64748B;
+    cursor: not-allowed;
+}
+
+.panel-menu-link:focus-visible,
+.panel-brand:focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 3px;
+}
+
+.panel-sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #D8E1EC;
+}
+
+.panel-menu-link--logout {
+    color: #B42318;
+}
+
+
+/* ==================== CABEÇALHO ==================== */
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 88px;
+    padding: 20px 32px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D8E1EC;
+}
+
+.panel-header-title {
+    color: #64748B;
+    font-weight: 700;
+}
+
+.panel-account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 0;
+}
+
+.panel-account-name {
+    color: #172B4D;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.panel-account-role {
+    color: #64748B;
+    font-size: 0.875rem;
+}
+
+
+/* ==================== CONTEÚDO PRINCIPAL ==================== */
+
+.panel-main {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.panel-intro {
+    margin-bottom: 28px;
+}
+
+.panel-intro h1 {
+    margin: 0;
+    color: #172B4D;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.panel-intro p {
+    margin: 8px 0 0;
+    color: #64748B;
+}
+
+.panel-card {
+    padding: 24px;
+    background-color: #FFFFFF;
+    border: 1px solid #D8E1EC;
+    border-radius: 16px;
+}
+
+.panel-card h2 {
+    margin: 0;
+    color: #172B4D;
+    font-size: 1.25rem;
+}
+
+.panel-card p {
+    margin: 8px 0 0;
+    color: #64748B;
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 900px) {
+    .panel-page {
+        grid-template-columns: 200px minmax(0, 1fr);
+    }
+
+    .panel-sidebar {
+        padding: 24px 16px;
+    }
+
+    .panel-header,
+    .panel-main {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 700px) {
+    .panel-page {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel-sidebar {
+        position: static;
+        height: auto;
+        gap: 20px;
+        border-right: 0;
+        border-bottom: 1px solid #D8E1EC;
+    }
+
+    .panel-menu {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel-sidebar-footer {
+        margin-top: 0;
+        padding-top: 12px;
+    }
+
+    .panel-header {
+        flex-wrap: wrap;
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .panel-main {
+        padding: 24px 20px;
+    }
+}
