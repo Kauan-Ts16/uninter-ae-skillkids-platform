@@ -1,0 +1,496 @@
+/* ==================== CARTÃO DE USUÁRIOS ==================== */
+
+.panel-card.users-card {
+    padding: 0;
+}
+
+
+/* ==================== CABEÇALHO DA LISTAGEM ==================== */
+
+.users-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+}
+
+.users-header .button {
+    min-height: 44px;
+}
+
+.users-header #users-count {
+    margin-top: 4px;
+    font-size: 0.95rem;
+}
+
+
+/* ==================== FILTROS ==================== */
+
+.users-filters {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 16px;
+    padding: 0 24px 24px;
+}
+
+.users-filters .form-group {
+    min-width: 0;
+}
+
+.users-filters .form-input,
+.users-filters .button {
+    min-height: 44px;
+}
+
+.users-clear {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.users-clear:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== ESTADOS DA LISTAGEM ==================== */
+
+.users-card .users-feedback {
+    margin: 0;
+    padding: 24px;
+    color: var(--color-text-light);
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ==================== TABELA ==================== */
+
+.users-table-wrapper {
+    overflow-x: auto;
+    border-radius: 0 0 16px 16px;
+}
+
+.users-table {
+    width: 100%;
+    min-width: 680px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.users-table th,
+.users-table td {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-border);
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+.users-table thead {
+    background-color: var(--color-background);
+}
+
+.users-table th {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.users-table td {
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.users-table tbody tr:hover {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== STATUS DO USUÁRIO ==================== */
+
+.user-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.user-status[data-active="true"] {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.user-status[data-active="false"] {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+/* ==================== AÇÕES DA LISTAGEM ==================== */
+
+.users-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.users-reload {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.users-reload:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+
+/* ==================== MODAL DE USUÁRIO ==================== */
+
+.user-dialog {
+    width: min(680px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    margin: auto;
+    padding: 0;
+
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(23, 43, 77, 0.2);
+
+    overflow: auto;
+}
+
+.user-dialog::backdrop {
+    background-color: rgba(23, 43, 77, 0.5);
+}
+
+
+/* ==================== CABEÇALHO DO MODAL ==================== */
+
+.user-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.user-dialog-header h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.user-dialog-header p {
+    margin-top: 6px;
+    color: var(--color-text-light);
+}
+
+.user-dialog-close {
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+
+    background-color: transparent;
+    color: var(--color-text-light);
+    border-radius: var(--border-radius-small);
+
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.user-dialog-close:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== FORMULÁRIO DO MODAL ==================== */
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+}
+
+.user-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.user-form-row .form-group {
+    min-width: 0;
+}
+
+.user-form .form-input {
+    min-height: 48px;
+}
+
+.form-help {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+}
+
+
+/* ==================== AÇÕES DO FORMULÁRIO ==================== */
+
+.user-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 4px;
+}
+
+.user-button-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.user-button-secondary:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+/* ==================== AÇÃO DA TABELA ==================== */
+
+.user-row-actions {
+    display: flex;
+    align-items: center;
+}
+
+.user-action-button {
+    min-height: 36px;
+    padding: 0 16px;
+
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-small);
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.user-action-button:hover {
+    background-color: #EFF6FF;
+}
+
+
+/* ==================== PÁGINA COM MODAL ==================== */
+
+.panel-page.modal-open {
+    overflow: hidden;
+}
+
+/* ==================== MODAL DE AÇÕES ==================== */
+
+.actions-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.user-actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+}
+
+.user-management-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+
+    width: 100%;
+    min-height: 68px;
+    padding: 12px 16px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+
+    text-align: left;
+    cursor: pointer;
+}
+
+.user-management-action:hover:not(:disabled) {
+    background-color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+.user-management-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.user-management-action[hidden] {
+    display: none;
+}
+
+.user-management-action-title {
+    font-weight: 800;
+}
+
+.user-management-action-description {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+.user-management-action--status[data-status="activate"] {
+    border-color: #067647;
+}
+
+.user-management-action--status[data-status="activate"]
+.user-management-action-title {
+    color: #067647;
+}
+
+.user-management-action--status[data-status="deactivate"] {
+    border-color: #B42318;
+}
+
+.user-management-action--status[data-status="deactivate"]
+.user-management-action-title {
+    color: #B42318;
+}
+
+.user-management-action--delete {
+    border-color: #B42318;
+}
+
+.user-management-action--delete .user-management-action-title {
+    color: #B42318;
+}
+
+.user-management-action--delete:hover:not(:disabled) {
+    background-color: #FEF3F2;
+    border-color: #B42318;
+}
+
+
+/* ==================== CONFIRMAÇÃO DE STATUS ==================== */
+
+.status-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.status-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    text-align: center;
+}
+
+.status-dialog-icon {
+    display: grid;
+    place-items: center;
+
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+
+    background-color: var(--status-background);
+    color: var(--status-color);
+    border-radius: 50%;
+
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.status-dialog h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.status-dialog p {
+    margin-top: 12px;
+    color: var(--color-text-light);
+}
+
+.status-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 28px;
+}
+
+.status-dialog-actions .button {
+    flex: 1;
+}
+
+.status-dialog[data-action="activate"] {
+    --status-color: #067647;
+    --status-background: #ECFDF3;
+}
+
+.status-dialog[data-action="deactivate"] {
+    --status-color: #B42318;
+    --status-background: #FEF3F2;
+}
+
+.status-confirm {
+    background-color: var(--status-color);
+    color: var(--color-surface);
+}
+
+.status-confirm:hover:not(:disabled) {
+    filter: brightness(0.92);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1100px) {
+    .users-filters {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0 20px 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .users-header {
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .users-table th,
+    .users-table td {
+        padding: 14px 20px;
+    }
+
+        .users-actions {
+        width: 100%;
+    }
+
+    .users-actions .button {
+        flex: 1;
+    }
+
+    .user-form-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .user-form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .user-form-footer .button {
+        width: 100%;
+    }
+}
