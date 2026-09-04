@@ -1,0 +1,601 @@
+/* ==================== CARTÃO DE EXERCÍCIOS ==================== */
+
+.panel-card.exercises-card {
+    padding: 0;
+}
+
+
+/* ==================== CABEÇALHO DA LISTAGEM ==================== */
+
+.exercises-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+}
+
+.exercises-header .button {
+    min-height: 44px;
+}
+
+.exercises-header #exercises-count {
+    margin-top: 4px;
+    font-size: 0.95rem;
+}
+
+.exercises-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.exercises-reload {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.exercises-reload:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+
+/* ==================== FILTROS ==================== */
+
+.exercises-filters {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 16px;
+    padding: 0 24px 24px;
+}
+
+.exercises-filters .form-group {
+    min-width: 0;
+}
+
+.exercises-filters .form-input,
+.exercises-filters .button {
+    min-height: 44px;
+}
+
+.exercises-clear {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.exercises-clear:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== ESTADOS DA LISTAGEM ==================== */
+
+.exercises-card .exercises-feedback {
+    margin: 0;
+    padding: 24px;
+    color: var(--color-text-light);
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ==================== TABELA ==================== */
+
+.exercises-table-wrapper {
+    overflow-x: auto;
+    border-radius: 0 0 16px 16px;
+}
+
+.exercises-table {
+    width: 100%;
+    min-width: 900px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.exercises-table th,
+.exercises-table td {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-border);
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+.exercises-table thead {
+    background-color: var(--color-background);
+}
+
+.exercises-table th {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.exercises-table td {
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+.exercises-table tbody tr:hover {
+    background-color: var(--color-background);
+}
+
+.exercises-table th:nth-child(1) {
+    width: 12%;
+}
+
+.exercises-table th:nth-child(2) {
+    width: 24%;
+}
+
+.exercises-table th:nth-child(3) {
+    width: 24%;
+}
+
+.exercises-table th:nth-child(4) {
+    width: 16%;
+}
+
+.exercises-table th:nth-child(5) {
+    width: 12%;
+}
+
+.exercises-table th:nth-child(6) {
+    width: 12%;
+}
+
+.exercise-sequence {
+    font-weight: 800;
+}
+
+
+/* ==================== DIFICULDADE ==================== */
+
+.exercise-difficulty {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.exercise-difficulty[data-difficulty="EASY"] {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.exercise-difficulty[data-difficulty="MEDIUM"] {
+    background-color: #FFFAEB;
+    color: #B54708;
+}
+
+.exercise-difficulty[data-difficulty="HARD"] {
+    background-color: #FEF3F2;
+    color: #B42318;
+}
+
+
+/* ==================== STATUS DO EXERCÍCIO ==================== */
+
+.exercise-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.exercise-status[data-active="true"] {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.exercise-status[data-active="false"] {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+
+/* ==================== AÇÃO DA TABELA ==================== */
+
+.exercise-row-actions {
+    display: flex;
+    align-items: center;
+}
+
+.exercise-action-button {
+    min-height: 36px;
+    padding: 0 16px;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-small);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.exercise-action-button:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+/* ==================== MODAL DE EXERCÍCIO ==================== */
+
+.exercise-dialog {
+    width: min(760px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    margin: auto;
+    padding: 0;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(23, 43, 77, 0.2);
+    overflow: auto;
+}
+
+.exercise-dialog::backdrop {
+    background-color: rgba(23, 43, 77, 0.5);
+}
+
+
+/* ==================== CABEÇALHO DO MODAL ==================== */
+
+.exercise-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.exercise-dialog-header h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.exercise-dialog-header p {
+    margin-top: 6px;
+    color: var(--color-text-light);
+}
+
+.exercise-dialog-close {
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 0;
+    border-radius: var(--border-radius-small);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.exercise-dialog-close:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== FORMULÁRIO DO MODAL ==================== */
+
+.exercise-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+}
+
+.exercise-form-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 20px;
+}
+
+.exercise-form .form-input {
+    min-height: 48px;
+}
+
+.exercise-course-field,
+.exercise-description-field {
+    grid-column: 1 / -1;
+}
+
+.exercise-description-input {
+    min-height: 112px;
+    resize: vertical;
+}
+
+.exercise-form .form-help {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+}
+
+
+/* ==================== ALTERNATIVAS ==================== */
+
+.exercise-options-fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+}
+
+.exercise-options-fieldset legend {
+    padding: 0 8px;
+    font-weight: 800;
+}
+
+.exercise-options-help {
+    margin-bottom: 16px;
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+.exercise-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.optional-label {
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+
+/* ==================== AÇÕES DO FORMULÁRIO ==================== */
+
+.exercise-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.exercise-button-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.exercise-button-secondary:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+
+/* ==================== PÁGINA COM MODAL ==================== */
+
+.panel-page.modal-open {
+    overflow: hidden;
+}
+
+/* ==================== MODAL DE AÇÕES ==================== */
+
+.exercise-actions-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.exercise-actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+}
+
+.exercise-action-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    width: 100%;
+    min-height: 68px;
+    padding: 12px 16px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+    text-align: left;
+    cursor: pointer;
+}
+
+.exercise-action-option:hover:not(:disabled) {
+    background-color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+.exercise-action-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.exercise-action-title {
+    font-weight: 800;
+}
+
+.exercise-action-description {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+/* ==================== AÇÕES DE STATUS ==================== */
+
+.exercise-action-option[data-status="activate"] {
+    border-color: #067647;
+}
+
+.exercise-action-option[data-status="activate"]
+.exercise-action-title {
+    color: #067647;
+}
+
+.exercise-action-option[data-status="deactivate"] {
+    border-color: #B42318;
+}
+
+.exercise-action-option[data-status="deactivate"]
+.exercise-action-title {
+    color: #B42318;
+}
+
+/* ==================== AÇÃO DE EXCLUSÃO ==================== */
+
+.exercise-action-option--danger {
+    border-color: #B42318;
+}
+
+.exercise-action-option--danger
+.exercise-action-title {
+    color: #B42318;
+}
+
+.exercise-action-option--danger:hover:not(:disabled) {
+    background-color: #FEF3F2;
+    border-color: #B42318;
+}
+
+/* ==================== CONFIRMAÇÃO DE STATUS ==================== */
+
+.status-dialog {
+    width: min(460px, calc(100% - 32px));
+}
+
+.status-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    text-align: center;
+}
+
+.status-dialog-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+    background-color: var(--status-background);
+    color: var(--status-color);
+    border-radius: 50%;
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.status-dialog h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.status-dialog p {
+    margin-top: 12px;
+    color: var(--color-text-light);
+}
+
+.status-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 28px;
+}
+
+.status-dialog-actions .button {
+    flex: 1;
+}
+
+.status-dialog[data-action="activate"] {
+    --status-color: #067647;
+    --status-background: #ECFDF3;
+}
+
+.status-dialog[data-action="deactivate"] {
+    --status-color: #B42318;
+    --status-background: #FEF3F2;
+}
+
+.status-confirm {
+    background-color: var(--status-color);
+    color: var(--color-surface);
+}
+
+.status-confirm:hover:not(:disabled) {
+    filter: brightness(0.92);
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1250px) {
+    .exercises-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        padding: 0 20px 20px;
+    }
+
+    .exercises-clear {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 700px) {
+    .exercises-header {
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .exercises-actions {
+        width: 100%;
+    }
+
+    .exercises-actions .button {
+        flex: 1;
+    }
+
+    .exercises-filters {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .exercises-clear {
+        grid-column: auto;
+    }
+
+    .exercises-table th,
+    .exercises-table td {
+        padding: 14px 20px;
+    }
+
+    .exercise-dialog-header,
+    .exercise-form {
+        padding: 20px;
+    }
+
+    .exercise-form-grid,
+    .exercise-options-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .exercise-course-field,
+    .exercise-description-field {
+        grid-column: auto;
+    }
+
+    .exercise-form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .exercise-form-footer .button {
+        width: 100%;
+    }
+}

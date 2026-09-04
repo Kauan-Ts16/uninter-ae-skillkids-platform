@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exercícios | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/panel.css">
+    <link rel="stylesheet" href="../assets/css/exercises.css">
+</head>
+
+<body class="panel-page">
+    <!-- ==================== MENU LATERAL ==================== -->
+    <aside id="panel-sidebar" class="panel-sidebar"></aside>
+
+    <div class="panel-body">
+        <!-- ==================== CABEÇALHO ==================== -->
+        <header id="panel-header" class="panel-header"></header>
+
+        <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+        <main class="panel-main">
+            <section class="panel-intro" aria-labelledby="page-title">
+                <h1 id="page-title">Exercícios</h1>
+                <p>Gerencie os exercícios do SkillKids.</p>
+            </section>
+
+            <!-- ==================== LISTAGEM DE EXERCÍCIOS ==================== -->
+            <section class="panel-card exercises-card" aria-labelledby="exercises-title">
+                <!-- Cabeçalho da listagem -->
+                <header class="exercises-header">
+                    <div>
+                        <h2 id="exercises-title">
+                            Lista de exercícios
+                        </h2>
+
+                        <p id="exercises-count"></p>
+                    </div>
+
+                    <div class="exercises-actions">
+                        <button id="exercises-create" class="button button-primary" type="button" disabled>
+                            Novo exercício
+                        </button>
+
+                        <button id="exercises-reload" class="button exercises-reload" type="button" disabled>
+                            Atualizar
+                        </button>
+                    </div>
+                </header>
+
+                <!-- ==================== FILTROS ==================== -->
+                <div class="exercises-filters" role="search" aria-label="Filtros de exercícios">
+                    <!-- Busca -->
+                    <div class="form-group">
+                        <label class="form-label" for="exercises-search">
+                            Buscar
+                        </label>
+
+                        <input id="exercises-search" class="form-input" type="search" placeholder="Título ou descrição"
+                            autocomplete="off" disabled>
+                    </div>
+
+                    <!-- Curso -->
+                    <div class="form-group">
+                        <label class="form-label" for="exercises-course">
+                            Curso
+                        </label>
+
+                        <select id="exercises-course" class="form-input" disabled>
+                            <option value="">Todos os cursos</option>
+                        </select>
+                    </div>
+
+                    <!-- Dificuldade -->
+                    <div class="form-group">
+                        <label class="form-label" for="exercises-difficulty">
+                            Dificuldade
+                        </label>
+
+                        <select id="exercises-difficulty" class="form-input" disabled>
+                            <option value="">Todas</option>
+                            <option value="EASY">Fácil</option>
+                            <option value="MEDIUM">Média</option>
+                            <option value="HARD">Difícil</option>
+                        </select>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="form-label" for="exercises-status">
+                            Status
+                        </label>
+
+                        <select id="exercises-status" class="form-input" disabled>
+                            <option value="">Todos</option>
+                            <option value="true">Ativo</option>
+                            <option value="false">Inativo</option>
+                        </select>
+                    </div>
+
+                    <!-- Limpeza -->
+                    <button id="exercises-clear" class="button exercises-clear" type="button" disabled>
+                        Limpar
+                    </button>
+                </div>
+
+                <!-- Estados da listagem -->
+                <p id="exercises-feedback" class="exercises-feedback" role="status">
+                    Carregando exercícios...
+                </p>
+
+                <!-- Tabela -->
+                <div id="exercises-table-wrapper" class="exercises-table-wrapper" role="region"
+                    aria-labelledby="exercises-title" tabindex="0" hidden>
+                    <table class="exercises-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sequência</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Dificuldade</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="exercises-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== CADASTRO DE EXERCÍCIO ==================== -->
+    <dialog id="exercise-dialog" class="exercise-dialog" aria-labelledby="exercise-dialog-title"
+        aria-describedby="exercise-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="exercise-dialog-header">
+            <div>
+                <h2 id="exercise-dialog-title">
+                    Novo exercício
+                </h2>
+
+                <p id="exercise-dialog-description">
+                    Preencha os dados e as alternativas.
+                </p>
+            </div>
+
+            <button id="exercise-dialog-close" class="exercise-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="exercise-form" class="exercise-form">
+            <!-- Dados principais -->
+            <div class="exercise-form-grid">
+                <div class="form-group exercise-title-field">
+                    <label class="form-label" for="exercise-title">
+                        Título
+                    </label>
+
+                    <input id="exercise-title" class="form-input" name="title" type="text" placeholder="Digite o título"
+                        minlength="3" maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="exercise-difficulty">
+                        Dificuldade
+                    </label>
+
+                    <select id="exercise-difficulty" class="form-input" name="difficulty" required>
+                        <option value="">Selecione</option>
+                        <option value="EASY">Fácil</option>
+                        <option value="MEDIUM">Média</option>
+                        <option value="HARD">Difícil</option>
+                    </select>
+                </div>
+
+                <div class="form-group exercise-course-field">
+                    <label class="form-label" for="exercise-course">
+                        Curso
+                    </label>
+
+                    <select id="exercise-course" class="form-input" name="courseId" required>
+                        <option value="">Selecione um curso</option>
+                    </select>
+
+                    <small id="exercise-course-help" class="form-help">
+                        Somente cursos ativos são exibidos.
+                    </small>
+                </div>
+
+                <div class="form-group exercise-description-field">
+                    <label class="form-label" for="exercise-description">
+                        Descrição
+                    </label>
+
+                    <textarea id="exercise-description" class="form-input exercise-description-input" name="description"
+                        placeholder="Descreva o exercício" minlength="3" maxlength="500" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <!-- Alternativas -->
+            <fieldset class="exercise-options-fieldset">
+                <legend>Alternativas</legend>
+
+                <p class="exercise-options-help">
+                    Informe de duas a quatro alternativas.
+                </p>
+
+                <div class="exercise-options-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="exercise-option-1">
+                            Alternativa 1
+                        </label>
+
+                        <input id="exercise-option-1" class="form-input exercise-option-input" name="option" type="text"
+                            maxlength="255" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="exercise-option-2">
+                            Alternativa 2
+                        </label>
+
+                        <input id="exercise-option-2" class="form-input exercise-option-input" name="option" type="text"
+                            maxlength="255" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="exercise-option-3">
+                            Alternativa 3
+                            <span class="optional-label">(opcional)</span>
+                        </label>
+
+                        <input id="exercise-option-3" class="form-input exercise-option-input" name="option" type="text"
+                            maxlength="255">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="exercise-option-4">
+                            Alternativa 4
+                            <span class="optional-label">(opcional)</span>
+                        </label>
+
+                        <input id="exercise-option-4" class="form-input exercise-option-input" name="option" type="text"
+                            maxlength="255">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Resposta correta -->
+            <div class="form-group">
+                <label class="form-label" for="exercise-correct-option">
+                    Resposta correta
+                </label>
+
+                <select id="exercise-correct-option" class="form-input" name="correctOptionIndex" required>
+                    <option value="">Selecione uma alternativa</option>
+                    <option value="0">Alternativa 1</option>
+                    <option value="1">Alternativa 2</option>
+                    <option value="2">Alternativa 3</option>
+                    <option value="3">Alternativa 4</option>
+                </select>
+            </div>
+
+            <!-- Ações -->
+            <footer class="exercise-form-footer">
+                <button id="exercise-cancel" class="button exercise-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="exercise-submit" class="button button-primary" type="submit">
+                    Criar exercício
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== EDIÇÃO DO EXERCÍCIO ==================== -->
+    <dialog id="edit-exercise-dialog" class="exercise-dialog" aria-labelledby="edit-exercise-dialog-title"
+        aria-describedby="edit-exercise-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="exercise-dialog-header">
+            <div>
+                <h2 id="edit-exercise-dialog-title">
+                    Editar exercício
+                </h2>
+
+                <p id="edit-exercise-dialog-description">
+                    Altere as informações principais do exercício.
+                </p>
+            </div>
+
+            <button id="edit-exercise-dialog-close" class="exercise-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="edit-exercise-form" class="exercise-form">
+            <div class="exercise-form-grid">
+                <div class="form-group exercise-title-field">
+                    <label class="form-label" for="edit-exercise-title">
+                        Título
+                    </label>
+
+                    <input id="edit-exercise-title" class="form-input" name="title" type="text"
+                        placeholder="Digite o título" minlength="3" maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="edit-exercise-difficulty">
+                        Dificuldade
+                    </label>
+
+                    <select id="edit-exercise-difficulty" class="form-input" name="difficulty" required>
+                        <option value="">Selecione</option>
+                        <option value="EASY">Fácil</option>
+                        <option value="MEDIUM">Média</option>
+                        <option value="HARD">Difícil</option>
+                    </select>
+                </div>
+
+                <div class="form-group exercise-description-field">
+                    <label class="form-label" for="edit-exercise-description">
+                        Descrição
+                    </label>
+
+                    <textarea id="edit-exercise-description" class="form-input exercise-description-input"
+                        name="description" placeholder="Descreva o exercício" minlength="3" maxlength="500" rows="4"
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- Ações -->
+            <footer class="exercise-form-footer">
+                <button id="edit-exercise-cancel" class="button exercise-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="edit-exercise-submit" class="button button-primary" type="submit">
+                    Salvar alterações
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== EDIÇÃO DAS ALTERNATIVAS ==================== -->
+    <dialog id="exercise-options-dialog" class="exercise-dialog" aria-labelledby="exercise-options-dialog-title"
+        aria-describedby="exercise-options-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="exercise-dialog-header">
+            <div>
+                <h2 id="exercise-options-dialog-title">
+                    Editar alternativas
+                </h2>
+
+                <p id="exercise-options-dialog-description">
+                    Altere as opções e a resposta correta.
+                </p>
+            </div>
+
+            <button id="exercise-options-dialog-close" class="exercise-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="exercise-options-form" class="exercise-form">
+            <fieldset class="exercise-options-fieldset">
+                <legend>Alternativas</legend>
+
+                <p class="exercise-options-help">
+                    Informe de duas a quatro alternativas.
+                </p>
+
+                <div class="exercise-options-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="edit-exercise-option-1">
+                            Alternativa 1
+                        </label>
+
+                        <input id="edit-exercise-option-1" class="form-input edit-exercise-option-input" name="option"
+                            type="text" maxlength="255" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="edit-exercise-option-2">
+                            Alternativa 2
+                        </label>
+
+                        <input id="edit-exercise-option-2" class="form-input edit-exercise-option-input" name="option"
+                            type="text" maxlength="255" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="edit-exercise-option-3">
+                            Alternativa 3
+                            <span class="optional-label">
+                                (opcional)
+                            </span>
+                        </label>
+
+                        <input id="edit-exercise-option-3" class="form-input edit-exercise-option-input" name="option"
+                            type="text" maxlength="255">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="edit-exercise-option-4">
+                            Alternativa 4
+                            <span class="optional-label">
+                                (opcional)
+                            </span>
+                        </label>
+
+                        <input id="edit-exercise-option-4" class="form-input edit-exercise-option-input" name="option"
+                            type="text" maxlength="255">
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label class="form-label" for="edit-exercise-correct-option">
+                    Resposta correta
+                </label>
+
+                <select id="edit-exercise-correct-option" class="form-input" name="correctOptionIndex" required>
+                    <option value="">
+                        Selecione uma alternativa
+                    </option>
+                    <option value="0">Alternativa 1</option>
+                    <option value="1">Alternativa 2</option>
+                    <option value="2">Alternativa 3</option>
+                    <option value="3">Alternativa 4</option>
+                </select>
+            </div>
+
+            <!-- Ações -->
+            <footer class="exercise-form-footer">
+                <button id="exercise-options-cancel" class="button exercise-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="exercise-options-submit" class="button button-primary" type="submit">
+                    Salvar alternativas
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== STATUS DO EXERCÍCIO ==================== -->
+    <dialog id="exercise-status-dialog" class="exercise-dialog status-dialog" aria-labelledby="exercise-status-title"
+        aria-describedby="exercise-status-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span id="exercise-status-icon" class="status-dialog-icon" aria-hidden="true"></span>
+
+            <!-- Mensagem -->
+            <h2 id="exercise-status-title"></h2>
+
+            <p id="exercise-status-description"></p>
+
+            <!-- Ações -->
+            <form id="exercise-status-form" class="status-dialog-actions">
+                <button id="exercise-status-cancel" class="button exercise-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="exercise-status-confirm" class="button status-confirm" type="submit">
+                    Confirmar
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== EXCLUSÃO DO EXERCÍCIO ==================== -->
+    <dialog id="exercise-delete-dialog" class="exercise-dialog status-dialog" data-action="deactivate"
+        aria-labelledby="exercise-delete-title" aria-describedby="exercise-delete-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span class="status-dialog-icon" aria-hidden="true">
+                !
+            </span>
+
+            <!-- Mensagem -->
+            <h2 id="exercise-delete-title">
+                Excluir exercício?
+            </h2>
+
+            <p id="exercise-delete-description">
+                Esta ação não poderá ser desfeita.
+            </p>
+
+            <!-- Ações -->
+            <form id="exercise-delete-form" class="status-dialog-actions">
+                <button id="exercise-delete-cancel" class="button exercise-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="exercise-delete-confirm" class="button status-confirm" type="submit">
+                    Excluir
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== AÇÕES DO EXERCÍCIO ==================== -->
+    <dialog id="exercise-actions-dialog" class="exercise-dialog exercise-actions-dialog"
+        aria-labelledby="exercise-actions-title" aria-describedby="exercise-actions-description">
+        <div class="exercise-actions-content">
+            <header class="exercise-dialog-header">
+                <div>
+                    <h2 id="exercise-actions-title">
+                        Ações do exercício
+                    </h2>
+
+                    <p id="exercise-actions-description"></p>
+                </div>
+
+                <button id="exercise-actions-close" class="exercise-dialog-close" type="button" aria-label="Fechar">
+                    &times;
+                </button>
+            </header>
+
+            <div class="exercise-actions-list">
+                <button id="exercise-action-edit" class="exercise-action-option" type="button">
+                    <span class="exercise-action-title">
+                        Editar dados
+                    </span>
+
+                    <span class="exercise-action-description">
+                        Altere o título, a descrição e a dificuldade.
+                    </span>
+                </button>
+
+                <button id="exercise-action-options" class="exercise-action-option" type="button">
+                    <span class="exercise-action-title">
+                        Editar alternativas
+                    </span>
+
+                    <span class="exercise-action-description">
+                        Altere as opções e a resposta correta.
+                    </span>
+                </button>
+
+                <button id="exercise-action-status" class="exercise-action-option" type="button">
+                    <span id="exercise-action-status-title" class="exercise-action-title"></span>
+
+                    <span id="exercise-action-status-description" class="exercise-action-description"></span>
+                </button>
+
+                <button id="exercise-action-delete" class="exercise-action-option exercise-action-option--danger"
+                    type="button">
+                    <span class="exercise-action-title">
+                        Excluir exercício
+                    </span>
+
+                    <span class="exercise-action-description">
+                        Remova definitivamente este exercício.
+                    </span>
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/admin/exercises.js"></script>
+</body>
+
+</html>
