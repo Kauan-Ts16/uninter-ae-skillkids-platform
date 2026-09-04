@@ -24,6 +24,11 @@ const COURSES_URL = new URL(
     import.meta.url
 );
 
+const EXERCISES_URL = new URL(
+    "../../../admin/exercises.html",
+    import.meta.url
+);
+
 // ==================== PÁGINA ATUAL ====================
 
 function getCurrentPageAttribute(pageName) {
@@ -41,6 +46,7 @@ export function renderAdminPanel(user) {
     const usersCurrent = getCurrentPageAttribute("users.html");
     const classroomsCurrent = getCurrentPageAttribute("classrooms.html");
     const coursesCurrent = getCurrentPageAttribute("courses.html");
+    const exercisesCurrent = getCurrentPageAttribute("exercises.html");
 
     // Menu lateral
     sidebar.innerHTML = `
@@ -85,9 +91,13 @@ export function renderAdminPanel(user) {
                 </li>
 
                 <li>
-                    <button class="panel-menu-link" type="button" disabled>
+                    <a
+                        class="panel-menu-link"
+                        href="${EXERCISES_URL.href}"
+                        ${exercisesCurrent}
+                    >
                         Exercícios
-                    </button>
+                    </a>
                 </li>
 
                 <li>
