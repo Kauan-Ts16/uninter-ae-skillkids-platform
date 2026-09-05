@@ -1,0 +1,88 @@
+/* ==================== PÁGINA ==================== */
+
+body {
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.teacher-account-main {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 36px 0 56px;
+}
+
+
+/* ==================== APRESENTAÇÃO ==================== */
+
+.teacher-account-intro {
+    margin-bottom: 28px;
+}
+
+.teacher-account-intro h1 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.teacher-account-intro p {
+    margin: 8px 0 0;
+    color: var(--color-text-light);
+}
+
+
+/* ==================== CONTA ==================== */
+
+.teacher-account-main .account-grid,
+.teacher-account-main .account-feedback {
+    max-width: none;
+}
+
+.teacher-account-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
+    overflow: hidden;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 8px 24px rgba(23, 43, 77, 0.06);
+}
+
+.teacher-account-card .account-card-header h2 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.teacher-account-card .account-card-header p {
+    margin: 6px 0 0;
+    color: var(--color-text-light);
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 700px) {
+    .teacher-account-main {
+        width: min(100% - 24px, 1120px);
+        padding: 28px 0 40px;
+    }
+
+    .teacher-account-intro {
+        margin-bottom: 24px;
+    }
+
+    .teacher-account-intro h1 {
+        font-size: 1.75rem;
+    }
+}

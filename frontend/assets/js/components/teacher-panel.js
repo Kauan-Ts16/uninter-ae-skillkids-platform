@@ -24,6 +24,11 @@ const CONTENTS_URL = new URL(
     import.meta.url
 );
 
+const ACCOUNT_URL = new URL(
+    "../../../teacher/account.html",
+    import.meta.url
+);
+
 // ==================== PÁGINAS ====================
 
 const CLASSROOM_PAGES = new Set([
@@ -168,9 +173,9 @@ export function renderTeacherPanel(user) {
                     hidden
                 >
                     <button
+                        id="teacher-account-manage"
                         class="teacher-account-menu-button"
                         type="button"
-                        disabled
                     >
                         Gerenciar conta
                     </button>
@@ -207,6 +212,10 @@ export function renderTeacherPanel(user) {
         "#teacher-logout"
     );
 
+    const manageAccountButton = document.querySelector(
+        "#teacher-account-manage"
+    );
+
     const initial = user.name
         ?.trim()
         .charAt(0)
@@ -239,6 +248,14 @@ export function renderTeacherPanel(user) {
     logoutButton.addEventListener(
         "click",
         signOut,
+        { signal }
+    );
+
+    manageAccountButton.addEventListener(
+        "click",
+        () => {
+            window.location.href = ACCOUNT_URL.href;
+        },
         { signal }
     );
 
