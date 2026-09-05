@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exercício | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+
+    <link rel="stylesheet" href="../assets/css/student-panel.css">
+
+    <link rel="stylesheet" href="../assets/css/student-exercise.css">
+</head>
+
+<body class="student-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="student-header" class="student-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="student-exercise-main">
+        <a id="exercise-back" class="student-exercise-back" href="./courses.html">
+            <span aria-hidden="true">←</span>
+            Voltar ao curso
+        </a>
+
+        <!-- ==================== CARREGAMENTO E ERROS ==================== -->
+        <section id="exercise-page-feedback" class="student-exercise-page-feedback" role="status" aria-live="polite">
+            Carregando exercício...
+        </section>
+
+        <!-- ==================== EXERCÍCIO ==================== -->
+        <div id="exercise-content" class="student-exercise-page-content" hidden>
+            <!-- ==================== APRESENTAÇÃO ==================== -->
+            <section class="student-exercise-intro">
+                <div class="student-exercise-intro-content">
+                    <p id="exercise-course-title" class="student-exercise-course-title"></p>
+
+                    <h1 id="exercise-title"></h1>
+
+                    <p id="exercise-description" class="student-exercise-description"></p>
+                </div>
+
+                <div class="student-exercise-information">
+                    <span id="exercise-sequence"></span>
+
+                    <span id="exercise-difficulty" class="student-exercise-difficulty"></span>
+                </div>
+            </section>
+
+            <!-- ==================== RESPOSTA ==================== -->
+            <section class="student-answer-card">
+                <aside class="student-answer-mascot">
+                    <img src="../assets/images/skillkids-mascot-login.png" alt="Robô mascote do SkillKids">
+
+                    <p id="exercise-mascot-message">
+                        Escolha a alternativa que você considera correta.
+                    </p>
+
+                    <span id="exercise-progress">
+                        Nenhuma tentativa realizada.
+                    </span>
+                </aside>
+
+                <form id="exercise-form" class="student-answer-form">
+                    <fieldset>
+                        <legend>
+                            Qual é a resposta?
+                        </legend>
+
+                        <div id="exercise-options" class="student-answer-options"></div>
+                    </fieldset>
+
+                    <!-- ==================== RESULTADO ==================== -->
+                    <div id="exercise-result" class="student-answer-result" role="status" aria-live="polite" hidden>
+                        <strong id="exercise-result-title"></strong>
+
+                        <p id="exercise-result-description"></p>
+                    </div>
+
+                    <!-- ==================== AÇÕES ==================== -->
+                    <footer class="student-answer-actions">
+                        <button id="exercise-submit" class="student-answer-submit" type="submit" disabled>
+                            Confirmar resposta
+                        </button>
+
+                        <a id="exercise-return" class="student-answer-return" href="./courses.html" hidden>
+                            Voltar ao curso
+                        </a>
+                    </footer>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/student/exercise.js"></script>
+</body>
+
+</html>
