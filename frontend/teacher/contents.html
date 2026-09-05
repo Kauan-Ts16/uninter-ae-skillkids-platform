@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conteúdos | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-contents.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="teacher-contents-hero">
+            <div class="teacher-contents-hero-content">
+                <p class="teacher-contents-eyebrow">
+                    Material de ensino
+                </p>
+
+                <h1>Conteúdos</h1>
+
+                <p class="teacher-contents-introduction">
+                    Consulte os cursos e exercícios disponíveis
+                    para os alunos do SkillKids.
+                </p>
+            </div>
+
+            <img class="teacher-contents-mascot" src="../assets/images/skillkids-mascot-login.png"
+                alt="Robô mascote do SkillKids">
+        </section>
+
+        <!-- ==================== CURSOS ==================== -->
+        <section class="teacher-contents-section" aria-labelledby="teacher-contents-title">
+            <header class="teacher-contents-header">
+                <div>
+                    <h2 id="teacher-contents-title">
+                        Cursos disponíveis
+                    </h2>
+
+                    <p id="teacher-contents-count"></p>
+                </div>
+
+                <button id="teacher-contents-reload" class="teacher-secondary-button" type="button" disabled>
+                    Atualizar
+                </button>
+            </header>
+
+            <!-- ==================== CARREGAMENTO ==================== -->
+            <p id="teacher-contents-feedback" class="teacher-contents-feedback" role="status">
+                Carregando conteúdos...
+            </p>
+
+            <!-- ==================== LISTA ==================== -->
+            <div id="teacher-contents-grid" class="teacher-contents-grid" hidden></div>
+        </section>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/contents.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minhas turmas | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-classrooms.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="teacher-classrooms-hero">
+            <div class="teacher-classrooms-hero-content">
+                <p class="teacher-classrooms-eyebrow">
+                    Ensinar e acompanhar
+                </p>
+
+                <h1>
+                    Olá,
+                    <span id="teacher-first-name"></span>!
+                </h1>
+
+                <p class="teacher-classrooms-introduction">
+                    Organize suas turmas e acompanhe de perto o desenvolvimento dos seus alunos.
+                </p>
+            </div>
+
+            <img class="teacher-classrooms-mascot" src="../assets/images/skillkids-mascot-login.png"
+                alt="Robô mascote do SkillKids">
+        </section>
+
+        <!-- ==================== TURMAS ==================== -->
+        <section class="teacher-classrooms-section" aria-labelledby="teacher-classrooms-title">
+            <header class="teacher-classrooms-header">
+                <div>
+                    <h2 id="teacher-classrooms-title">
+                        Minhas turmas
+                    </h2>
+
+                    <p id="teacher-classrooms-count"></p>
+                </div>
+
+                <div class="teacher-classrooms-header-actions">
+                    <button id="teacher-classrooms-reload" class="teacher-secondary-button" type="button" disabled>
+                        Atualizar
+                    </button>
+
+                    <button id="teacher-classroom-create-toggle" class="button button-primary" type="button" disabled>
+                        Nova turma
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==================== NOVA TURMA ==================== -->
+            <section id="teacher-classroom-create" class="teacher-classroom-create" aria-labelledby="create-title"
+                hidden>
+                <div class="teacher-classroom-create-content">
+                    <h3 id="create-title">Criar nova turma</h3>
+
+                    <p>
+                        Informe um nome para identificar sua nova turma.
+                    </p>
+                </div>
+
+                <form id="teacher-classroom-create-form" class="teacher-classroom-create-form">
+                    <div class="form-group">
+                        <label class="form-label" for="teacher-classroom-name">
+                            Nome da turma
+                        </label>
+
+                        <input id="teacher-classroom-name" class="form-input" name="name" type="text"
+                            placeholder="Exemplo: Turma A" autocomplete="off" minlength="3" maxlength="50" required>
+                    </div>
+
+                    <div class="teacher-classroom-create-actions">
+                        <button id="teacher-classroom-create-cancel" class="teacher-neutral-button" type="button">
+                            Cancelar
+                        </button>
+
+                        <button id="teacher-classroom-create-submit" class="button button-primary" type="submit">
+                            Criar turma
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ==================== CARREGAMENTO ==================== -->
+            <p id="teacher-classrooms-feedback" class="teacher-classrooms-feedback" role="status">
+                Carregando turmas...
+            </p>
+
+            <!-- ==================== LISTA ==================== -->
+            <div id="teacher-classrooms-grid" class="teacher-classrooms-grid" hidden></div>
+        </section>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/classrooms.js"></script>
+</body>
+
+</html>

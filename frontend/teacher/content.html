@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conteúdo do curso | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-content.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-content-main">
+        <a class="teacher-content-back" href="./contents.html">
+            <span aria-hidden="true">←</span>
+            Voltar para os conteúdos
+        </a>
+
+        <!-- ==================== CARREGAMENTO ==================== -->
+        <p id="teacher-content-feedback" class="teacher-content-feedback" role="status">
+            Carregando conteúdo do curso...
+        </p>
+
+        <!-- ==================== CONTEÚDO ==================== -->
+        <div id="teacher-content" hidden>
+            <!-- ==================== APRESENTAÇÃO ==================== -->
+            <section class="teacher-content-hero">
+                <div class="teacher-content-hero-content">
+                    <p class="teacher-content-eyebrow">
+                        Conteúdo do curso
+                    </p>
+
+                    <h1 id="teacher-content-title"></h1>
+
+                    <p id="teacher-content-description" class="teacher-content-introduction"></p>
+                </div>
+
+                <aside class="teacher-content-summary" aria-label="Resumo do curso">
+                    <span class="teacher-content-summary-label">
+                        Exercícios disponíveis
+                    </span>
+
+                    <strong id="teacher-content-exercises-count">0</strong>
+
+                    <span class="teacher-content-readonly-badge">
+                        Somente leitura
+                    </span>
+                </aside>
+            </section>
+
+            <!-- ==================== EXERCÍCIOS ==================== -->
+            <section class="teacher-content-exercises" aria-labelledby="teacher-content-exercises-title">
+                <header class="teacher-content-exercises-header">
+                    <div>
+                        <h2 id="teacher-content-exercises-title">
+                            Exercícios do curso
+                        </h2>
+
+                        <p id="teacher-content-exercises-description"></p>
+                    </div>
+
+                    <button id="teacher-content-reload" class="teacher-secondary-button" type="button">
+                        Atualizar
+                    </button>
+                </header>
+
+                <p id="teacher-content-exercises-feedback" class="teacher-content-exercises-feedback" role="status"
+                    hidden></p>
+
+                <div id="teacher-content-exercises-list" class="teacher-content-exercises-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/content.js"></script>
+</body>
+
+</html>

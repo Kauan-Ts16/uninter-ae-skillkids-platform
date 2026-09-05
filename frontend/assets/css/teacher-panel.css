@@ -1,0 +1,350 @@
+/* ==================== ESTABILIDADE DA PÁGINA ==================== */
+
+html {
+    scrollbar-gutter: stable;
+}
+
+
+/* ==================== ESTRUTURA ==================== */
+
+.teacher-page {
+    min-height: 100vh;
+    background-color: var(--color-background);
+}
+
+.teacher-main {
+    width: 100%;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 40px 32px 56px;
+}
+
+
+/* ==================== CABEÇALHO ==================== */
+
+.teacher-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.teacher-header-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 32px;
+
+    width: 100%;
+    max-width: 1536px;
+    min-height: 88px;
+    margin: 0 auto;
+    padding: 14px 32px;
+}
+
+
+/* ==================== MARCA ==================== */
+
+.teacher-brand {
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius-small);
+}
+
+.teacher-brand img {
+    width: 210px;
+    height: auto;
+}
+
+
+/* ==================== NAVEGAÇÃO ==================== */
+
+.teacher-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.teacher-navigation-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0 4px;
+
+    background-color: transparent;
+    color: var(--color-text);
+
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.teacher-navigation-link:hover:not(:disabled) {
+    color: var(--color-primary);
+}
+
+.teacher-navigation-link[aria-current="page"] {
+    color: var(--color-primary);
+}
+
+.teacher-navigation-link[aria-current="page"]::after {
+    position: absolute;
+    right: 4px;
+    bottom: 0;
+    left: 4px;
+
+    height: 3px;
+
+    background-color: var(--color-primary);
+    border-radius: 3px;
+
+    content: "";
+}
+
+.teacher-navigation-link:disabled {
+    color: var(--color-text-light);
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+
+/* ==================== CONTA ==================== */
+
+.teacher-account {
+    position: relative;
+}
+
+.teacher-account-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-height: 52px;
+    padding: 4px 8px;
+
+    background-color: transparent;
+    color: var(--color-text);
+    border-radius: var(--border-radius-medium);
+
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.teacher-account-toggle:hover {
+    background-color: #EFF6FF;
+}
+
+.teacher-account-avatar {
+    display: grid;
+    place-items: center;
+
+    width: 44px;
+    height: 44px;
+
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+    border-radius: 50%;
+
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.teacher-account-chevron {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    transition: transform var(--transition-default);
+}
+
+.teacher-account-toggle[aria-expanded="true"] .teacher-account-chevron {
+    transform: rotate(180deg);
+}
+
+
+/* ==================== MENU DA CONTA ==================== */
+
+.teacher-account-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    width: 210px;
+    padding: 8px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-card);
+}
+
+.teacher-account-menu[hidden] {
+    display: none;
+}
+
+.teacher-account-menu-button {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+
+    background-color: transparent;
+    color: var(--color-text);
+    border-radius: var(--border-radius-small);
+
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.teacher-account-menu-button:hover:not(:disabled) {
+    background-color: var(--color-background);
+}
+
+.teacher-account-menu-button:disabled {
+    color: var(--color-text-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.teacher-account-menu-button--logout {
+    color: #B42318;
+}
+
+
+/* ==================== BOTÕES COMPLEMENTARES ==================== */
+
+.teacher-secondary-button,
+.teacher-neutral-button,
+.teacher-danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+    padding: 0 20px;
+
+    border: 1px solid;
+    border-radius: var(--border-radius-medium);
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background-color var(--transition-default),
+        border-color var(--transition-default),
+        color var(--transition-default),
+        transform var(--transition-default),
+        opacity var(--transition-default);
+}
+
+.teacher-secondary-button {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.teacher-secondary-button:hover:not(:disabled) {
+    background-color: #EFF6FF;
+}
+
+.teacher-neutral-button {
+    background-color: var(--color-surface);
+    color: var(--color-text-light);
+    border-color: var(--color-border);
+}
+
+.teacher-neutral-button:hover:not(:disabled) {
+    background-color: #F1F5F9;
+    color: var(--color-text);
+}
+
+.teacher-danger-button {
+    background-color: var(--color-surface);
+    color: #B42318;
+    border-color: #EF4444;
+}
+
+.teacher-danger-button:hover:not(:disabled) {
+    background-color: #FEF2F2;
+    border-color: #DC2626;
+    transform: translateY(-1px);
+}
+
+.teacher-secondary-button:disabled,
+.teacher-neutral-button:disabled,
+.teacher-danger-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1000px) {
+    .teacher-header-inner {
+        gap: 20px;
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+
+    .teacher-brand img {
+        width: 175px;
+    }
+
+    .teacher-navigation {
+        gap: 24px;
+    }
+
+    .teacher-account-label {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .teacher-header {
+        position: static;
+    }
+
+    .teacher-header-inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 12px 20px;
+    }
+
+    .teacher-navigation {
+        grid-column: 1 / -1;
+        grid-row: 2;
+
+        justify-content: flex-start;
+        gap: 24px;
+
+        padding: 4px 0;
+        overflow-x: auto;
+    }
+
+    .teacher-navigation-link {
+        font-size: 0.95rem;
+    }
+
+    .teacher-main {
+        padding: 28px 20px 40px;
+    }
+}

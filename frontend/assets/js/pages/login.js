@@ -17,6 +17,11 @@ const ADMIN_URL = new URL(
     import.meta.url
 );
 
+const TEACHER_URL = new URL(
+    "../../../teacher/classrooms.html",
+    import.meta.url
+);
+
 const STUDENT_URL = new URL(
     "../../../student/courses.html",
     import.meta.url
@@ -34,6 +39,7 @@ const loginSubmit = document.querySelector("#login-submit");
 function redirectToPanel(user) {
     const panelUrls = {
         ADMIN: ADMIN_URL,
+        TEACHER: TEACHER_URL,
         STUDENT: STUDENT_URL
     };
 
@@ -85,10 +91,9 @@ async function handleLogin(event) {
             return;
         }
 
-        // Comportamento temporário para Professor
         showMessage(
-            `Login realizado com sucesso! Bem-vindo(a), ${user.name}.`,
-            "success"
+            "Não foi possível identificar o painel do usuário.",
+            "error"
         );
     } catch (error) {
         showMessage(
