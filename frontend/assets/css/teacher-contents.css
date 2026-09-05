@@ -1,0 +1,307 @@
+/* ==================== APRESENTAÇÃO ==================== */
+
+.teacher-contents-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: center;
+    gap: 32px;
+
+    min-height: 270px;
+    padding: 40px 48px;
+
+    overflow: hidden;
+
+    background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+}
+
+.teacher-contents-hero::after {
+    position: absolute;
+    top: -90px;
+    right: -70px;
+
+    width: 230px;
+    height: 230px;
+
+    background-color: rgba(250, 204, 21, 0.2);
+    border-radius: 50%;
+
+    content: "";
+}
+
+.teacher-contents-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+}
+
+.teacher-contents-eyebrow {
+    margin: 0 0 8px;
+
+    color: var(--color-secondary);
+
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.teacher-contents-hero h1 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.teacher-contents-introduction {
+    max-width: 680px;
+    margin: 16px 0 0;
+
+    color: var(--color-text-light);
+
+    font-size: 1.15rem;
+}
+
+.teacher-contents-mascot {
+    position: relative;
+    z-index: 1;
+
+    justify-self: center;
+
+    width: 240px;
+    max-height: 220px;
+    object-fit: contain;
+}
+
+
+/* ==================== SEÇÃO DE CURSOS ==================== */
+
+.teacher-contents-section {
+    margin-top: 36px;
+}
+
+.teacher-contents-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.teacher-contents-header h2 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.teacher-contents-header p {
+    margin: 4px 0 0;
+    color: var(--color-text-light);
+}
+
+
+/* ==================== ESTADOS ==================== */
+
+.teacher-contents-feedback {
+    margin: 0;
+    padding: 32px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+
+    text-align: center;
+}
+
+.teacher-contents-feedback[hidden],
+.teacher-contents-grid[hidden] {
+    display: none;
+}
+
+
+/* ==================== LISTA DE CURSOS ==================== */
+
+.teacher-contents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.teacher-content-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    padding: 24px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 8px 24px rgba(23, 43, 77, 0.06);
+
+    transition:
+        border-color var(--transition-default),
+        transform var(--transition-default),
+        box-shadow var(--transition-default);
+}
+
+.teacher-content-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-3px);
+}
+
+.teacher-content-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.teacher-content-number,
+.teacher-content-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.teacher-content-number {
+    background-color: #EFF6FF;
+    color: var(--color-primary);
+}
+
+.teacher-content-status {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.teacher-content-card h3 {
+    margin: 20px 0 0;
+
+    color: var(--color-text);
+
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.teacher-content-description {
+    margin: 12px 0 24px;
+
+    color: var(--color-text-light);
+
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.teacher-content-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.teacher-content-card-footer > span {
+    color: var(--color-text-light);
+    font-size: 0.82rem;
+}
+
+.teacher-content-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-medium);
+
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background-color var(--transition-default),
+        border-color var(--transition-default),
+        box-shadow var(--transition-default),
+        transform var(--transition-default);
+}
+
+.teacher-content-action:hover {
+    background-color: #1D4ED8;
+    border-color: #1D4ED8;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.18);
+    transform: translateY(-1px);
+}
+
+.teacher-content-action:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+    outline-offset: 2px;
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 900px) {
+    .teacher-contents-hero {
+        grid-template-columns: minmax(0, 1fr) 200px;
+        padding: 32px;
+    }
+
+    .teacher-contents-mascot {
+        width: 190px;
+    }
+}
+
+@media (max-width: 700px) {
+    .teacher-contents-hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 28px 24px;
+        text-align: center;
+    }
+
+    .teacher-contents-eyebrow,
+    .teacher-contents-introduction {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .teacher-contents-mascot {
+        width: 170px;
+    }
+
+    .teacher-contents-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .teacher-contents-header .teacher-secondary-button {
+        width: 100%;
+    }
+
+    .teacher-content-card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .teacher-content-action {
+        width: 100%;
+    }
+}

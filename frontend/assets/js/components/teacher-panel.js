@@ -19,6 +19,11 @@ const PROGRESS_URL = new URL(
     import.meta.url
 );
 
+const CONTENTS_URL = new URL(
+    "../../../teacher/contents.html",
+    import.meta.url
+);
+
 // ==================== PÁGINAS ====================
 
 const CLASSROOM_PAGES = new Set([
@@ -31,6 +36,11 @@ const PROGRESS_PAGES = new Set([
     "student-progress.html"
 ]);
 
+const CONTENT_PAGES = new Set([
+    "contents.html",
+    "content.html"
+]);
+
 // ==================== CONTROLE DOS EVENTOS ====================
 
 let panelEventsController;
@@ -40,7 +50,8 @@ let panelEventsController;
 function getCurrentPage() {
     const pathname = window.location.pathname;
 
-    return pathname.split("/").pop() || "classrooms.html";
+    return pathname.split("/").pop() ||
+        "classrooms.html";
 }
 
 function getCurrentPageAttribute(active) {
@@ -52,7 +63,9 @@ function getCurrentPageAttribute(active) {
 // ==================== PAINEL DO PROFESSOR ====================
 
 export function renderTeacherPanel(user) {
-    const header = document.querySelector("#teacher-header");
+    const header = document.querySelector(
+        "#teacher-header"
+    );
 
     if (!header) {
         return;
@@ -73,6 +86,10 @@ export function renderTeacherPanel(user) {
         currentPage
     );
 
+    const contentsActive = CONTENT_PAGES.has(
+        currentPage
+    );
+
     header.innerHTML = `
         <div class="teacher-header-inner">
             <a
@@ -80,7 +97,10 @@ export function renderTeacherPanel(user) {
                 href="${CLASSROOMS_URL.href}"
                 aria-label="SkillKids — Minhas turmas"
             >
-                <img src="${LOGO_URL.href}" alt="SkillKids">
+                <img
+                    src="${LOGO_URL.href}"
+                    alt="SkillKids"
+                >
             </a>
 
             <nav
@@ -103,13 +123,13 @@ export function renderTeacherPanel(user) {
                     Acompanhamento
                 </a>
 
-                <button
+                <a
                     class="teacher-navigation-link"
-                    type="button"
-                    disabled
+                    href="${CONTENTS_URL.href}"
+                    ${getCurrentPageAttribute(contentsActive)}
                 >
                     Conteúdos
-                </button>
+                </a>
             </nav>
 
             <div
@@ -207,8 +227,9 @@ export function renderTeacherPanel(user) {
         "click",
         () => {
             const isOpen =
-                accountToggle.getAttribute("aria-expanded") ===
-                "true";
+                accountToggle.getAttribute(
+                    "aria-expanded"
+                ) === "true";
 
             setAccountMenuOpen(!isOpen);
         },
