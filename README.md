@@ -156,7 +156,7 @@ cd uninter-ae-skillkids-platform
 #
 ### ⚙️ **CONFIGURAÇÃO**
 
-## Banco de dados
+### Banco de dados
 
 Crie um banco de dados PostgreSQL para a aplicação:
 
@@ -164,7 +164,7 @@ Crie um banco de dados PostgreSQL para a aplicação:
 CREATE DATABASE skillkids;
 ```
 
-## Arquivo de propriedades
+### Arquivo de propriedades
 
 Dentro da pasta:
 
@@ -220,7 +220,7 @@ ADMIN_PASSWORD
 #
 ### ▶️ **EXECUÇÃO**
 
-## Backend
+### Backend
 
 Acesse a pasta do backend:
 
@@ -252,7 +252,7 @@ Após a inicialização, a API estará disponível em:
 http://localhost:8080/skillkids-platform
 ```
 
-## Frontend
+### Frontend
 
 Abra a pasta raiz do projeto no Visual Studio Code.
 
