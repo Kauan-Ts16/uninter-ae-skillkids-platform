@@ -14,11 +14,21 @@ const CLASSROOMS_URL = new URL(
     import.meta.url
 );
 
+const PROGRESS_URL = new URL(
+    "../../../teacher/progress.html",
+    import.meta.url
+);
+
 // ==================== PÁGINAS ====================
 
 const CLASSROOM_PAGES = new Set([
     "classrooms.html",
     "classroom.html"
+]);
+
+const PROGRESS_PAGES = new Set([
+    "progress.html",
+    "student-progress.html"
 ]);
 
 // ==================== CONTROLE DOS EVENTOS ====================
@@ -54,7 +64,14 @@ export function renderTeacherPanel(user) {
     const { signal } = panelEventsController;
 
     const currentPage = getCurrentPage();
-    const classroomsActive = CLASSROOM_PAGES.has(currentPage);
+
+    const classroomsActive = CLASSROOM_PAGES.has(
+        currentPage
+    );
+
+    const progressActive = PROGRESS_PAGES.has(
+        currentPage
+    );
 
     header.innerHTML = `
         <div class="teacher-header-inner">
@@ -78,13 +95,13 @@ export function renderTeacherPanel(user) {
                     Minhas turmas
                 </a>
 
-                <button
+                <a
                     class="teacher-navigation-link"
-                    type="button"
-                    disabled
+                    href="${PROGRESS_URL.href}"
+                    ${getCurrentPageAttribute(progressActive)}
                 >
                     Acompanhamento
-                </button>
+                </a>
 
                 <button
                     class="teacher-navigation-link"
