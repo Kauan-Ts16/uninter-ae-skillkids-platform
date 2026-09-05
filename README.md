@@ -2,7 +2,7 @@
 
 ### 🎯 **OBJETIVO**
 
-> **Skill Kids** é uma aplicação web composta por uma **API RESTful**, desenvolvida em **Java** com **Spring Boot**, e uma interface de usuário construída utilizando **HTML, CSS e JavaScript**.
+> **SkillKids** é uma aplicação web composta por uma **API RESTful**, desenvolvida em **Java com Spring Boot**, e uma interface de usuário construída utilizando **HTML, CSS e JavaScript**.
 
 > O projeto tem como objetivo oferecer uma plataforma interativa voltada ao ensino de **lógica de programação para crianças**, permitindo o aprendizado de conceitos fundamentais de tecnologia por meio de conteúdos educativos, exercícios e acompanhamento de desempenho.
 
@@ -12,32 +12,78 @@
 #
 ### 🔧 **FUNCIONALIDADES**
 
-- 🔐 **Autenticação e Controle de Acesso:**
-Implementação de autenticação segura utilizando Spring Security e JWT, permitindo controle de acesso conforme o perfil do usuário (Administrador, Professor e Aluno).
+- 🔐 **Autenticação e Controle de Acesso:**  
+Implementação de autenticação segura utilizando Spring Security e JWT, permitindo controle de acesso conforme o perfil do usuário: Administrador, Professor ou Aluno.
 
-- 👥 **Gerenciamento de Usuários:**
-Cadastro e gerenciamento de usuários da plataforma, com diferentes níveis de permissão e funcionalidades específicas para cada perfil.
+- 👥 **Gerenciamento de Usuários:**  
+Cadastro, consulta, edição, ativação, desativação e exclusão de usuários, com funcionalidades específicas para cada perfil.
 
-- 👨‍🏫 **Gestão de Professores e Turmas:**
-Permite a organização de professores responsáveis por turmas, possibilitando o acompanhamento dos alunos vinculados.
+- 👨‍🏫 **Gestão de Professores e Turmas:**  
+Permite que professores criem e visualizem suas turmas, adicionem ou removam alunos e acompanhem os estudantes vinculados.
 
-- 👧 **Gestão de Alunos:**
-Cadastro de estudantes e associação com suas respectivas turmas para utilização dos conteúdos educacionais.
+- 👧 **Gestão de Alunos:**  
+Cadastro de estudantes, associação com turmas e participação por meio do código da turma.
 
-- 📚 **Conteúdos Educacionais:**
-Disponibilização exercícios voltados ao ensino de lógica de programação, organizados de forma didática para o público infantil.
+- 📚 **Cursos e Conteúdos Educacionais:**  
+Disponibilização de cursos e exercícios voltados ao ensino de lógica de programação, organizados de forma didática para o público infantil.
 
-- 📊 **Acompanhamento de Desempenho:**
-Registro das atividades realizadas pelos alunos, permitindo que professores acompanhem o progresso e evolução dos estudantes.
+- 📝 **Exercícios de Múltipla Escolha:**  
+Exercícios com diferentes níveis de dificuldade, sequência automática, alternativas e identificação da resposta correta.
 
-- 📦 **Data Transfer Objects (DTOs):**
-Utilização de DTOs para padronização das informações trafegadas entre o front-end e a API, garantindo separação de responsabilidades entre as camadas da aplicação.
+- ✅ **Resolução de Exercícios:**  
+Permite que alunos respondam aos exercícios, recebam feedback e realizem novas tentativas enquanto o exercício não estiver concluído.
 
-- ⚠️ **Validação e Tratamento de Exceções Personalizado:**
-Implementação de validações utilizando recursos do Spring, garantindo respostas padronizadas e melhor experiência durante o uso da aplicação.
+- 📊 **Acompanhamento de Desempenho:**  
+Registro das atividades realizadas pelos alunos, permitindo acompanhar exercícios concluídos, tentativas e última atividade.
 
-- 💾 **Persistência de Dados com Spring Data JPA:**
-Armazenamento das informações em banco relacional PostgreSQL, utilizando entidades e repositórios JPA para comunicação eficiente com a camada de dados.
+- 🧑‍🏫 **Painel do Professor:**  
+Gerenciamento de turmas, acompanhamento individual dos alunos, consulta dos conteúdos disponíveis e gerenciamento da própria conta.
+
+- 🧒 **Painel do Aluno:**  
+Visualização de cursos, resolução de exercícios, acompanhamento do progresso, participação em turma e gerenciamento da própria conta.
+
+- 🛠️ **Painel do Administrador:**  
+Gerenciamento de usuários, turmas, cursos, exercícios e dados da conta administrativa.
+
+- 📦 **Data Transfer Objects (DTOs):**  
+Utilização de DTOs para padronização das informações trafegadas entre o frontend e a API, garantindo separação de responsabilidades entre as camadas da aplicação.
+
+- ⚠️ **Validação e Tratamento de Exceções Personalizado:**  
+Implementação de validações e tratamento global de exceções, garantindo respostas padronizadas e melhor experiência durante o uso da aplicação.
+
+- 💾 **Persistência de Dados com Spring Data JPA:**  
+Armazenamento das informações em banco relacional PostgreSQL, utilizando entidades e repositórios JPA para comunicação com a camada de dados.
+
+
+#
+### 👤 **PERFIS DE ACESSO**
+
+A plataforma possui três perfis de usuário:
+
+#### Administrador
+
+- Gerencia usuários;
+- Gerencia turmas;
+- Gerencia cursos;
+- Gerencia exercícios;
+- Ativa e desativa registros;
+- Atualiza os próprios dados e senha.
+
+#### Professor
+
+- Cria e visualiza suas turmas;
+- Adiciona e remove alunos;
+- Acompanha o progresso dos estudantes;
+- Consulta cursos, exercícios e respostas corretas;
+- Atualiza os próprios dados e senha.
+
+#### Aluno
+
+- Visualiza os cursos disponíveis;
+- Responde exercícios;
+- Acompanha o próprio progresso;
+- Entra e sai de uma turma;
+- Atualiza os próprios dados e senha.
 
 
 #
@@ -65,13 +111,22 @@ Armazenamento das informações em banco relacional PostgreSQL, utilizando entid
 #
 ### 📌 **REQUISITOS**
 
-Para executar nossa plataforma localmente, é necessário ter em seu dispositivo computacional:
+Para executar a plataforma localmente, é necessário ter instalado:
 
-  1. Certifique-se que instalou a versão **21 do Java**.  [Baixe aqui](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+1. **Java 21**  
+[Baixar Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 
-  2. Certifique-se de que tenha instalado alguma **IDE** em sua máquina. [Baixe aqui](https://www.jetbrains.com/idea/download/?section=windows)
+2. **PostgreSQL**  
+[Baixar PostgreSQL](https://www.postgresql.org/download/)
 
-  3. Certifique-se de que tenha o **PostgreSQL** instalado. [Baixe aqui](https://www.postgresql.org/download/)
+3. **Git**  
+[Baixar Git](https://git-scm.com/downloads)
+
+4. Uma IDE para o backend, como o **IntelliJ IDEA**  
+[Baixar IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+
+5. Um editor para o frontend, como o **Visual Studio Code**, com a extensão **Live Server**  
+[Baixar Visual Studio Code](https://code.visualstudio.com/)
 
 
 #
@@ -83,33 +138,179 @@ Baixe o projeto em seu computador através do comando:
 git clone https://github.com/Kauan-Ts16/uninter-ae-skillkids-platform.git
 ```
 
+Depois, acesse a pasta do projeto:
+
+```bash
+cd uninter-ae-skillkids-platform
+```
+
 **ou**
 
 1. Clique em `<> Code`.
 2. Faça o download do arquivo ZIP.
-3. Abra o seu explorador de arquivos na localização da instalação.
+3. Abra o explorador de arquivos na localização do download.
 4. Extraia o arquivo ZIP.
+5. Abra a pasta extraída em sua IDE.
+
+
+#
+### ⚙️ **CONFIGURAÇÃO**
+
+## Banco de dados
+
+Crie um banco de dados PostgreSQL para a aplicação:
+
+```sql
+CREATE DATABASE skillkids;
+```
+
+## Arquivo de propriedades
+
+Dentro da pasta:
+
+```text
+backend/src/main/resources
+```
+
+Utilize o arquivo `application-example.properties` como referência para criar o arquivo:
+
+```text
+application.properties
+```
+
+O projeto utiliza as seguintes variáveis de ambiente:
+
+```text
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+JWT_SECRET
+JWT_EXPIRATION
+ADMIN_NAME
+ADMIN_EMAIL
+ADMIN_PASSWORD
+```
+
+Exemplo de configuração:
+
+```text
+DB_URL=jdbc:postgresql://localhost:5432/skillkids
+DB_USERNAME=postgres
+DB_PASSWORD=sua_senha
+JWT_SECRET=sua_chave_secreta_em_base64
+JWT_EXPIRATION=86400
+ADMIN_NAME=Administrador
+ADMIN_EMAIL=admin@admin.com
+ADMIN_PASSWORD=sua_senha_de_administrador
+```
+
+A variável `JWT_SECRET` deve possuir uma chave segura codificada em Base64.
+
+A variável `JWT_EXPIRATION` representa o tempo de duração do token em segundos. O valor `86400` corresponde a 24 horas.
+
+O usuário administrador será criado automaticamente na primeira inicialização da aplicação, utilizando as variáveis:
+
+```text
+ADMIN_NAME
+ADMIN_EMAIL
+ADMIN_PASSWORD
+```
 
 
 #
 ### ▶️ **EXECUÇÃO**
 
-Sequência de execução do projeto:
+## Backend
 
+Acesse a pasta do backend:
+
+```bash
+cd backend
 ```
-1.  Acesse a IDE na qual deseja executar o projeto.
-2.  Clique em "Abrir um projeto já existente".
-3.  Selecione o local da pasta descompactada do projeto.
-4.  Confirme a seleção.
-5.  Crie um banco de dados ou utilize um de teste.
-6.  Altere o arquivo "application.properties" com o nome do banco e a senha.
-7.  Localize e clique no botão "Play" (verde) localizado na parte superior da IDE.
-8.  Um terminal integrado será aberto.
-9.  Aguarde a instalação das dependências do projeto.
-10. Após a conclusão das instalações, o projeto será executado.
 
-AO FINAL DA EXECUÇÃO, VOCÊ PODERÁ TESTAR A APLICAÇÃO LOCALMENTE NO NAVEGADOR USANDO O DOMÍNIO ABAIXO.
+No Windows, execute:
 
+```bash
+mvnw.cmd spring-boot:run
+```
+
+No Linux ou macOS, execute:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Também é possível abrir a pasta `backend` no IntelliJ IDEA e executar a classe:
+
+```text
+BackendApplication
+```
+
+Após a inicialização, a API estará disponível em:
+
+```text
+http://localhost:8080/skillkids-platform
+```
+
+## Frontend
+
+Abra a pasta raiz do projeto no Visual Studio Code.
+
+Com a extensão **Live Server** instalada:
+
+1. Localize o arquivo `frontend/index.html`.
+2. Clique com o botão direito sobre o arquivo.
+3. Selecione `Open with Live Server`.
+
+O frontend estará disponível normalmente em:
+
+```text
+http://127.0.0.1:5500/frontend/index.html
+```
+
+O frontend identifica automaticamente o endereço do dispositivo que está executando a aplicação e envia as requisições para a API na porta `8080`.
+
+Para o funcionamento completo, o backend e o frontend devem permanecer em execução simultaneamente.
+
+
+#
+### 🗂️ **ESTRUTURA DO PROJETO**
+
+```text
+skillkids-platform
+│
+├── backend
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com.kauanrodrigues.backend
+│       │   │       ├── config
+│       │   │       ├── controller
+│       │   │       ├── dto
+│       │   │       ├── enums
+│       │   │       ├── exception
+│       │   │       ├── mapper
+│       │   │       ├── model
+│       │   │       ├── repository
+│       │   │       ├── security
+│       │   │       ├── service
+│       │   │       └── validation
+│       │   └── resources
+│       └── test
+│
+├── frontend
+│   ├── admin
+│   ├── student
+│   ├── teacher
+│   ├── assets
+│   │   ├── css
+│   │   ├── images
+│   │   └── js
+│   ├── index.html
+│   └── register.html
+│
+└── docs
+    └── diagramas
 ```
 
 
@@ -135,22 +336,35 @@ AO FINAL DA EXECUÇÃO, VOCÊ PODERÁ TESTAR A APLICAÇÃO LOCALMENTE NO NAVEGAD
 
 ![POSTGRESQL](https://img.shields.io/badge/PostgreSQL-0D1117?style=for-the-badge&logo=postgresql&labelColor=0D1117)&nbsp;
 
-#### 📘 Documentação
-
-![Swagger](https://img.shields.io/badge/Swagger-0D1117?style=for-the-badge&logo=Swagger&logoColor=85EA2D&labelColor=0D1117)&nbsp;
-
 
 #
-### 🌐 DOMÍNIO DA API
+### 🌐 **DOMÍNIO DA API**
 
-```
-http://localhost:8080
+```text
+http://localhost:8080/skillkids-platform
 ```
 
 
 #
-### 📚 DOCUMENTAÇAO DA API
+### 📚 **DOCUMENTAÇÃO DA API**
 
-```
-http://localhost:8080/swagger-ui/index.html
-```
+A API segue o padrão REST e possui controllers separados conforme o recurso e o perfil responsável pelo acesso.
+
+A documentação interativa com Swagger não está configurada na versão atual do MVP.
+
+
+#
+### 📌 **ESTADO ATUAL**
+
+O MVP do SkillKids possui:
+
+- Backend integrado ao PostgreSQL;
+- Autenticação e autorização com Spring Security e JWT;
+- Controle de acesso para Administrador, Professor e Aluno;
+- Painel administrativo;
+- Painel do professor;
+- Painel do aluno;
+- Gerenciamento de turmas, cursos e exercícios;
+- Resolução e acompanhamento de exercícios;
+- Gerenciamento da conta autenticada;
+- Integração entre frontend, backend e banco de dados.
