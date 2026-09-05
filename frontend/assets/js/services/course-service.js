@@ -31,6 +31,12 @@ export async function getActiveCourses(token) {
     return courses;
 }
 
+export function getActiveCourse(id, token) {
+    return apiRequest(`/courses/active/${id}`, {
+        token
+    });
+}
+
 // ==================== CADASTRO DE CURSO ====================
 
 export function createCourse(data, token) {

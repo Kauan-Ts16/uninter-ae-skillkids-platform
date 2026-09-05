@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cursos | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/student-panel.css">
+    <link rel="stylesheet" href="../assets/css/student-courses.css">
+</head>
+
+<body class="student-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="student-header" class="student-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="student-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="student-courses-hero">
+            <div class="student-courses-hero-content">
+                <p class="student-courses-eyebrow">
+                    Aprender brincando
+                </p>
+
+                <h1>
+                    Olá,
+                    <span id="student-first-name"></span>!
+                </h1>
+
+                <p class="student-courses-introduction">
+                    Escolha um curso e continue aprendendo lógica
+                    de programação com o SkillKids.
+                </p>
+            </div>
+
+            <img class="student-courses-mascot" src="../assets/images/skillkids-mascot-login.png"
+                alt="Robô mascote do SkillKids">
+        </section>
+
+        <!-- ==================== CURSOS ==================== -->
+        <section class="student-courses-section" aria-labelledby="student-courses-title">
+            <header class="student-courses-header">
+                <div>
+                    <h2 id="student-courses-title">
+                        Cursos disponíveis
+                    </h2>
+
+                    <p id="student-courses-count"></p>
+                </div>
+
+                <button id="student-courses-reload" class="button student-courses-reload" type="button" disabled>
+                    Atualizar
+                </button>
+            </header>
+
+            <p id="student-courses-feedback" class="student-courses-feedback" role="status">
+                Carregando cursos...
+            </p>
+
+            <div id="student-courses-grid" class="student-courses-grid" hidden></div>
+        </section>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/student/courses.js"></script>
+</body>
+
+</html>
