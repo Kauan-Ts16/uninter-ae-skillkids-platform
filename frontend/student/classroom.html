@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha turma | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/student-panel.css">
+    <link rel="stylesheet" href="../assets/css/student-classroom.css">
+</head>
+
+<body class="student-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="student-header" class="student-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="student-classroom-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="student-classroom-hero" aria-labelledby="student-classroom-title">
+            <div class="student-classroom-hero-content">
+                <p class="student-classroom-eyebrow">
+                    Aprender em equipe
+                </p>
+
+                <h1 id="student-classroom-title">
+                    Minha turma
+                </h1>
+
+                <p class="student-classroom-introduction">
+                    Entre em uma turma para ficar conectado ao seu
+                    professor e continuar aprendendo com o SkillKids.
+                </p>
+            </div>
+
+            <img class="student-classroom-mascot" src="../assets/images/skillkids-mascot-login.png"
+                alt="Robô mascote do SkillKids">
+        </section>
+
+        <!-- ==================== TURMA ==================== -->
+        <section class="student-classroom-section" aria-labelledby="student-classroom-section-title">
+            <header class="student-classroom-section-header">
+                <div>
+                    <h2 id="student-classroom-section-title">
+                        Dados da turma
+                    </h2>
+
+                    <p>Consulte ou atualize sua participação.</p>
+                </div>
+
+                <button id="student-classroom-reload" class="student-classroom-reload" type="button" disabled>
+                    Atualizar
+                </button>
+            </header>
+
+            <!-- ==================== CARREGAMENTO E ERROS ==================== -->
+            <p id="student-classroom-feedback" class="student-classroom-feedback" role="status">
+                Carregando dados da turma...
+            </p>
+
+            <!-- ==================== SEM TURMA ==================== -->
+            <section id="student-classroom-empty" class="student-classroom-empty" hidden>
+                <div class="student-classroom-empty-icon" aria-hidden="true">
+                    +
+                </div>
+
+                <div class="student-classroom-empty-content">
+                    <h3>Você ainda não está em uma turma</h3>
+
+                    <p>
+                        Peça o código ao seu professor e informe
+                        abaixo para participar.
+                    </p>
+
+                    <form id="student-classroom-join-form" class="student-classroom-join-form">
+                        <div class="student-classroom-form-group">
+                            <label for="student-classroom-code">
+                                Código da turma
+                            </label>
+
+                            <input id="student-classroom-code" name="joinCode" type="text" placeholder="Exemplo: A1B2C3"
+                                minlength="6" maxlength="6" pattern="[A-Za-z0-9]{6}" autocomplete="off"
+                                autocapitalize="characters" spellcheck="false" required>
+                        </div>
+
+                        <button id="student-classroom-join" class="student-classroom-join" type="submit">
+                            Entrar na turma
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ==================== TURMA ATUAL ==================== -->
+            <section id="student-classroom-current" class="student-classroom-current" hidden>
+                <header class="student-classroom-current-header">
+                    <div>
+                        <p class="student-classroom-current-label">
+                            Sua turma atual
+                        </p>
+
+                        <h3 id="student-classroom-name"></h3>
+                    </div>
+
+                    <span id="student-classroom-status" class="student-classroom-status"></span>
+                </header>
+
+                <div class="student-classroom-details">
+                    <article class="student-classroom-detail">
+                        <span class="student-classroom-detail-icon" aria-hidden="true">
+                            P
+                        </span>
+
+                        <div>
+                            <span>Professor</span>
+                            <strong id="student-classroom-teacher"></strong>
+                        </div>
+                    </article>
+
+                    <article class="student-classroom-detail">
+                        <span class="student-classroom-detail-icon" aria-hidden="true">
+                            #
+                        </span>
+
+                        <div>
+                            <span>Código da turma</span>
+                            <strong id="student-classroom-join-code"></strong>
+                        </div>
+                    </article>
+                </div>
+
+                <p id="student-classroom-inactive-warning" class="student-classroom-inactive-warning" hidden>
+                    Esta turma está inativa no momento. Você ainda pode
+                    sair dela se desejar.
+                </p>
+
+                <footer class="student-classroom-current-footer">
+                    <p>
+                        Caso tenha entrado na turma errada, você pode
+                        sair e utilizar outro código.
+                    </p>
+
+                    <button id="student-classroom-leave" class="student-classroom-leave" type="button">
+                        Sair da turma
+                    </button>
+                </footer>
+            </section>
+        </section>
+    </main>
+
+    <!-- ==================== CONFIRMAÇÃO DE SAÍDA ==================== -->
+    <dialog id="student-classroom-leave-dialog" class="student-classroom-dialog">
+        <form id="student-classroom-leave-form" method="dialog">
+            <div class="student-classroom-dialog-icon" aria-hidden="true">
+                !
+            </div>
+
+            <h2>Sair da turma?</h2>
+
+            <p id="student-classroom-leave-description">
+                Você precisará do código para entrar novamente nesta turma.
+            </p>
+
+            <div class="student-classroom-dialog-actions">
+                <button id="student-classroom-leave-cancel" class="student-classroom-dialog-cancel" type="button">
+                    Cancelar
+                </button>
+
+                <button id="student-classroom-leave-confirm" class="student-classroom-dialog-confirm" type="submit">
+                    Confirmar saída
+                </button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/student/classroom.js"></script>
+</body>
+
+</html>
