@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Curso | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+
+    <link rel="stylesheet" href="../assets/css/student-panel.css">
+
+    <link rel="stylesheet" href="../assets/css/student-course.css">
+</head>
+
+<body class="student-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="student-header" class="student-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="student-course-main">
+        <a class="student-course-back" href="./courses.html">
+            <span aria-hidden="true">←</span>
+            Voltar para os cursos
+        </a>
+
+        <!-- ==================== CARREGAMENTO E ERROS ==================== -->
+        <section id="course-feedback" class="student-course-feedback" role="status" aria-live="polite">
+            Carregando dados do curso...
+        </section>
+
+        <!-- ==================== CONTEÚDO DO CURSO ==================== -->
+        <div id="course-content" class="student-course-content" hidden>
+            <!-- ==================== APRESENTAÇÃO ==================== -->
+            <section class="student-course-hero">
+                <div class="student-course-hero-content">
+                    <p class="student-course-eyebrow">
+                        Continue aprendendo
+                    </p>
+
+                    <h1 id="course-title"></h1>
+
+                    <p id="course-description"></p>
+                </div>
+
+                <!-- ==================== RESUMO ==================== -->
+                <div class="student-course-summary">
+                    <span class="student-course-summary-label">
+                        Seu progresso
+                    </span>
+
+                    <strong id="course-progress-count">
+                        0 de 0
+                    </strong>
+
+                    <span id="course-progress-description">
+                        exercícios concluídos
+                    </span>
+
+                    <div class="student-course-progress-track" aria-hidden="true">
+                        <div id="course-progress-bar" class="student-course-progress-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== EXERCÍCIOS ==================== -->
+            <section class="student-exercises-section" aria-labelledby="student-exercises-title">
+                <header class="student-exercises-header">
+                    <div>
+                        <h2 id="student-exercises-title">
+                            Exercícios do curso
+                        </h2>
+
+                        <p id="exercises-count"></p>
+                    </div>
+
+                    <button id="course-reload" class="button student-course-reload" type="button">
+                        Atualizar
+                    </button>
+                </header>
+
+                <p id="exercises-feedback" class="student-exercises-feedback" role="status" aria-live="polite" hidden>
+                </p>
+
+                <div id="exercises-list" class="student-exercises-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/student/course.js"></script>
+</body>
+
+</html>

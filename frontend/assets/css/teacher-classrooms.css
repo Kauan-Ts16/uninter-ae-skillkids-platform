@@ -1,0 +1,404 @@
+/* ==================== APRESENTAÇÃO ==================== */
+
+.teacher-classrooms-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: center;
+    gap: 32px;
+
+    min-height: 270px;
+    padding: 40px 48px;
+
+    overflow: hidden;
+
+    background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+}
+
+.teacher-classrooms-hero::after {
+    position: absolute;
+    top: -90px;
+    right: -70px;
+
+    width: 230px;
+    height: 230px;
+
+    background-color: rgba(250, 204, 21, 0.2);
+    border-radius: 50%;
+
+    content: "";
+}
+
+.teacher-classrooms-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+}
+
+.teacher-classrooms-eyebrow {
+    margin: 0 0 8px;
+
+    color: var(--color-secondary);
+
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.teacher-classrooms-hero h1 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.teacher-classrooms-hero h1 span {
+    color: var(--color-primary);
+}
+
+.teacher-classrooms-introduction {
+    max-width: 680px;
+    margin: 16px 0 0;
+
+    color: var(--color-text-light);
+    font-size: 1.15rem;
+}
+
+.teacher-classrooms-mascot {
+    position: relative;
+    z-index: 1;
+
+    justify-self: center;
+
+    width: 240px;
+    max-height: 220px;
+    object-fit: contain;
+}
+
+
+/* ==================== SEÇÃO DE TURMAS ==================== */
+
+.teacher-classrooms-section {
+    margin-top: 36px;
+}
+
+.teacher-classrooms-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.teacher-classrooms-header h2 {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.teacher-classrooms-header p {
+    margin: 4px 0 0;
+    color: var(--color-text-light);
+}
+
+.teacher-classrooms-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.teacher-classrooms-header-actions .button {
+    min-height: 48px;
+}
+
+
+/* ==================== NOVA TURMA ==================== */
+
+.teacher-classroom-create {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+    align-items: end;
+    gap: 32px;
+
+    margin-bottom: 20px;
+    padding: 24px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 8px 24px rgba(23, 43, 77, 0.06);
+}
+
+.teacher-classroom-create[hidden] {
+    display: none;
+}
+
+.teacher-classroom-create h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.25rem;
+}
+
+.teacher-classroom-create-content p {
+    margin: 6px 0 0;
+    color: var(--color-text-light);
+}
+
+.teacher-classroom-create-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 16px;
+}
+
+.teacher-classroom-create-form .form-input {
+    min-height: 48px;
+}
+
+.teacher-classroom-create-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.teacher-classroom-create-actions .button {
+    min-height: 48px;
+}
+
+
+/* ==================== ESTADOS ==================== */
+
+.teacher-classrooms-feedback {
+    margin: 0;
+    padding: 32px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+
+    text-align: center;
+}
+
+.teacher-classrooms-feedback[hidden],
+.teacher-classrooms-grid[hidden] {
+    display: none;
+}
+
+
+/* ==================== LISTA DE TURMAS ==================== */
+
+.teacher-classrooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.teacher-classroom-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 330px;
+    padding: 24px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 8px 24px rgba(23, 43, 77, 0.06);
+
+    transition:
+        border-color var(--transition-default),
+        transform var(--transition-default),
+        box-shadow var(--transition-default);
+}
+
+.teacher-classroom-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-3px);
+}
+
+.teacher-classroom-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.teacher-classroom-number,
+.teacher-classroom-card-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 0.875rem;
+    font-weight: 800;
+}
+
+.teacher-classroom-number {
+    background-color: #EFF6FF;
+    color: var(--color-primary);
+}
+
+.teacher-classroom-card-status {
+    background-color: #ECFDF3;
+    color: #067647;
+}
+
+.teacher-classroom-card h3 {
+    margin: 20px 0 0;
+
+    color: var(--color-text);
+
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.teacher-classroom-description {
+    margin: 10px 0 20px;
+    color: var(--color-text-light);
+    overflow-wrap: anywhere;
+}
+
+.teacher-classroom-code {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 14px 16px;
+
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+}
+
+.teacher-classroom-code span {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+.teacher-classroom-code strong {
+    color: var(--color-primary);
+    letter-spacing: 0.08em;
+}
+
+.teacher-classroom-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+.teacher-classroom-teacher {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+}
+
+.teacher-classroom-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 18px;
+
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius-medium);
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background-color var(--transition-default),
+        border-color var(--transition-default),
+        transform var(--transition-default);
+}
+
+.teacher-classroom-action:hover {
+    background-color: #1D4ED8;
+    border-color: #1D4ED8;
+    transform: translateY(-1px);
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1000px) {
+    .teacher-classroom-create {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .teacher-classrooms-hero {
+        grid-template-columns: minmax(0, 1fr) 200px;
+        padding: 32px;
+    }
+
+    .teacher-classrooms-mascot {
+        width: 190px;
+    }
+}
+
+@media (max-width: 700px) {
+    .teacher-classrooms-hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 28px 24px;
+        text-align: center;
+    }
+
+    .teacher-classrooms-eyebrow,
+    .teacher-classrooms-introduction {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .teacher-classrooms-mascot {
+        width: 170px;
+    }
+
+    .teacher-classrooms-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .teacher-classrooms-header-actions,
+    .teacher-classroom-create-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .teacher-classroom-create-form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .teacher-classrooms-header-actions>*,
+    .teacher-classroom-create-actions>* {
+        width: 100%;
+    }
+
+    .teacher-classroom-card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .teacher-classroom-action {
+        width: 100%;
+    }
+}

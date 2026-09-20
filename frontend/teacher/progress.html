@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acompanhamento | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-progress.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-progress-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="teacher-progress-hero">
+            <div class="teacher-progress-hero-content">
+                <p class="teacher-progress-eyebrow">
+                    Evolução dos alunos
+                </p>
+
+                <h1>Acompanhamento</h1>
+
+                <p class="teacher-progress-introduction">
+                    Consulte o desempenho dos alunos nas suas turmas
+                    e acompanhe a evolução nos exercícios.
+                </p>
+            </div>
+
+            <div class="teacher-progress-hero-summary" aria-label="Resumo do acompanhamento">
+                <div>
+                    <strong id="teacher-progress-classrooms-total">
+                        0
+                    </strong>
+
+                    <span>Turmas</span>
+                </div>
+
+                <div>
+                    <strong id="teacher-progress-students-total">
+                        0
+                    </strong>
+
+                    <span>Alunos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TURMAS E ALUNOS ==================== -->
+        <section class="teacher-progress-section" aria-labelledby="teacher-progress-title">
+            <header class="teacher-progress-header">
+                <div>
+                    <h2 id="teacher-progress-title">
+                        Alunos por turma
+                    </h2>
+
+                    <p id="teacher-progress-description">
+                        Carregando turmas e alunos...
+                    </p>
+                </div>
+
+                <button id="teacher-progress-reload" class="teacher-secondary-button" type="button" disabled>
+                    Atualizar
+                </button>
+            </header>
+
+            <!-- ==================== CARREGAMENTO ==================== -->
+            <p id="teacher-progress-feedback" class="teacher-progress-feedback" role="status">
+                Carregando acompanhamento...
+            </p>
+
+            <!-- ==================== LISTA ==================== -->
+            <div id="teacher-progress-classrooms" class="teacher-progress-classrooms" hidden></div>
+        </section>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/progress.js"></script>
+</body>
+
+</html>

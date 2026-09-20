@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turmas | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/panel.css">
+    <link rel="stylesheet" href="../assets/css/classrooms.css">
+</head>
+
+<body class="panel-page">
+    <!-- ==================== MENU LATERAL ==================== -->
+    <aside id="panel-sidebar" class="panel-sidebar"></aside>
+
+    <div class="panel-body">
+        <!-- ==================== CABEÇALHO ==================== -->
+        <header id="panel-header" class="panel-header"></header>
+
+        <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+        <main class="panel-main">
+            <section class="panel-intro" aria-labelledby="page-title">
+                <h1 id="page-title">Turmas</h1>
+                <p>Gerencie as turmas do SkillKids.</p>
+            </section>
+
+            <!-- ==================== LISTAGEM DE TURMAS ==================== -->
+            <section class="panel-card classrooms-card" aria-labelledby="classrooms-title">
+                <!-- Cabeçalho da listagem -->
+                <header class="classrooms-header">
+                    <div>
+                        <h2 id="classrooms-title">Lista de turmas</h2>
+                        <p id="classrooms-count"></p>
+                    </div>
+
+                    <div class="classrooms-actions">
+                        <button id="classrooms-create" class="button button-primary" type="button" disabled>
+                            Nova turma
+                        </button>
+
+                        <button id="classrooms-reload" class="button classrooms-reload" type="button" disabled>
+                            Atualizar
+                        </button>
+                    </div>
+                </header>
+
+                <!-- ==================== FILTROS ==================== -->
+                <div class="classrooms-filters" role="search" aria-label="Filtros de turmas">
+                    <!-- Busca -->
+                    <div class="form-group">
+                        <label class="form-label" for="classrooms-search">
+                            Buscar
+                        </label>
+
+                        <input id="classrooms-search" class="form-input" type="search" placeholder="Nome ou código"
+                            autocomplete="off" disabled>
+                    </div>
+
+                    <!-- Professor -->
+                    <div class="form-group">
+                        <label class="form-label" for="classrooms-teacher">
+                            Professor
+                        </label>
+
+                        <select id="classrooms-teacher" class="form-input" disabled>
+                            <option value="">Todas as turmas</option>
+                            <option value="assigned">Com professor</option>
+                            <option value="unassigned">Sem professor</option>
+                        </select>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="form-label" for="classrooms-status">
+                            Status
+                        </label>
+
+                        <select id="classrooms-status" class="form-input" disabled>
+                            <option value="">Todos os status</option>
+                            <option value="true">Ativa</option>
+                            <option value="false">Inativa</option>
+                        </select>
+                    </div>
+
+                    <!-- Limpeza -->
+                    <button id="classrooms-clear" class="button classrooms-clear" type="button" disabled>
+                        Limpar
+                    </button>
+                </div>
+
+                <!-- Estados da listagem -->
+                <p id="classrooms-feedback" class="classrooms-feedback" role="status">
+                    Carregando turmas...
+                </p>
+
+                <!-- Tabela -->
+                <div id="classrooms-table-wrapper" class="classrooms-table-wrapper" role="region"
+                    aria-labelledby="classrooms-title" tabindex="0" hidden>
+                    <table class="classrooms-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Professor</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="classrooms-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== CADASTRO DE TURMA ==================== -->
+    <dialog id="classroom-dialog" class="classroom-dialog" aria-labelledby="classroom-dialog-title"
+        aria-describedby="classroom-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="classroom-dialog-header">
+            <div>
+                <h2 id="classroom-dialog-title">Nova turma</h2>
+
+                <p id="classroom-dialog-description">
+                    Preencha os dados para criar uma turma.
+                </p>
+            </div>
+
+            <button id="classroom-dialog-close" class="classroom-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="classroom-form" class="classroom-form">
+            <!-- Nome -->
+            <div class="form-group">
+                <label class="form-label" for="classroom-name">
+                    Nome
+                </label>
+
+                <input id="classroom-name" class="form-input" name="name" type="text"
+                    placeholder="Digite o nome da turma" minlength="3" maxlength="100" required>
+            </div>
+
+            <!-- Professor -->
+            <div class="form-group">
+                <label class="form-label" for="classroom-teacher">
+                    Professor
+                </label>
+
+                <select id="classroom-teacher" class="form-input" name="teacherId">
+                    <option value="">Sem professor</option>
+                </select>
+
+                <small id="classroom-teacher-help" class="form-help">
+                    O professor é opcional.
+                </small>
+            </div>
+
+            <!-- Ações -->
+            <footer class="classroom-form-footer">
+                <button id="classroom-cancel" class="button classroom-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="classroom-submit" class="button button-primary" type="submit">
+                    Criar turma
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== EDIÇÃO DE TURMA ==================== -->
+    <dialog id="edit-classroom-dialog" class="classroom-dialog" aria-labelledby="edit-classroom-title"
+        aria-describedby="edit-classroom-description">
+        <!-- Cabeçalho -->
+        <header class="classroom-dialog-header">
+            <div>
+                <h2 id="edit-classroom-title">
+                    Editar turma
+                </h2>
+
+                <p id="edit-classroom-description">
+                    Atualize o nome da turma.
+                </p>
+            </div>
+
+            <button id="edit-classroom-close" class="classroom-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="edit-classroom-form" class="classroom-form">
+            <div class="form-group">
+                <label class="form-label" for="edit-classroom-name">
+                    Nome
+                </label>
+
+                <input id="edit-classroom-name" class="form-input" name="name" type="text" minlength="3" maxlength="100"
+                    required>
+            </div>
+
+            <!-- Ações -->
+            <footer class="classroom-form-footer">
+                <button id="edit-classroom-cancel" class="button classroom-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="edit-classroom-submit" class="button button-primary" type="submit">
+                    Salvar alterações
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== PROFESSOR DA TURMA ==================== -->
+    <dialog id="teacher-dialog" class="classroom-dialog" aria-labelledby="teacher-dialog-title"
+        aria-describedby="teacher-dialog-description">
+        <!-- Cabeçalho -->
+        <header class="classroom-dialog-header">
+            <div>
+                <h2 id="teacher-dialog-title">
+                    Professor da turma
+                </h2>
+
+                <p id="teacher-dialog-description">
+                    Selecione um professor para a turma.
+                </p>
+            </div>
+
+            <button id="teacher-dialog-close" class="classroom-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Formulário -->
+        <form id="teacher-form" class="classroom-form">
+            <div class="form-group">
+                <label class="form-label" for="manage-teacher">
+                    Professor
+                </label>
+
+                <select id="manage-teacher" class="form-input" name="teacherId">
+                    <option value="">Sem professor</option>
+                </select>
+
+                <small id="manage-teacher-help" class="form-help">
+                    Selecione “Sem professor” para remover o vínculo.
+                </small>
+            </div>
+
+            <!-- Ações -->
+            <footer class="classroom-form-footer">
+                <button id="teacher-cancel" class="button classroom-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="teacher-submit" class="button button-primary" type="submit">
+                    Salvar vínculo
+                </button>
+            </footer>
+        </form>
+    </dialog>
+
+    <!-- ==================== STATUS DA TURMA ==================== -->
+    <dialog id="classroom-status-dialog" class="classroom-dialog status-dialog" aria-labelledby="classroom-status-title"
+        aria-describedby="classroom-status-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span id="classroom-status-icon" class="status-dialog-icon" aria-hidden="true"></span>
+
+            <!-- Mensagem -->
+            <h2 id="classroom-status-title"></h2>
+
+            <p id="classroom-status-description"></p>
+
+            <!-- Ações -->
+            <form id="classroom-status-form" class="status-dialog-actions">
+                <button id="classroom-status-cancel" class="button classroom-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="classroom-status-confirm" class="button status-confirm" type="submit">
+                    Confirmar
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== EXCLUSÃO DA TURMA ==================== -->
+    <dialog id="classroom-delete-dialog" class="classroom-dialog status-dialog" data-action="deactivate"
+        aria-labelledby="classroom-delete-title" aria-describedby="classroom-delete-description">
+        <div class="status-dialog-content">
+            <!-- Ícone -->
+            <span class="status-dialog-icon" aria-hidden="true">
+                !
+            </span>
+
+            <!-- Mensagem -->
+            <h2 id="classroom-delete-title">
+                Excluir turma?
+            </h2>
+
+            <p id="classroom-delete-description">
+                Esta ação não poderá ser desfeita.
+            </p>
+
+            <!-- Ações -->
+            <form id="classroom-delete-form" class="status-dialog-actions">
+                <button id="classroom-delete-cancel" class="button classroom-button-secondary" type="button">
+                    Cancelar
+                </button>
+
+                <button id="classroom-delete-confirm" class="button status-confirm" type="submit">
+                    Excluir
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- ==================== AÇÕES DA TURMA ==================== -->
+    <dialog id="classroom-actions-dialog" class="classroom-dialog classroom-actions-dialog"
+        aria-labelledby="classroom-actions-title" aria-describedby="classroom-actions-description">
+        <!-- Cabeçalho -->
+        <header class="classroom-dialog-header">
+            <div>
+                <h2 id="classroom-actions-title">
+                    Ações da turma
+                </h2>
+
+                <p id="classroom-actions-description">
+                    Escolha uma ação.
+                </p>
+            </div>
+
+            <button id="classroom-actions-close" class="classroom-dialog-close" type="button" aria-label="Fechar">
+                ×
+            </button>
+        </header>
+
+        <!-- Opções -->
+        <div class="classroom-actions-list">
+            <button id="classroom-action-edit" class="classroom-management-action" type="button">
+                <span class="classroom-management-action-title">
+                    Editar dados
+                </span>
+
+                <span class="classroom-management-action-description">
+                    Alterar o nome da turma
+                </span>
+            </button>
+
+            <button id="classroom-action-teacher" class="classroom-management-action" type="button">
+                <span class="classroom-management-action-title">
+                    Gerenciar professor
+                </span>
+
+                <span class="classroom-management-action-description">
+                    Vincular, trocar ou remover o professor
+                </span>
+            </button>
+
+            <button id="classroom-action-status" class="classroom-management-action classroom-management-action--status"
+                type="button">
+                <span id="classroom-action-status-title" class="classroom-management-action-title"></span>
+
+                <span id="classroom-action-status-description" class="classroom-management-action-description"></span>
+            </button>
+
+            <button id="classroom-action-delete" class="classroom-management-action classroom-management-action--delete"
+                type="button">
+                <span class="classroom-management-action-title">
+                    Excluir turma
+                </span>
+
+                <span class="classroom-management-action-description">
+                    Remover permanentemente esta turma
+                </span>
+            </button>
+        </div>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/admin/classrooms.js"></script>
+</body>
+
+</html>

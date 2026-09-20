@@ -1,0 +1,121 @@
+/* ==================== CONTA ==================== */
+
+.account-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+    max-width: 1050px;
+}
+
+.account-grid[hidden],
+.account-feedback[hidden] {
+    display: none;
+}
+
+
+/* ==================== CARREGAMENTO ==================== */
+
+.account-feedback {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0;
+    padding: 24px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+
+/* ==================== CARTÃO ==================== */
+
+.panel-card.account-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.account-card-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.account-card-header p {
+    margin-top: 6px;
+}
+
+
+/* ==================== FORMULÁRIO ==================== */
+
+.account-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+}
+
+.account-form .form-input {
+    min-height: 48px;
+}
+
+.account-role {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    margin: 0;
+    padding: 0 16px;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+
+    font-weight: 700;
+}
+
+.account-help {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+}
+
+
+/* ==================== AÇÕES ==================== */
+
+.account-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.account-form-footer .button {
+    min-width: 180px;
+    min-height: 48px;
+}
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 1000px) {
+    .account-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .account-card-header,
+    .account-form {
+        padding: 20px;
+    }
+
+    .account-form-footer .button {
+        width: 100%;
+    }
+}

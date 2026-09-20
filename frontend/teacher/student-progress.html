@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progresso do aluno | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-student-progress.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-student-progress-main">
+        <a class="teacher-student-progress-back" href="./progress.html">
+            <span aria-hidden="true">←</span>
+            Voltar para o acompanhamento
+        </a>
+
+        <!-- ==================== CARREGAMENTO ==================== -->
+        <p id="teacher-student-progress-feedback" class="teacher-progress-feedback" role="status">
+            Carregando progresso do aluno...
+        </p>
+
+        <!-- ==================== CONTEÚDO ==================== -->
+        <div id="teacher-student-progress-content" hidden>
+            <!-- ==================== APRESENTAÇÃO ==================== -->
+            <section class="teacher-student-progress-hero">
+                <div class="teacher-student-progress-hero-content">
+                    <p id="teacher-student-progress-classroom" class="teacher-progress-eyebrow"></p>
+
+                    <h1 id="teacher-student-progress-name"></h1>
+
+                    <p id="teacher-student-progress-email" class="teacher-student-progress-email"></p>
+                </div>
+
+                <div class="teacher-student-progress-overall">
+                    <div class="teacher-student-progress-overall-heading">
+                        <span>Progresso geral</span>
+
+                        <strong id="teacher-student-progress-percentage">
+                            0%
+                        </strong>
+                    </div>
+
+                    <div id="teacher-student-progress-overall-track"
+                        class="teacher-student-progress-track teacher-student-progress-track-large" role="progressbar"
+                        aria-label="Progresso geral do aluno" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div id="teacher-student-progress-overall-bar" class="teacher-student-progress-bar"></div>
+                    </div>
+
+                    <p id="teacher-student-progress-overall-description">
+                        0 de 0 exercícios concluídos
+                    </p>
+                </div>
+            </section>
+
+            <!-- ==================== CONTROLE ==================== -->
+            <header class="teacher-student-progress-control">
+                <div>
+                    <h2>Visão geral</h2>
+
+                    <p>
+                        Acompanhe os resultados mais recentes deste aluno.
+                    </p>
+                </div>
+
+                <button id="teacher-student-progress-reload" class="teacher-secondary-button" type="button">
+                    Atualizar
+                </button>
+            </header>
+
+            <!-- ==================== INDICADORES ==================== -->
+            <section class="teacher-student-progress-stats" aria-label="Resumo do progresso do aluno">
+                <article class="teacher-student-progress-stat" data-color="blue">
+                    <span class="teacher-student-progress-stat-icon" aria-hidden="true">
+                        ✓
+                    </span>
+
+                    <div>
+                        <strong id="teacher-student-progress-completed">
+                            0
+                        </strong>
+
+                        <span>Exercícios concluídos</span>
+                    </div>
+                </article>
+
+                <article class="teacher-student-progress-stat" data-color="yellow">
+                    <span class="teacher-student-progress-stat-icon" aria-hidden="true">
+                        ↻
+                    </span>
+
+                    <div>
+                        <strong id="teacher-student-progress-in-progress">
+                            0
+                        </strong>
+
+                        <span>Exercícios em andamento</span>
+                    </div>
+                </article>
+
+                <article class="teacher-student-progress-stat" data-color="green">
+                    <span class="teacher-student-progress-stat-icon" aria-hidden="true">
+                        ★
+                    </span>
+
+                    <div>
+                        <strong id="teacher-student-progress-attempts">
+                            0
+                        </strong>
+
+                        <span>Tentativas realizadas</span>
+                    </div>
+                </article>
+
+                <article class="teacher-student-progress-stat" data-color="purple">
+                    <span class="teacher-student-progress-stat-icon" aria-hidden="true">
+                        ◷
+                    </span>
+
+                    <div>
+                        <strong id="teacher-student-progress-last-activity">
+                            Nenhuma
+                        </strong>
+
+                        <span>Última atividade</span>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ==================== CURSOS ==================== -->
+            <section class="teacher-student-progress-courses" aria-labelledby="teacher-student-progress-courses-title">
+                <header class="teacher-student-progress-courses-header">
+                    <h2 id="teacher-student-progress-courses-title">
+                        Progresso por curso
+                    </h2>
+
+                    <p id="teacher-student-progress-courses-count"></p>
+                </header>
+
+                <div id="teacher-student-progress-courses-list" class="teacher-student-progress-courses-list"></div>
+
+                <p id="teacher-student-progress-courses-empty" class="teacher-progress-feedback" hidden>
+                    Nenhum curso está disponível no momento.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/student-progress.js"></script>
+</body>
+
+</html>

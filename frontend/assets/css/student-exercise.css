@@ -1,0 +1,567 @@
+/* ==================== PÁGINA ==================== */
+
+body {
+    min-height: 100vh;
+    background: #f5f8fc;
+    color: #102751;
+}
+
+.student-exercise-main {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 56px;
+}
+
+/* ==================== VOLTAR ==================== */
+
+.student-exercise-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: #557091;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.student-exercise-back:hover {
+    color: #2563eb;
+    transform: translateX(-2px);
+}
+
+/* ==================== FEEDBACK DA PÁGINA ==================== */
+
+.student-exercise-page-feedback {
+    padding: 28px;
+    border: 1px solid #d5e0ef;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #557091;
+    text-align: center;
+}
+
+.student-exercise-page-feedback[data-type="error"] {
+    border-color: #f4b4b4;
+    color: #c7271e;
+}
+
+.student-exercise-page-feedback[hidden],
+.student-exercise-page-content[hidden] {
+    display: none;
+}
+
+/* ==================== APRESENTAÇÃO ==================== */
+
+.student-exercise-intro {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: flex-start;
+    overflow: hidden;
+    padding: 34px 40px;
+    border: 1px solid #d4e1f1;
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 96% 5%,
+            rgba(252, 211, 77, 0.34) 0,
+            rgba(252, 211, 77, 0.34) 92px,
+            transparent 93px),
+        linear-gradient(135deg, #ffffff 0%, #edf5ff 100%);
+}
+
+.student-exercise-intro-content {
+    position: relative;
+    z-index: 1;
+}
+
+.student-exercise-course-title {
+    margin: 0 0 10px;
+    color: #078573;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.student-exercise-intro h1 {
+    margin: 0;
+    color: #102751;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+}
+
+.student-exercise-description {
+    max-width: 760px;
+    margin: 16px 0 0;
+    color: #435f81;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.55;
+}
+
+.student-exercise-information {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-shrink: 0;
+    gap: 8px;
+    align-items: center;
+}
+
+.student-exercise-information>span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+#exercise-sequence {
+    background: #eaf1ff;
+    color: #2563eb;
+}
+
+.student-exercise-difficulty[data-difficulty="EASY"] {
+    background: #e7f8ef;
+    color: #087b45;
+}
+
+.student-exercise-difficulty[data-difficulty="MEDIUM"] {
+    background: #fff5d9;
+    color: #9a6500;
+}
+
+.student-exercise-difficulty[data-difficulty="HARD"] {
+    background: #ffe9e8;
+    color: #c7271e;
+}
+
+/* ==================== ÁREA DE RESPOSTA ==================== */
+
+.student-answer-card {
+    display: grid;
+    grid-template-columns: minmax(210px, 270px) minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 18px;
+    padding: 22px;
+    border: 1px solid #d5e0ef;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(35, 77, 128, 0.07);
+}
+
+/* ==================== MASCOTE ==================== */
+
+.student-answer-mascot {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 18px;
+    background: #f2f7ff;
+    text-align: center;
+}
+
+.student-answer-mascot img {
+    width: auto;
+    max-width: 100%;
+    height: 170px;
+    object-fit: contain;
+}
+
+.student-answer-mascot p {
+    margin: 10px 0 0;
+    color: #23446d;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.student-answer-mascot span {
+    margin-top: 6px;
+    color: #617895;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* ==================== FORMULÁRIO ==================== */
+
+.student-answer-form {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.student-answer-form fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.student-answer-form legend {
+    margin-bottom: 12px;
+    color: #102751;
+    font-size: clamp(1.45rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+}
+
+.student-answer-options {
+    display: grid;
+    gap: 9px;
+}
+
+/* ==================== ALTERNATIVAS ==================== */
+
+.student-answer-option {
+    position: relative;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) 24px;
+    gap: 14px;
+    align-items: center;
+    min-height: 56px;
+    padding: 7px 16px;
+    border: 2px solid #d9e2ee;
+    border-radius: 15px;
+    background: #ffffff;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.student-answer-option:hover {
+    border-color: #8cb0f8;
+    transform: translateY(-1px);
+}
+
+.student-answer-option:has(input:checked) {
+    border-color: #2563eb;
+    background: #f3f7ff;
+}
+
+.student-answer-option:focus-within {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 2px;
+}
+
+.student-answer-option[data-state="correct"] {
+    border-color: #15965f;
+    background: #effbf5;
+}
+
+.student-answer-option[data-state="incorrect"] {
+    border-color: #dc3b32;
+    background: #fff3f2;
+}
+
+.student-answer-option[data-disabled="true"] {
+    cursor: default;
+}
+
+.student-answer-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.student-answer-letter {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 50%;
+    background: #eaf1ff;
+    color: #2563eb;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.student-answer-option:has(input:checked) .student-answer-letter {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.student-answer-option[data-state="correct"] .student-answer-letter {
+    background: #15965f;
+    color: #ffffff;
+}
+
+.student-answer-option[data-state="incorrect"] .student-answer-letter {
+    background: #dc3b32;
+    color: #ffffff;
+}
+
+.student-answer-text {
+    min-width: 0;
+    color: #17335c;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.student-answer-selector {
+    width: 21px;
+    height: 21px;
+    border: 2px solid #9bacc1;
+    border-radius: 50%;
+}
+
+.student-answer-option:has(input:checked) .student-answer-selector {
+    border: 6px solid #2563eb;
+}
+
+.student-answer-option[data-state="correct"] .student-answer-selector {
+    border: 6px solid #15965f;
+}
+
+.student-answer-option[data-state="incorrect"] .student-answer-selector {
+    border: 6px solid #dc3b32;
+}
+
+/* ==================== RESULTADO ==================== */
+
+.student-answer-result {
+    margin-top: 20px;
+    padding: 16px 18px;
+    border: 1px solid;
+    border-radius: 14px;
+}
+
+.student-answer-result[data-type="success"] {
+    border-color: #93dfba;
+    background: #effbf5;
+    color: #087b45;
+}
+
+.student-answer-result[data-type="error"] {
+    border-color: #f0aaa6;
+    background: #fff3f2;
+    color: #b8261e;
+}
+
+.student-answer-result strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.student-answer-result p {
+    margin: 5px 0 0;
+    color: inherit;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ==================== AÇÕES ==================== */
+
+.student-answer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.student-answer-submit,
+.student-answer-return {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid #2563eb;
+    border-radius: 12px;
+    background: #2563eb;
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.student-answer-submit:hover,
+.student-answer-return:hover {
+    border-color: #1d4ed8;
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.student-answer-submit:disabled {
+    border-color: #dce5f2;
+    background: #dce5f2;
+    color: #8092aa;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.student-answer-return[hidden] {
+    display: none;
+}
+
+
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 860px) {
+    .student-exercise-intro {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .student-answer-card {
+        grid-template-columns: 1fr;
+    }
+
+    .student-answer-mascot {
+        padding: 20px;
+    }
+
+    .student-answer-mascot img {
+        width: auto;
+        height: 150px;
+    }
+}
+
+@media (max-width: 560px) {
+    .student-exercise-main {
+        width: min(100% - 24px, 1120px);
+        padding-top: 22px;
+    }
+
+    .student-exercise-intro {
+        padding: 25px 21px;
+        border-radius: 18px;
+    }
+
+    .student-exercise-intro h1 {
+        font-size: 1.9rem;
+    }
+
+    .student-exercise-information {
+        flex-wrap: wrap;
+    }
+
+    .student-answer-card {
+        gap: 22px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .student-answer-option {
+        grid-template-columns: 40px minmax(0, 1fr) 22px;
+        gap: 12px;
+        min-height: 62px;
+        padding: 10px 13px;
+    }
+
+    .student-answer-letter {
+        width: 38px;
+        height: 38px;
+    }
+
+    .student-answer-actions {
+        flex-direction: column;
+    }
+
+    .student-answer-submit,
+    .student-answer-return {
+        width: 100%;
+    }
+}
+
+/* ==================== TELAS COM POUCA ALTURA ==================== */
+
+@media (min-width: 861px) and (max-height: 850px) {
+    .student-exercise-main {
+        padding-top: 18px;
+        padding-bottom: 20px;
+    }
+
+    .student-exercise-back {
+        margin-bottom: 10px;
+    }
+
+    .student-exercise-intro {
+        padding: 18px 30px;
+    }
+
+    .student-exercise-course-title {
+        margin-bottom: 5px;
+    }
+
+    .student-exercise-intro h1 {
+        font-size: 2.1rem;
+    }
+
+    .student-exercise-description {
+        margin-top: 8px;
+        font-size: 1rem;
+    }
+
+    .student-answer-card {
+        gap: 24px;
+        margin-top: 14px;
+        padding: 20px;
+    }
+
+    .student-answer-mascot {
+        padding: 14px;
+    }
+
+    .student-answer-mascot img {
+        width: 140px;
+    }
+
+    .student-answer-mascot p {
+        margin-top: 10px;
+        font-size: 0.88rem;
+    }
+
+    .student-answer-mascot span {
+        margin-top: 6px;
+        font-size: 0.75rem;
+    }
+
+    .student-answer-form legend {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .student-answer-options {
+        gap: 8px;
+    }
+
+    .student-answer-option {
+        min-height: 50px;
+        padding: 5px 14px;
+    }
+
+    .student-answer-letter {
+        width: 36px;
+        height: 36px;
+    }
+
+    .student-answer-actions {
+        padding-top: 14px;
+    }
+
+    .student-answer-submit,
+    .student-answer-return {
+        min-height: 42px;
+    }
+}

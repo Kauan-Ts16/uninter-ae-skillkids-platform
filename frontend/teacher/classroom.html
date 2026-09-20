@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turma | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/teacher-panel.css">
+    <link rel="stylesheet" href="../assets/css/teacher-classroom.css">
+</head>
+
+<body class="teacher-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="teacher-header" class="teacher-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="teacher-classroom-main">
+        <a class="teacher-classroom-back" href="./classrooms.html">
+            <span aria-hidden="true">←</span>
+            Voltar para as turmas
+        </a>
+
+        <!-- ==================== CARREGAMENTO ==================== -->
+        <p id="teacher-classroom-feedback" class="teacher-classroom-feedback" role="status">
+            Carregando dados da turma...
+        </p>
+
+        <!-- ==================== CONTEÚDO ==================== -->
+        <div id="teacher-classroom-content" hidden>
+            <section class="teacher-classroom-hero">
+                <div class="teacher-classroom-hero-content">
+                    <p class="teacher-classroom-eyebrow">
+                        Minha turma
+                    </p>
+
+                    <h1 id="teacher-classroom-name"></h1>
+
+                    <p>
+                        Gerencie os alunos participantes e compartilhe o código para novos ingressos.
+                    </p>
+                </div>
+
+                <div class="teacher-classroom-summary">
+                    <span class="teacher-classroom-summary-label">
+                        Código da turma
+                    </span>
+
+                    <strong id="teacher-classroom-code"></strong>
+
+                    <span id="teacher-classroom-status" class="teacher-classroom-status">
+                        Turma ativa
+                    </span>
+                </div>
+            </section>
+
+            <!-- ==================== ALUNOS ==================== -->
+            <section class="teacher-students-section" aria-labelledby="teacher-students-title">
+                <header class="teacher-students-header">
+                    <div>
+                        <h2 id="teacher-students-title">Alunos da turma</h2>
+
+                        <p id="teacher-students-count"></p>
+                    </div>
+
+                    <div class="teacher-students-header-actions">
+                        <button id="teacher-students-reload" class="teacher-secondary-button" type="button" disabled>
+                            Atualizar
+                        </button>
+
+                        <button id="teacher-student-add-toggle" class="button button-primary" type="button" disabled>
+                            Adicionar aluno
+                        </button>
+                    </div>
+                </header>
+
+                <!-- ==================== ADICIONAR ALUNO ==================== -->
+                <section id="teacher-student-add" class="teacher-student-add" aria-labelledby="student-add-title"
+                    hidden>
+                    <div>
+                        <h3 id="student-add-title">Adicionar aluno</h3>
+
+                        <p>
+                            Selecione um aluno que ainda não participa de nenhuma turma.
+                        </p>
+                    </div>
+
+                    <form id="teacher-student-add-form" class="teacher-student-add-form">
+                        <div class="form-group">
+                            <label class="form-label" for="teacher-student-select">
+                                Aluno disponível
+                            </label>
+
+                            <select id="teacher-student-select" class="form-input" required disabled>
+                                <option value="">Carregando alunos...</option>
+                            </select>
+                        </div>
+
+                        <div class="teacher-student-add-actions">
+                            <button id="teacher-student-add-cancel" class="teacher-neutral-button" type="button">
+                                Cancelar
+                            </button>
+
+                            <button id="teacher-student-add-submit" class="button button-primary" type="submit"
+                                disabled>
+                                Adicionar
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <p id="teacher-students-feedback" class="teacher-students-feedback" role="status">
+                    Carregando alunos...
+                </p>
+
+                <div id="teacher-students-list" class="teacher-students-list" hidden></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== CONFIRMAÇÃO ==================== -->
+    <dialog id="teacher-student-remove-dialog" class="teacher-confirm-dialog">
+        <form id="teacher-student-remove-form" method="dialog">
+            <h2>Remover aluno?</h2>
+
+            <p>
+                <strong id="teacher-student-remove-name"></strong>
+                deixará de participar desta turma.
+            </p>
+
+            <div class="teacher-confirm-dialog-actions">
+                <button id="teacher-student-remove-cancel" class="teacher-neutral-button" type="button">
+                    Cancelar
+                </button>
+
+                <button id="teacher-student-remove-confirm" class="teacher-danger-button" type="submit">
+                    Remover aluno
+                </button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/teacher/classroom.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu progresso | SkillKids</title>
+
+    <!-- ==================== ESTILOS ==================== -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/student-panel.css">
+    <link rel="stylesheet" href="../assets/css/student-progress.css">
+</head>
+
+<body class="student-page">
+    <!-- ==================== CABEÇALHO ==================== -->
+    <header id="student-header" class="student-header"></header>
+
+    <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+    <main class="student-progress-main">
+        <!-- ==================== APRESENTAÇÃO ==================== -->
+        <section class="student-progress-hero" aria-labelledby="student-progress-title">
+            <div class="student-progress-hero-content">
+                <p class="student-progress-eyebrow">
+                    Continue evoluindo
+                </p>
+
+                <h1 id="student-progress-title">
+                    Meu progresso
+                </h1>
+
+                <p class="student-progress-introduction">
+                    Veja tudo o que você já conquistou e continue aprendendo no seu ritmo,
+                    <strong id="student-progress-first-name"></strong>.
+                </p>
+            </div>
+
+            <div class="student-progress-overall">
+                <div class="student-progress-overall-heading">
+                    <span>Progresso geral</span>
+                    <strong id="student-progress-percentage">0%</strong>
+                </div>
+
+                <div id="student-progress-overall-track" class="student-progress-track student-progress-track-large"
+                    role="progressbar" aria-label="Progresso geral" aria-valuemin="0" aria-valuemax="100"
+                    aria-valuenow="0">
+                    <div id="student-progress-overall-bar" class="student-progress-bar"></div>
+                </div>
+
+                <p id="student-progress-overall-description">
+                    0 de 0 exercícios concluídos
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== CONTROLE ==================== -->
+        <div class="student-progress-control">
+            <div>
+                <h2>Visão geral</h2>
+                <p>Acompanhe seus resultados nos cursos disponíveis.</p>
+            </div>
+
+            <button id="student-progress-reload" class="student-progress-reload" type="button" disabled>
+                Atualizar
+            </button>
+        </div>
+
+        <!-- ==================== CARREGAMENTO E ERROS ==================== -->
+        <p id="student-progress-feedback" class="student-progress-feedback" role="status">
+            Carregando seu progresso...
+        </p>
+
+        <!-- ==================== DADOS DO PROGRESSO ==================== -->
+        <div id="student-progress-content" class="student-progress-content" hidden>
+            <!-- ==================== INDICADORES ==================== -->
+            <section class="student-progress-stats" aria-label="Resumo do progresso">
+                <article class="student-progress-stat" data-color="blue">
+                    <span class="student-progress-stat-icon" aria-hidden="true">✓</span>
+
+                    <div>
+                        <strong id="student-progress-completed">0</strong>
+                        <span>Exercícios concluídos</span>
+                    </div>
+                </article>
+
+                <article class="student-progress-stat" data-color="yellow">
+                    <span class="student-progress-stat-icon" aria-hidden="true">↻</span>
+
+                    <div>
+                        <strong id="student-progress-in-progress">0</strong>
+                        <span>Exercícios em andamento</span>
+                    </div>
+                </article>
+
+                <article class="student-progress-stat" data-color="green">
+                    <span class="student-progress-stat-icon" aria-hidden="true">★</span>
+
+                    <div>
+                        <strong id="student-progress-attempts">0</strong>
+                        <span>Tentativas realizadas</span>
+                    </div>
+                </article>
+
+                <article class="student-progress-stat" data-color="purple">
+                    <span class="student-progress-stat-icon" aria-hidden="true">◷</span>
+
+                    <div>
+                        <strong id="student-progress-last-activity">Nenhuma</strong>
+                        <span>Última atividade</span>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ==================== PROGRESSO POR CURSO ==================== -->
+            <section class="student-progress-courses" aria-labelledby="student-progress-courses-title">
+                <header class="student-progress-courses-header">
+                    <div>
+                        <h2 id="student-progress-courses-title">
+                            Progresso por curso
+                        </h2>
+
+                        <p id="student-progress-courses-count"></p>
+                    </div>
+                </header>
+
+                <div id="student-progress-courses-grid" class="student-progress-courses-grid"></div>
+
+                <p id="student-progress-courses-empty" class="student-progress-courses-empty" hidden>
+                    Nenhum curso está disponível no momento.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== NOTIFICAÇÕES ==================== -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script type="module" src="../assets/js/pages/student/progress.js"></script>
+</body>
+
+</html>

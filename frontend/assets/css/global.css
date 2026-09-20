@@ -1,0 +1,322 @@
+/* ==================== FONTE ==================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+
+/* ==================== VARIÁVEIS ==================== */
+
+:root {
+    --color-primary: #2563EB;
+    --color-secondary: #0F766E;
+    --color-highlight: #FACC15;
+
+    --color-background: #F7FAFF;
+    --color-surface: #FFFFFF;
+
+    --color-text: #172B4D;
+    --color-text-light: #64748B;
+
+    --color-border: #D8E1EC;
+    --color-focus: rgba(37, 99, 235, 0.2);
+
+    --font-primary: "Nunito", Arial, sans-serif;
+
+    --border-radius-small: 8px;
+    --border-radius-medium: 12px;
+    --border-radius-large: 24px;
+
+    --shadow-card: 0 10px 30px rgba(23, 43, 77, 0.1);
+
+    --transition-default: 0.2s ease;
+}
+
+
+/* ==================== CONFIGURAÇÕES GERAIS ==================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ==================== NOTIFICAÇÕES ==================== */
+
+.toast-container {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1000;
+
+    width: min(380px, calc(100vw - 32px));
+    pointer-events: none;
+}
+
+.toast {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) 28px;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px;
+    background-color: #FFFFFF;
+    color: #172B4D;
+
+    border: 1px solid #D8E1EC;
+    border-left: 4px solid var(--toast-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(23, 43, 77, 0.16);
+
+    pointer-events: auto;
+    animation: toast-enter 0.2s ease-out;
+}
+
+/* Tipos */
+
+.toast[data-type="success"] {
+    --toast-color: #0F766E;
+}
+
+.toast[data-type="error"] {
+    --toast-color: #B42318;
+}
+
+/* Conteúdo */
+
+.toast-icon {
+    color: var(--toast-color);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: center;
+}
+
+.toast-message {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.toast-close {
+    display: grid;
+    place-items: center;
+
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    background-color: transparent;
+    color: #64748B;
+    border: 0;
+    border-radius: 6px;
+
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.toast-close:hover {
+    background-color: #F1F5F9;
+}
+
+.toast-close:focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 2px;
+}
+
+/* Animações */
+
+.toast.is-leaving {
+    pointer-events: none;
+    animation: toast-exit 0.2s ease-in forwards;
+}
+
+@keyframes toast-enter {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toast-exit {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+/* Preferência por movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+    .toast,
+    .toast.is-leaving {
+        animation: none;
+    }
+}
+
+
+/* ==================== LINKS ==================== */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+
+/* ==================== MARCA ==================== */
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.brand-logo {
+    width: 250px;
+    height: auto;
+}
+
+.brand-skill {
+    color: var(--color-primary);
+}
+
+.brand-kids {
+    color: var(--color-secondary);
+}
+
+
+/* ==================== FORMULÁRIOS ==================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.form-input {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 16px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-medium);
+
+    color: var(--color-text);
+    transition:
+        border-color var(--transition-default),
+        box-shadow var(--transition-default);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-light);
+}
+
+.form-input:hover {
+    border-color: var(--color-primary);
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px var(--color-focus);
+    outline: none;
+}
+
+.form-message {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+
+/* ==================== BOTÕES ==================== */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 56px;
+    padding: 0 24px;
+
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+
+    font-weight: 700;
+    text-align: center;
+
+    transition:
+        background-color var(--transition-default),
+        transform var(--transition-default),
+        opacity var(--transition-default);
+}
+
+.button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.button-primary:hover:not(:disabled) {
+    background-color: #1D4ED8;
+    transform: translateY(-1px);
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
